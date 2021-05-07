@@ -1,0 +1,10 @@
+{
+    "name": "cailinwang/bluedot-composer",
+    "authors": [
+        {
+            "name": "wangcailin",
+            "email": "cailin.wang@blue-dot.cn"
+        }
+    ],
+    "require": {}
+}
