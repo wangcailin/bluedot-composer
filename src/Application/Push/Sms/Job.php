@@ -9,7 +9,11 @@ use Illuminate\Queue\SerializesModels;
 
 class Job implements ShouldQueue
 {
-    use InteractsWithQueue, Queueable, SerializesModels;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+
+    use JobTrait;
 
 
     public $query;
@@ -18,8 +22,6 @@ class Job implements ShouldQueue
     {
         $this->query = $query;
     }
-
-    use JobTrait;
 
     public function handle()
     {

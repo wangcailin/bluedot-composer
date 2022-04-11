@@ -3,7 +3,7 @@
 namespace Composer\Application\Event\Live;
 
 use Composer\Application\Event\Models\Live\PPT;
-use \GatewayWorker\Lib\Gateway;
+use GatewayWorker\Lib\Gateway;
 
 class WebSocket
 {

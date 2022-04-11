@@ -49,7 +49,9 @@ class QrcodeClient extends Controller
         $data['url'] = $result['url'];
 
         $this->data = $data;
-        if ($this->authUserId) $this->createAuthUserId();
+        if ($this->authUserId) {
+            $this->createAuthUserId();
+        }
     }
 
     public function getSceneStr($scene_str)

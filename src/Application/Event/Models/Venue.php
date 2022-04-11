@@ -16,5 +16,4 @@ class Venue extends Model
     protected $casts = [
         'img_list' => 'array',
     ];
-
 }

@@ -17,5 +17,4 @@ class PPT extends Model
     protected $casts = [
         'filelist' => 'array',
     ];
-
 }

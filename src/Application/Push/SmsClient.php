@@ -4,19 +4,19 @@ namespace Composer\Application\Push;
 
 use Composer\Http\Controller;
 use Illuminate\Http\Request;
-use Composer\Application\Push\Sms\{Job, JobTrait};
+use Composer\Application\Push\Sms\Job;
+use Composer\Application\Push\Sms\JobTrait;
 use Composer\Application\Push\Models\VerifyCode;
 
 class SmsClient extends Controller
 {
+    use JobTrait;
     public function sendSms(Request $request)
     {
         $query = $request->input('query');
         dispatch(new Job($query));
         return $this->success();
     }
-
-    use JobTrait;
 
     // 发送邮件验证码
     public function getVerifyCode(Request $request)

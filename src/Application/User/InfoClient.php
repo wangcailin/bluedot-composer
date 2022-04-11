@@ -17,5 +17,4 @@ class InfoClient extends Controller
         $row = $this->model->firstWhere('user_id', $id);
         return $this->success($row);
     }
-
 }

@@ -8,16 +8,15 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class SpeakerClient extends Controller
 {
-    
+    use \Composer\Application\Event\Traits\GetAllList;
+    use \Composer\Application\Event\Traits\GetMany;
+
 
     public function __construct(Speaker $speaker)
     {
         $this->model = $speaker;
         $this->allowedFilters = [AllowedFilter::exact('event_id')];
     }
-
-    use \Composer\Application\Event\Traits\GetAllList;
-    use \Composer\Application\Event\Traits\GetMany;
 
     public function create()
     {
@@ -38,5 +37,4 @@ class SpeakerClient extends Controller
         $list = $this->model->where('event_id', $eventID)->orderBy('sort', 'desc')->get();
         return $this->success($list);
     }
-
 }

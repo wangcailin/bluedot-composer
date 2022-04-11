@@ -2,7 +2,6 @@
 
 namespace Composer\Application\WeChat\User;
 
-
 class MiniProgram extends BaseUser
 {
     public function __construct($appid, $unionid, $openid, $wechatUser = [])

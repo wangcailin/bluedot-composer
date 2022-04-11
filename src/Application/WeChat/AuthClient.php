@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class AuthClient extends BaseController
 {
-
     public function oauth(WeChat $weChat, Request $request)
     {
         $appid = $request->input('appid');

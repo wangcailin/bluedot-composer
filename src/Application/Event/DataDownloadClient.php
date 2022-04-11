@@ -30,6 +30,5 @@ class DataDownloadClient extends Controller
 
     public function sendMail(Request $request)
     {
-
     }
 }

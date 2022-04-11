@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class LogMessageHandler implements EventHandlerInterface
 {
+    use Traits;
 
     public $appid;
     public $app;
@@ -17,8 +18,6 @@ class LogMessageHandler implements EventHandlerInterface
         $this->appid = $appid;
         $this->app = $app;
     }
-
-    use Traits;
 
     /**
      * @param mixed $payload
@@ -46,7 +45,7 @@ class LogMessageHandler implements EventHandlerInterface
                 'error_count' => $payload['ErrorCount'],
                 'article_url' => $payload['ArticleUrlResult'],
             ];
-            $push = new \Composer\Application\Push\Models\Push;
+            $push = new \Composer\Application\Push\Models\Push();
             $push::where('data->msg->id', $payload['MsgID'])->update([
                 'total_count' => $payload['TotalCount'],
                 'send_count' => $payload['SentCount'],

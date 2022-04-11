@@ -98,6 +98,7 @@ class User extends Model
                             }
                         }
                     }
+                    // no break
                 case 'info':
                     $this->oneToOne($value, $query, $relationConditions, $conditions, 'info');
                     break;

@@ -2,7 +2,6 @@
 
 namespace Composer\Application\WeChat\User;
 
-
 class OfficialAccount extends BaseUser
 {
     public function __construct($type, $app, $appid, $openid, $wechatUser = [])

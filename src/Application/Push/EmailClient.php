@@ -5,11 +5,13 @@ namespace Composer\Application\Push;
 use Composer\Http\Controller;
 use Illuminate\Http\Request;
 use Composer\Application\Config\System\Models\System;
-use Composer\Application\Push\Email\{Job, JobTrait};
+use Composer\Application\Push\Email\Job;
+use Composer\Application\Push\Email\JobTrait;
 use Composer\Application\Push\Models\VerifyCode;
 
 class EmailClient extends Controller
 {
+    use JobTrait;
     public function sendMail(Request $request)
     {
         $recipientList = $request->input('recipient_list', []);
@@ -36,8 +38,6 @@ class EmailClient extends Controller
         dispatch(new Job($mailConfig['data'], array_merge($toN, $recipientListN), $subject, $body, $cc));
         return $this->success();
     }
-
-    use JobTrait;
 
     // 发送邮件验证码
     public function getVerifyCode(Request $request)

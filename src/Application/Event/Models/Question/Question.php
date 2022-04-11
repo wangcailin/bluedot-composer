@@ -30,5 +30,4 @@ class Question extends Model
         }
         return $timeState;
     }
-
 }

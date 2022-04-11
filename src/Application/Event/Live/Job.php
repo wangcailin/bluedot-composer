@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Log;
 
 class Job implements ShouldQueue
 {
-    use InteractsWithQueue, Queueable, SerializesModels;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public $timeout = 3600;
 
@@ -31,5 +33,4 @@ class Job implements ShouldQueue
         Log::info($this->eventId);
         PPT::pdf2png($this->filepath, $this->eventId);
     }
-
 }

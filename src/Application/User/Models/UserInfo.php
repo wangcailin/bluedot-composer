@@ -20,5 +20,4 @@ class UserInfo extends Model
     protected $casts = [
         'extend' => 'json',
     ];
-
 }

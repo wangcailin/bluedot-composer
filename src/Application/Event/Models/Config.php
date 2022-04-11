@@ -16,5 +16,4 @@ class Config extends Model
     protected $casts = [
         'value' => 'json',
     ];
-
 }

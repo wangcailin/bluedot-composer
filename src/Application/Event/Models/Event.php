@@ -62,7 +62,7 @@ class Event extends Model
         $startTime = strtotime($this->start_time);
         if ($endTime < $time) {
             $timeState = 3;
-        } else if ($startTime < $time && $time < $endTime) {
+        } elseif ($startTime < $time && $time < $endTime) {
             $timeState = 2;
         }
         return $timeState;
@@ -74,9 +74,9 @@ class Event extends Model
 
         if ($value == 1) {
             return $query->whereTime('start_time', '>', $time);
-        } else if ($value == 2) {
+        } elseif ($value == 2) {
             return $query->where('start_time', '>', $time)->where('end_time', '<', $time);
-        } else if ($value == 3) {
+        } elseif ($value == 3) {
             return $query->whereTime('end_time', '<', $time);
         }
     }

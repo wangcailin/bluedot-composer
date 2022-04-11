@@ -17,5 +17,4 @@ class Speaker extends Model
         'is_sign_page',
         'sort',
     ];
-
 }

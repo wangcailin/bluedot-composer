@@ -6,7 +6,6 @@ use Composer\Support\Aip\AipNlp;
 
 class Nlp
 {
-
     private $client;
     public function __construct()
     {

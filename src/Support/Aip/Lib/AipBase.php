@@ -24,7 +24,6 @@ require_once 'AipBCEUtil.php';
  */
 class AipBase
 {
-
     /**
      * 获取access token url
      * @var string
@@ -376,7 +375,6 @@ class AipBase
      */
     public function report($feedback)
     {
-
         $data = array();
 
         $data['feedback'] = $feedback;

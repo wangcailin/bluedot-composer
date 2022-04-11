@@ -10,6 +10,7 @@ use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
 
 class EventMessageHandler implements EventHandlerInterface
 {
+    use Traits;
 
     public $appid;
     public $app;
@@ -18,8 +19,6 @@ class EventMessageHandler implements EventHandlerInterface
         $this->appid = $appid;
         $this->app = $app;
     }
-
-    use Traits;
 
     /**
      * @param mixed $payload
@@ -39,6 +38,7 @@ class EventMessageHandler implements EventHandlerInterface
                         return $this->reply($reply['reply_material_id'], $payload['FromUserName']);
                     }
                 }
+                // no break
             case 'SCAN':
                 $sceneStr = str_replace('qrscene_', '', $payload['EventKey']);
                 if ($result = AppEventHandler::handler($this->app, $sceneStr, $payload['FromUserName'])) {

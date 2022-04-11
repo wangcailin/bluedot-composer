@@ -11,6 +11,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class RegisterClient extends Controller
 {
+    use \Composer\Application\Event\Traits\GetList;
+    use \Composer\Application\Event\Traits\GetOneUser;
     public function __construct(Register $register)
     {
         $this->model = $register;
@@ -18,9 +20,6 @@ class RegisterClient extends Controller
             AllowedFilter::exact('event_id'),
         ];
     }
-
-    use \Composer\Application\Event\Traits\GetList;
-    use \Composer\Application\Event\Traits\GetOneUser;
 
     public function verify($id, $state)
     {
@@ -51,10 +50,10 @@ class RegisterClient extends Controller
             $company = '';
             $email = '';
             $phone = '';
-            if($value['phone']){
+            if ($value['phone']) {
                 $phone = $value['phone'];
             }
-            if($value['email']){
+            if ($value['email']) {
                 $email = $value['email'];
             }
             if ($value['extend']) {

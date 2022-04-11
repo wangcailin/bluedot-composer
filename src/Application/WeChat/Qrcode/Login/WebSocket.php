@@ -2,7 +2,7 @@
 
 namespace Composer\Application\WeChat\Qrcode\Login;
 
-use \GatewayWorker\Lib\Gateway;
+use GatewayWorker\Lib\Gateway;
 
 class WebSocket
 {
@@ -32,7 +32,5 @@ class WebSocket
 
     public static function onClose($clientId)
     {
-
     }
-
 }

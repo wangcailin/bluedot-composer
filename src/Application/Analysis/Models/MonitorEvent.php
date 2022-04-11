@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class MonitorEvent extends Model
 {
-
     protected $table = 'analysis_monitor_event';
 
     protected $fillable = [

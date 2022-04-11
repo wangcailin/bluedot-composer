@@ -3,13 +3,14 @@
 namespace Composer\Http;
 
 use Spatie\QueryBuilder\QueryBuilder;
-use Composer\Http\Traits\{Select, Validate};
+use Composer\Http\Traits\Select;
+use Composer\Http\Traits\Validate;
 use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
-
-    use Select, Validate;
+    use Select;
+    use Validate;
 
     /** 模型对象 */
     protected $model;
@@ -94,7 +95,9 @@ class Controller extends BaseController
     public function performCreate()
     {
         $this->data = request()->all();
-        if ($this->authUserId) $this->createAuthUserId();
+        if ($this->authUserId) {
+            $this->createAuthUserId();
+        }
         $this->handleCreateValidate();
     }
     public function afterCreate()

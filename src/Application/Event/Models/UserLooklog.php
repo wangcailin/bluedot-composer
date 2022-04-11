@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserLooklog extends Model
 {
-
     protected $table = 'event_userlooklog';
 
     protected $fillable = [

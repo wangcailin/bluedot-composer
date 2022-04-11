@@ -21,7 +21,6 @@ use Composer\Support\Aip\Lib\AipBase;
 
 class AipNlp extends AipBase
 {
-
     /**
      * 词法分析 lexer api url
      * @var string
@@ -126,7 +125,6 @@ class AipNlp extends AipBase
      */
     public function lexer($text, $options = array())
     {
-
         $data = array();
 
         $data['text'] = $text;
@@ -147,7 +145,6 @@ class AipNlp extends AipBase
      */
     public function lexerCustom($text, $options = array())
     {
-
         $data = array();
 
         $data['text'] = $text;
@@ -169,7 +166,6 @@ class AipNlp extends AipBase
      */
     public function depParser($text, $options = array())
     {
-
         $data = array();
 
         $data['text'] = $text;
@@ -190,7 +186,6 @@ class AipNlp extends AipBase
      */
     public function wordEmbedding($word, $options = array())
     {
-
         $data = array();
 
         $data['word'] = $word;
@@ -211,7 +206,6 @@ class AipNlp extends AipBase
      */
     public function dnnlm($text, $options = array())
     {
-
         $data = array();
 
         $data['text'] = $text;
@@ -234,7 +228,6 @@ class AipNlp extends AipBase
      */
     public function wordSimEmbedding($word1, $word2, $options = array())
     {
-
         $data = array();
 
         $data['word_1'] = $word1;
@@ -258,7 +251,6 @@ class AipNlp extends AipBase
      */
     public function simnet($text1, $text2, $options = array())
     {
-
         $data = array();
 
         $data['text_1'] = $text1;
@@ -281,7 +273,6 @@ class AipNlp extends AipBase
      */
     public function commentTag($text, $options = array())
     {
-
         $data = array();
 
         $data['text'] = $text;
@@ -302,7 +293,6 @@ class AipNlp extends AipBase
      */
     public function sentimentClassify($text, $options = array())
     {
-
         $data = array();
 
         $data['text'] = $text;
@@ -324,7 +314,6 @@ class AipNlp extends AipBase
      */
     public function keyword($title, $content, $options = array())
     {
-
         $data = array();
 
         $data['title'] = $title;
@@ -347,7 +336,6 @@ class AipNlp extends AipBase
      */
     public function topic($title, $content, $options = array())
     {
-
         $data = array();
 
         $data['title'] = $title;
@@ -369,7 +357,6 @@ class AipNlp extends AipBase
      */
     public function ecnet($text, $options = array())
     {
-
         $data = array();
 
         $data['text'] = $text;
@@ -391,7 +378,6 @@ class AipNlp extends AipBase
      */
     public function emotion($text, $options = array())
     {
-
         $data = array();
 
         $data['text'] = $text;
@@ -414,7 +400,6 @@ class AipNlp extends AipBase
      */
     public function newsSummary($content, $maxSummaryLen, $options = array())
     {
-
         $data = array();
 
         $data['content'] = $content;

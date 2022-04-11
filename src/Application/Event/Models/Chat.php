@@ -27,5 +27,4 @@ class Chat extends Model
         }
         return 0;
     }
-
 }

@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Log;
 
 class Job implements ShouldQueue
 {
-    use InteractsWithQueue, Queueable, SerializesModels;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     private $weChat;
     private $templateMessageTask;
@@ -26,7 +28,7 @@ class Job implements ShouldQueue
     public function handle()
     {
         Log::info($this->params);
-        $weChat = new WeChat;
+        $weChat = new WeChat();
         $app = $weChat->getOfficialAccount($this->params['appid']);
         $result = $app->template_message->send($this->params['params']);
         $this->params['result'] = $result;

@@ -10,14 +10,16 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 abstract class BaseController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     public function success($data = null)
     {
         return response()->json($data);
     }
 
-    public function fail($errcode = 0,  $errmsg = '')
+    public function fail($errcode = 0, $errmsg = '')
     {
         return response()->json(['errcode' => $errcode, 'errmsg' => $errmsg]);
     }

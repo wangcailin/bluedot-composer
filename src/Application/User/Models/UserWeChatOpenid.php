@@ -45,5 +45,4 @@ class UserWeChatOpenid extends Model
     {
         return $this->hasOne(Authorizer::class, 'appid', 'appid');
     }
-
 }

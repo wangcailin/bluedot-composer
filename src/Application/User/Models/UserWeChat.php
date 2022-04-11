@@ -24,5 +24,4 @@ class UserWeChat extends Model
     {
         return $this->hasMany(UserWeChatOpenid::class, 'unionid', 'unionid');
     }
-
 }

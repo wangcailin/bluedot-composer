@@ -13,5 +13,4 @@ class UserTagCount extends Pivot
     {
         return $this->hasOne(Tag::class, 'id', 'tag_id');
     }
-
 }

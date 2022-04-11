@@ -17,13 +17,11 @@
 
 namespace Composer\Support\Aip\Lib;
 
-
 /**
  * Http Client
  */
 class AipHttpClient
 {
-
     /**
      * HttpClient
      * @param array $headers HTTP header
@@ -204,7 +202,7 @@ class AipHttpClient
     }
 
     /**
-     * 
+     *
      * @param  string $url
      * @param  array $params 参数
      * @return string

@@ -8,15 +8,12 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class QuestionClient extends Controller
 {
+    use \Composer\Application\Event\Traits\GetOne;
+    use \Composer\Application\Event\Traits\Create;
 
     public function __construct(Question $question)
     {
         $this->model = $question;
         $this->allowedFilters = [AllowedFilter::exact('event_id')];
     }
-
-    use \Composer\Application\Event\Traits\GetOne;
-    use \Composer\Application\Event\Traits\Create;
-
-    
 }

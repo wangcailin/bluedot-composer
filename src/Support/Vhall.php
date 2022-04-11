@@ -88,7 +88,6 @@ class Vhall
      */
     private static function sign($params)
     {
-
         $SECRET_KEY = self::getSecretKey();
         ksort($params);
         $str = '';

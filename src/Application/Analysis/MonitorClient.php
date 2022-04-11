@@ -1,4 +1,5 @@
 <?php
+
 namespace Composer\Application\Analysis;
 
 use Composer\Application\Analysis\Models\Monitor;

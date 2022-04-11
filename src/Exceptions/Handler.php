@@ -11,7 +11,6 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
-
     protected $dontReport = [
         AuthorizationException::class,
         HttpException::class,

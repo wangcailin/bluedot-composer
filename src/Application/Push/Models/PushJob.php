@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class PushJob extends Model
 {
-
     protected $table = 'push_job';
 
     protected $fillable = [

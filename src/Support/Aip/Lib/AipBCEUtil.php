@@ -178,25 +178,24 @@ AipHttpUtil::__init();
 
 class AipSignOption
 {
-    const EXPIRATION_IN_SECONDS = 'expirationInSeconds';
+    public const EXPIRATION_IN_SECONDS = 'expirationInSeconds';
 
-    const HEADERS_TO_SIGN = 'headersToSign';
+    public const HEADERS_TO_SIGN = 'headersToSign';
 
-    const TIMESTAMP = 'timestamp';
+    public const TIMESTAMP = 'timestamp';
 
-    const DEFAULT_EXPIRATION_IN_SECONDS = 1800;
+    public const DEFAULT_EXPIRATION_IN_SECONDS = 1800;
 
-    const MIN_EXPIRATION_IN_SECONDS = 300;
+    public const MIN_EXPIRATION_IN_SECONDS = 300;
 
-    const MAX_EXPIRATION_IN_SECONDS = 129600;
+    public const MAX_EXPIRATION_IN_SECONDS = 129600;
 }
 
 
 class AipSampleSigner
 {
-
-    const BCE_AUTH_VERSION = "bce-auth-v1";
-    const BCE_PREFIX = 'x-bce-';
+    public const BCE_AUTH_VERSION = "bce-auth-v1";
+    public const BCE_PREFIX = 'x-bce-';
 
     //不指定headersToSign情况下，默认签名http头，包括：
     //    1.host
@@ -205,7 +204,7 @@ class AipSampleSigner
     //    4.content-md5
     public static $defaultHeadersToSign;
 
-    public static function  __init()
+    public static function __init()
     {
         AipSampleSigner::$defaultHeadersToSign = array(
             "host",
@@ -306,7 +305,6 @@ class AipSampleSigner
      */
     public static function getHeadersToSign($headers, $headersToSign)
     {
-
         $arr = array();
         foreach ($headersToSign as $value) {
             $arr[] = strtolower(trim($value));

@@ -34,7 +34,6 @@ trait Client
             'live_task_id' => $result['data']['task_id'],
         ]);
         return $this->success();
-
     }
 
     /**

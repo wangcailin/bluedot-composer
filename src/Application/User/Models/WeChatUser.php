@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class WeChatUser extends Model
 {
-
     protected $table = 'wechat_user';
 
     protected $fillable = [
@@ -44,5 +43,4 @@ class WeChatUser extends Model
     // {
     //     return $this->hasOne(UserRegister::class, 'user_id', 'id');
     // }
-
 }

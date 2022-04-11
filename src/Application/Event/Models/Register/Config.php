@@ -29,5 +29,4 @@ class Config extends Model
         }
         return $timeState;
     }
-
 }

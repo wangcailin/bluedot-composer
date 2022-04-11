@@ -41,7 +41,6 @@ class Qrcode extends Model
 
     public function getTimelineAttribute()
     {
-
         $start_date = (time() - 86400 * 5);
         $end_date = (time() + 86400);
         $cut = ($end_date - $start_date) / 86400;

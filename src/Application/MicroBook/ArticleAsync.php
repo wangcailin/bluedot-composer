@@ -12,11 +12,10 @@ use GatewayWorker\Lib\Gateway;
 
 class ArticleAsync
 {
-
     public function handle($type, $appid)
     {
         $weChat = new WeChat();
-        $speech = new Speech;
+        $speech = new Speech();
 
         $officialAccount = $weChat->getOfficialAccount($appid);
 

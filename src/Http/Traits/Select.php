@@ -4,7 +4,6 @@ namespace Composer\Http\Traits;
 
 trait Select
 {
-
     /**
      * Select选择器
      */

@@ -7,7 +7,6 @@ namespace Composer\Support\Aip;
  */
 class Speech
 {
-
     private $client;
     public function __construct()
     {

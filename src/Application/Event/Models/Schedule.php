@@ -28,7 +28,5 @@ class Schedule extends Model
     public function getSpeakersAttribute()
     {
         return Speaker::whereIn('id', $this->speaker_ids ?: [])->get();
-
     }
-
 }

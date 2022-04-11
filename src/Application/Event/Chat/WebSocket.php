@@ -4,7 +4,7 @@ namespace Composer\Application\Event\Chat;
 
 use Composer\Application\Event\Models\Chat;
 use Composer\Application\Event\Models\Chat\Like;
-use \GatewayWorker\Lib\Gateway;
+use GatewayWorker\Lib\Gateway;
 
 class WebSocket
 {
@@ -57,12 +57,9 @@ class WebSocket
                 Gateway::sendToGroup("event_{$data['event_id']}", json_encode($data));
                 break;
         }
-
     }
 
     public static function onClose($clientId)
     {
-
     }
-
 }

@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardClient extends Controller
 {
-
     private function getAppid()
     {
         $authorizer =  Authorizer::where(['app_type' => 1])->first();
@@ -38,7 +37,7 @@ class DashboardClient extends Controller
     // 查询7天数据
     private function queryWeekCount($query, $date, $date1 = null)
     {
-        return $query->where('created_at', '<=',  $date1 ?: date('Y-m-d H:i:s'))->where('created_at', '>=', $date . ' 00:00:00');
+        return $query->where('created_at', '<=', $date1 ?: date('Y-m-d H:i:s'))->where('created_at', '>=', $date . ' 00:00:00');
     }
     // 查询7天数据分天计数
     private function queryGroupDayCount($query)

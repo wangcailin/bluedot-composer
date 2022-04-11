@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Monitor extends Pivot
 {
-
     protected $table = 'analysis_monitor';
 
     protected $fillable = [
@@ -38,5 +37,4 @@ class Monitor extends Pivot
         'page_param' => 'json',
         'keywords' => 'array',
     ];
-
 }

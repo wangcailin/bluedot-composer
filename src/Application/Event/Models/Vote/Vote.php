@@ -18,5 +18,4 @@ class Vote extends Model
     protected $casts = [
         'qa' => 'json',
     ];
-
 }

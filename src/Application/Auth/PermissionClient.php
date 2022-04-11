@@ -7,7 +7,6 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionClient extends BaseController
 {
-
     public function __construct(Permission $permission)
     {
         $this->model = $permission;

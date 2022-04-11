@@ -7,12 +7,10 @@ use Composer\Http\Controller;
 
 class RegisterConfigClient extends Controller
 {
+    use \Composer\Application\Event\Traits\GetOne;
+    use \Composer\Application\Event\Traits\Create;
     public function __construct(Config $config)
     {
         $this->model = $config;
     }
-
-    use \Composer\Application\Event\Traits\GetOne;
-    use \Composer\Application\Event\Traits\Create;
-
 }

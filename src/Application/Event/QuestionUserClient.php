@@ -8,6 +8,7 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class QuestionUserClient extends Controller
 {
+    use \Composer\Application\Event\Traits\GetOneUser;
 
     public function __construct(User $user)
     {
@@ -16,6 +17,4 @@ class QuestionUserClient extends Controller
             AllowedFilter::exact('event_id'),
         ];
     }
-
-    use \Composer\Application\Event\Traits\GetOneUser;
 }

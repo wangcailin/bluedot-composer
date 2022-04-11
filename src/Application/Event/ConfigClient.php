@@ -8,6 +8,8 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class ConfigClient extends Controller
 {
+    use \Composer\Application\Event\Traits\GetOne;
+    use \Composer\Application\Event\Traits\Create;
 
     public function __construct(Config $config)
     {
@@ -16,8 +18,4 @@ class ConfigClient extends Controller
             AllowedFilter::exact('event_id'),
         ];
     }
-
-    use \Composer\Application\Event\Traits\GetOne;
-    use \Composer\Application\Event\Traits\Create;
-
 }

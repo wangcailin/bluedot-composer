@@ -80,11 +80,13 @@ class ConfigClient extends Controller
         ];
         $app = $this->app->getMiniProgram($authorizer['appid']);
         $result = $app->code->commit($data['template_id'], $data['ext_json'], $data['version'], $data['desc']);
-        if ($result['errcode'] !== 0)
+        if ($result['errcode'] !== 0) {
             return $this->success($result);
+        }
         $category = $app->code->getCategory();
-        if ($result['errcode'] !== 0)
+        if ($result['errcode'] !== 0) {
             return $this->success($result);
+        }
         $data = [
             'item_list' => [
                 [
@@ -99,8 +101,9 @@ class ConfigClient extends Controller
             ]
         ];
         $result = $app->code->submitAudit($data['item_list']);
-        if ($result['errcode'] !== 0)
+        if ($result['errcode'] !== 0) {
             return $this->success($result);
+        }
         return $this->success(['errcode' => 0]);
     }
 
@@ -109,7 +112,7 @@ class ConfigClient extends Controller
         $navcolor = '';
         if ($value['navcolor'] == '#fff') {
             $navcolor = 'black';
-        } else if ($value['navcolor'] == '#000') {
+        } elseif ($value['navcolor'] == '#000') {
             $navcolor = 'white';
         }
         return '{

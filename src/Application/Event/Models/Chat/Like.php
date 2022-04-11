@@ -13,5 +13,4 @@ class Like extends Pivot
         'user_id',
         'unionid',
     ];
-
 }

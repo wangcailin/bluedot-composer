@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-
     protected $table = 'user_group';
 
     protected $fillable = [

@@ -74,7 +74,7 @@ class PushService extends Command
                             if ($value['data']['group_id']) {
                                 $groupUser = UserGroup::where('group_id', $value['data']['group_id'])->get();
                                 Log::info($groupUser);
-                                $weChat = new WeChat;
+                                $weChat = new WeChat();
                                 $app = $weChat->getOfficialAccount($value['data']['appid']);
                                 if (count($groupUser) > 0) {
                                     $tag = $app->user_tag->create(uniqid());

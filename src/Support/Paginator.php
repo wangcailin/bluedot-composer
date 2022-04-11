@@ -6,7 +6,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class Paginator extends LengthAwarePaginator
 {
-
     /**
      * Create a new paginator instance.
      *

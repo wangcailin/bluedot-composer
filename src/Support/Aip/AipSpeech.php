@@ -24,7 +24,6 @@ use Composer\Support\Aip\Lib\AipBase;
  */
 class AipSpeech extends AipBase
 {
-
     /**
      * url
      * @var string
@@ -39,8 +38,8 @@ class AipSpeech extends AipBase
 
     /**
      * 判断认证是否有权限
-     * @param  array   $authObj 
-     * @return boolean          
+     * @param  array   $authObj
+     * @return boolean
      */
     protected function isPermission($authObj)
     {
@@ -56,7 +55,6 @@ class AipSpeech extends AipBase
      */
     protected function proccessRequest($url, &$params, &$data, $headers)
     {
-
         $token = isset($params['access_token']) ? $params['access_token'] : '';
 
         if (empty($data['cuid'])) {

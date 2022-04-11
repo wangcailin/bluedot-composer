@@ -18,5 +18,4 @@ class User extends Model
     protected $casts = [
         'qa' => 'json',
     ];
-
 }

@@ -45,7 +45,7 @@ class Register extends Model
 
     public function getViewTimepcAttribute()
     {
-        return UserLookLog::where(['event_id' => $this->event_id, 'user_id' => $this->user_id])->whereNotIn('browser',['MicroMessenger'])->sum('tt');
+        return UserLookLog::where(['event_id' => $this->event_id, 'user_id' => $this->user_id])->whereNotIn('browser', ['MicroMessenger'])->sum('tt');
     }
 
     public function getViewTimeh5Attribute()

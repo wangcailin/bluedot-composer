@@ -35,11 +35,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth.backend' => \Composer\Http\Middleware\Auth\BackendAuthenticate::class,
+        // 'auth.backend' => \Composer\Http\Middleware\Auth\BackendAuthenticate::class,
         'auth.operation_log' => \Composer\Http\Middleware\AuthOperationLog::class,
         'auth.role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'auth.permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'auth.role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
-        'auth.client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
+        'auth.client_credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
     ];
 }

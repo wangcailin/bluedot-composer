@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Hash;
 
 class BackendClient extends BaseController
 {
+    use VerifyCodeTrait;
+
+    use VerifyCodeTrait;
 
     /**
      * 登录失败次数
@@ -19,8 +22,6 @@ class BackendClient extends BaseController
 
     public $user;
     public $token;
-
-    use VerifyCodeTrait;
 
     /**
      * Get a JWT via given credentials.
@@ -39,7 +40,7 @@ class BackendClient extends BaseController
             if (Hash::check($credentials['password'], $this->user->password)) {
                 $this->getAccessToken();
             }
-        } else if ($type == 'mail') {
+        } elseif ($type == 'mail') {
             $credentials = $request->only(['email', 'code']);
             $r = $this->loginfailureCount($credentials);
             if ($r !== true) {
@@ -48,7 +49,7 @@ class BackendClient extends BaseController
             if ($this->verifyCode('email', $credentials['email'], $credentials['code'], 'login')) {
                 $this->getAccessToken();
             }
-        } else if ($type == 'mobile') {
+        } elseif ($type == 'mobile') {
             $credentials = $request->only(['phone', 'code']);
             $r = $this->loginfailureCount($credentials);
             if ($r !== true) {
@@ -75,9 +76,9 @@ class BackendClient extends BaseController
         $where = [];
         if (!empty($credentials['username'])) {
             $where['username'] = $credentials['username'];
-        } else if (!empty($credentials['email'])) {
+        } elseif (!empty($credentials['email'])) {
             $where['email'] = $credentials['email'];
-        } else if (!empty($credentials['phone'])) {
+        } elseif (!empty($credentials['phone'])) {
             $where['phone'] = $credentials['phone'];
         }
         if ($where) {
@@ -111,9 +112,9 @@ class BackendClient extends BaseController
         $where = [];
         if (!empty($credentials['username'])) {
             $where['username'] = $credentials['username'];
-        } else if (!empty($credentials['email'])) {
+        } elseif (!empty($credentials['email'])) {
             $where['email'] = $credentials['email'];
-        } else if (!empty($credentials['phone'])) {
+        } elseif (!empty($credentials['phone'])) {
             $where['phone'] = $credentials['phone'];
         }
         if ($where) {
@@ -216,8 +217,6 @@ class BackendClient extends BaseController
         }
         return $this->success(['code' => 0]);
     }
-
-    use VerifyCodeTrait;
 
     /**
      * 邮箱绑定

@@ -19,5 +19,4 @@ class TemplateMessageTask extends Model
     {
         $this->attributes['send_time'] = date('Y-m-d H:i:00', strtotime($value));
     }
-
 }

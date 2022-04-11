@@ -11,5 +11,4 @@ class User extends Model
     protected $fillable = [
         'schedule_id',
     ];
-
 }

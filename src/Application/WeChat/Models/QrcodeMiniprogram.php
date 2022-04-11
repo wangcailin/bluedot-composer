@@ -17,5 +17,4 @@ class QrcodeMiniprogram extends Model
     protected $casts = [
         'value' => 'json',
     ];
-
 }

@@ -8,14 +8,13 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class ScheduleClient extends Controller
 {
+    use \Composer\Application\Event\Traits\GetMany;
 
     public function __construct(Schedule $schedule)
     {
         $this->model = $schedule;
         $this->allowedFilters = [AllowedFilter::exact('event_id')];
     }
-
-    use \Composer\Application\Event\Traits\GetMany;
 
     public function create()
     {
