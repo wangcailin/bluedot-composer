@@ -13,7 +13,30 @@ class ServiceProvider extends AbstractServiceProvider
     {
         $this->makeLog();
         $this->makePassport();
+        $this->makePublishes();
     }
+
+    public function register()
+    {
+        $this->registerPaginator();
+        $this->registerHandler();
+        $this->registerHttpKernel();
+
+        $this->app->register(
+            \Laravel\Passport\PassportServiceProvider::class
+        );
+        $this->app->register(\Spatie\Permission\PermissionServiceProvider::class);
+    }
+
+    protected function makePublishes()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../database/migrations' => database_path('migrations'),
+            ], 'composer-migrations');
+        }
+    }
+
 
     protected function makeLog()
     {
@@ -35,17 +58,7 @@ class ServiceProvider extends AbstractServiceProvider
         Passport::personalAccessTokensExpireIn(now()->addDays(7));
     }
 
-    public function register()
-    {
-        $this->registerPaginator();
-        $this->registerHandler();
-        $this->registerHttpKernel();
 
-        $this->app->register(
-            \Laravel\Passport\PassportServiceProvider::class
-        );
-        $this->app->register(\Spatie\Permission\PermissionServiceProvider::class);
-    }
 
     /**
      * 分页器
