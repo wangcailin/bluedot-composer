@@ -13,7 +13,8 @@ class ServiceProvider extends AbstractServiceProvider
     {
         $this->makeLog();
         $this->makePassport();
-        $this->makePublishes();
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     public function register()
@@ -27,16 +28,6 @@ class ServiceProvider extends AbstractServiceProvider
         );
         $this->app->register(\Spatie\Permission\PermissionServiceProvider::class);
     }
-
-    protected function makePublishes()
-    {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../database/migrations' => database_path('migrations'),
-            ], 'composer-migrations');
-        }
-    }
-
 
     protected function makeLog()
     {
