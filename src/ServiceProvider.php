@@ -11,6 +11,12 @@ class ServiceProvider extends AbstractServiceProvider
 {
     public function boot()
     {
+        $this->makeLog();
+        $this->makePassport();
+    }
+
+    protected function makeLog()
+    {
         DB::listen(function ($query) {
             $data = [
                 'sql' => $query->sql,
@@ -19,38 +25,51 @@ class ServiceProvider extends AbstractServiceProvider
             ];
             Log::info(json_encode($data));
         });
+    }
 
+    protected function makePassport()
+    {
         Passport::loadKeysFrom(base_path(config('passport.key_path')));
         Passport::tokensExpireIn(now()->addHour(2));
         Passport::refreshTokensExpireIn(now()->addDays(1));
         Passport::personalAccessTokensExpireIn(now()->addDays(7));
     }
 
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register()
     {
-        // 注册分页器
-        $this->app->singleton('Illuminate\Pagination\LengthAwarePaginator', function ($app, $options) {
-            return new \Composer\Support\Paginator($options['items'], $options['total'], $options['perPage'], $options['currentPage'], $options['options']);
-        });
+        $this->registerPaginator();
+        $this->registerHandler();
+        $this->registerHttpKernel();
 
-        $this->app->singleton(
-            \Illuminate\Contracts\Debug\ExceptionHandler::class,
-            \Composer\Exceptions\Handler::class
-        );
-
-        $this->app->singleton(
-            \Illuminate\Contracts\Http\Kernel::class,
-            \Composer\Http\Kernel::class
-        );
         $this->app->register(
             \Laravel\Passport\PassportServiceProvider::class
         );
         $this->app->register(\Spatie\Permission\PermissionServiceProvider::class);
+    }
+
+    /**
+     * 分页器
+     */
+    protected function registerPaginator()
+    {
+        $this->app->singleton('Illuminate\Pagination\LengthAwarePaginator', function ($app, $options) {
+            return new \Composer\Support\Paginator($options['items'], $options['total'], $options['perPage'], $options['currentPage'], $options['options']);
+        });
+    }
+
+    protected function registerHandler()
+    {
+        $this->app->singleton(
+            \Illuminate\Contracts\Debug\ExceptionHandler::class,
+            \Composer\Exceptions\Handler::class
+        );
+    }
+
+    protected function registerHttpKernel()
+    {
+        $this->app->singleton(
+            \Illuminate\Contracts\Http\Kernel::class,
+            \Composer\Http\Kernel::class
+        );
     }
 }
