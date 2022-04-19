@@ -19,7 +19,7 @@ class ServiceProvider extends AbstractServiceProvider
 
         //php artisan vendor:publish --tag=controller-publish
         $this->publishes([
-            __DIR__ . '/Http/Controllers/Backend' => app_path("Http/Controllers/Backend"),
+            __DIR__ . '/Http/Controllers/Backend/Auth' => app_path("Http/Controllers/Backend/Auth"),
         ], 'controller-publish');
 
         //php artisan vendor:publish --tag=auth-publish --force
