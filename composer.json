@@ -34,6 +34,13 @@
       "src/helpers.php"
     ]
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Composer\\ComposerServiceProvider"
+      ]
+    }
+  },
   "config": {
     "allow-plugins": {
       "easywechat-composer/easywechat-composer": true
