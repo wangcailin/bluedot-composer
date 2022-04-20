@@ -126,3 +126,19 @@ if (!function_exists('data_masking_email')) {
         return data_masking($name, 1, 0, $re) . '@' . $doman;
     }
 }
+if (!function_exists('file_upload_oss')) {
+    /**
+     * @param string $url 网络图片地址
+     * @param string $dir oss文件夹
+     * @return mixed
+     */
+    function file_upload_oss(string $url,string $dir)
+    {
+        $ext = explode('.', $url);
+        $dir = !empty($dir)?$dir:'XiumiEdit';
+        $path = $dir."/" . date('ymd') . '/';
+        $name = $path . md5(rand(1000, 90000) . time()) . '.' . end($ext);
+        $res = Composer\Support\Aliyun\OssClient::putObject($name, file_get_contents($url));
+        return $res;
+    }
+}
