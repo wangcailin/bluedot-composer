@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Mail;
+namespace Composer\Support\Mail;
 
 use Composer\Support\Mail\Login\Verify;
 use Illuminate\Support\Facades\Mail;
