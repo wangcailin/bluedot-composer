@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support;
+namespace Composer\Support\Database\Models;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 

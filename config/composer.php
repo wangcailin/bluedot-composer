@@ -8,4 +8,8 @@ return [
 
     'aliyun_access_key_id' => env('ALIYUN_ACCESS_KEY_ID', ''),
     'aliyun_access_key_secret' => env('ALIYUN_ACCESS_KEY_SECRET', ''),
+
+    'aliyun_oss_bucket' => env('ALIYUN_OSS_BUCKET', ''),
+    'aliyun_oss_endpoint' => env('ALIYUN_OSS_ENDPOINT', ''),
+
 ];

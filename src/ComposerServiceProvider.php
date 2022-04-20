@@ -75,7 +75,7 @@ class ComposerServiceProvider extends ServiceProvider
     protected function registerPaginator()
     {
         $this->app->singleton('Illuminate\Pagination\LengthAwarePaginator', function ($app, $options) {
-            return new \Composer\Support\Paginator($options['items'], $options['total'], $options['perPage'], $options['currentPage'], $options['options']);
+            return new \Composer\Support\Database\Models\Paginator($options['items'], $options['total'], $options['perPage'], $options['currentPage'], $options['options']);
         });
     }
 

@@ -2,7 +2,6 @@
 
 namespace Composer\Support\Aliyun;
 
-use Composer\Support\Aliyun\BaseClient;
 use AlibabaCloud\Client\AlibabaCloud;
 use AlibabaCloud\Client\Exception\ClientException;
 use AlibabaCloud\Client\Exception\ServerException;

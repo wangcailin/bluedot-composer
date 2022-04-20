@@ -2,8 +2,7 @@
 
 namespace Composer\Support\Aliyun;
 
-use Illuminate\Support\Env;
-use AlibabaCloud\Kms\Kms as KmsBase;
+use AlibabaCloud\Kms\Kms;
 
 use AlibabaCloud\Client\AlibabaCloud;
 
@@ -27,7 +26,7 @@ class KmsClient
     public static function createSecret($secretName, $secretData)
     {
         self::createClient();
-        $request = KmsBase::v20160120()->createSecret();
+        $request = Kms::v20160120()->createSecret();
         return $request
             ->withSecretName($secretName)
             ->withVersionId('1')
@@ -41,7 +40,7 @@ class KmsClient
     public static function getSecret($secretName)
     {
         self::createClient();
-        $request = KmsBase::v20160120()->getSecretValue();
+        $request = Kms::v20160120()->getSecretValue();
         $result = $request
             ->withSecretName($secretName)
             ->request()->toArray();
@@ -65,7 +64,7 @@ class KmsClient
     public static function deleteSecret($secretName)
     {
         self::createClient();
-        $request = KmsBase::v20160120()->deleteSecret();
+        $request = Kms::v20160120()->deleteSecret();
         $result = $request
             ->withSecretName($secretName)
             ->request();
