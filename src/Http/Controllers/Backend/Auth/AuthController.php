@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Auth;
+namespace Composer\Http\Controllers\Backend\Auth;
 
-use Composer\Application\User\BackendClient;
+use Composer\Application\Auth\BackendClient;
 
 class AuthController extends BackendClient
 {

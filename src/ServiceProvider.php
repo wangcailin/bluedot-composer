@@ -18,9 +18,9 @@ class ServiceProvider extends AbstractServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         //php artisan vendor:publish --tag=controller-publish
-        $this->publishes([
-            __DIR__ . '/Http/Controllers/Backend/Auth' => app_path("Http/Controllers/Backend/Auth"),
-        ], 'controller-publish');
+        //$this->publishes([
+        //    __DIR__ . '/Http/Controllers/Backend/Auth' => app_path("Http/Controllers/Backend/Auth"),
+        //], 'controller-publish');
 
         //php artisan vendor:publish --tag=auth-publish --force
         $this->publishes([

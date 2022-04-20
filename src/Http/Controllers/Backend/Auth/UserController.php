@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Auth;
+namespace Composer\Http\Controllers\Backend\Auth;
 
 use Composer\Application\Auth\UserClient;
 

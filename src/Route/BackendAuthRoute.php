@@ -4,7 +4,7 @@ namespace Composer\Route;
 
 use Illuminate\Contracts\Routing\Registrar as Router;
 
-class BackendRoute
+class BackendAuthRoute
 {
     /**
      * The router implementation.
@@ -42,7 +42,7 @@ class BackendRoute
      */
     public function forBackendPermissionRoute()
     {
-        $this->router->group(['prefix' => 'backend/permission', 'middleware' => 'auth.backend', 'namespace' => 'App\Http\Controllers\Backend\Auth'], function () {
+        $this->router->group(['prefix' => 'backend/permission', 'middleware' => 'auth.backend', 'namespace' => '\Composer\Http\Controllers\Backend\Auth'], function () {
             $this->router->get('getSelect', 'PermissionController@getSelect');
         });
     }
@@ -52,7 +52,7 @@ class BackendRoute
      */
     public function forBackendRoleRoute()
     {
-        $this->router->group(['prefix' => 'backend/role', 'middleware' => 'auth.backend', 'namespace' => 'App\Http\Controllers\Backend\Auth'], function () {
+        $this->router->group(['prefix' => 'backend/role', 'middleware' => 'auth.backend', 'namespace' => '\Composer\Http\Controllers\Backend\Auth'], function () {
             $this->router->get('get/{id}', 'RoleController@get');
             $this->router->post('create', 'RoleController@create');
             $this->router->put('update/{id}', 'RoleController@update');
@@ -65,7 +65,7 @@ class BackendRoute
      */
     public function forBackendUserRoute()
     {
-        $this->router->group(['prefix' => 'backend/user', 'middleware' => 'auth.backend', 'namespace' => 'App\Http\Controllers\Backend\Auth'], function () {
+        $this->router->group(['prefix' => 'backend/user', 'middleware' => 'auth.backend', 'namespace' => '\Composer\Http\Controllers\Backend\Auth'], function () {
             $this->router->get('get/{id}', 'UserController@get');
             $this->router->post('create', 'UserController@create');
             $this->router->get('change/{id}', 'UserController@change');
@@ -78,19 +78,19 @@ class BackendRoute
      */
     public function forBackendAuthRoute()
     {
-        $this->router->post('backend/auth/login', 'Composer\Application\Auth\BackendClient@login');
-        $this->router->group(['prefix' => 'backend/auth', 'middleware' => 'auth.backend', 'namespace' => 'App\Http\Controllers\Backend\Auth'], function () {
-            $this->router->get('currentUser', 'BackendController@currentUser');
-            $this->router->get('public-token', 'BackendController@getPublicToken');
-            $this->router->get('refresh', 'BackendController@refresh');
-            $this->router->get('logout', 'BackendController@logout');
-            $this->router->post('createUser', 'BackendController@create');
-            $this->router->get('getPublicToken', 'BackendController@getPublicToken');
-            $this->router->post('passwordReset', 'BackendController@passwordReset');
-            $this->router->post('bindMail', 'BackendController@bindMail');
-            $this->router->post('verifyBindMail', 'BackendController@verifyBindMail');
-            $this->router->post('bindSms', 'BackendController@bindSms');
-            $this->router->post('verifyBindSms', 'BackendController@verifyBindSms');
+        $this->router->post('backend/auth/login', '\Composer\Http\Controllers\Backend\Auth\AuthController@login');
+        $this->router->group(['prefix' => 'backend/auth', 'middleware' => 'auth.backend', 'namespace' => '\Composer\Http\Controllers\Backend\Auth'], function () {
+            $this->router->get('currentUser', 'AuthController@currentUser');
+            $this->router->get('public-token', 'AuthController@getPublicToken');
+            $this->router->get('refresh', 'AuthController@refresh');
+            $this->router->get('logout', 'AuthController@logout');
+            $this->router->post('createUser', 'AuthController@create');
+            $this->router->get('getPublicToken', 'AuthController@getPublicToken');
+            $this->router->post('passwordReset', 'AuthController@passwordReset');
+            $this->router->post('bindMail', 'AuthController@bindMail');
+            $this->router->post('verifyBindMail', 'AuthController@verifyBindMail');
+            $this->router->post('bindSms', 'AuthController@bindSms');
+            $this->router->post('verifyBindSms', 'AuthController@verifyBindSms');
         });
     }
 }

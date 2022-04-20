@@ -2,7 +2,7 @@
 
 namespace Composer;
 
-use Composer\Route\BackendRoute;
+use Composer\Route\BackendAuthRoute;
 use Illuminate\Support\Facades\Route;
 
 class BaseRoute
@@ -23,12 +23,12 @@ class BaseRoute
 
         $defaultOptions = [
             'prefix' => 'api',
-            //'namespace' => '\Composer\Application\Auth',
+            //'namespace' => '\Composer\Http\Controllers',
         ];
 
         $options = array_merge($defaultOptions, $options);
         Route::group($options, function ($router) use ($callback) {
-            $callback(new BackendRoute($router));
+            $callback(new BackendAuthRoute($router));
         });
     }
 }
