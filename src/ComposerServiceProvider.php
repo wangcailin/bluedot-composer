@@ -15,12 +15,9 @@ class ComposerServiceProvider extends ServiceProvider
         $this->makeLog();
         $this->makePassport();
 
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/auth.php',
-            'auth'
-        );
+        $this->publishes([
+            __DIR__ . '/../config/composer.php' => config_path('composer.php'),
+        ], 'composer-config');
 
         $this->publishes([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
