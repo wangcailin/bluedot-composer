@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\Auth\Models;
+namespace Composer\Support\Auth\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,11 +27,12 @@ class User extends Authenticatable
         'phone',
         'email',
         'openid',
-        'loginfailure_time',
-        'loginfailure_count',
+        'loginfail_time',
+        'loginfail_count',
         'logintime',
         'is_admin',
         'is_active',
+        'avatar'
     ];
 
     /**
