@@ -2,10 +2,9 @@
 
 namespace Composer;
 
-use Composer\Route\BackendAuthRoute;
 use Illuminate\Support\Facades\Route;
 
-class BaseRoute
+class Composer
 {
 
     /**
@@ -28,7 +27,7 @@ class BaseRoute
 
         $options = array_merge($defaultOptions, $options);
         Route::group($options, function ($router) use ($callback) {
-            $callback(new BackendAuthRoute($router));
+            $callback(new RouteRegistrar($router));
         });
     }
 }

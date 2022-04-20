@@ -36,12 +36,8 @@ return [
 
     'guards' => [
         'backend' => [
-            'driver' => 'jwt',
-            'provider' => 'users',
-        ],
-        'platform' => [
-            'driver' => 'jwt',
-            'provider' => 'users',
+            'driver' => 'passport',
+            'provider' => 'auth_user',
         ],
     ],
 
@@ -63,15 +59,10 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'auth_user' => [
             'driver' => 'eloquent',
-            'model' => \App\Application\Auth\Models\User::class,
+            'model' => \Composer\Application\Auth\Models\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

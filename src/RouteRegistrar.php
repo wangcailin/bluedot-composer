@@ -1,10 +1,10 @@
 <?php
 
-namespace Composer\Route;
+namespace Composer;
 
 use Illuminate\Contracts\Routing\Registrar as Router;
 
-class BackendAuthRoute
+class RouteRegistrar
 {
     /**
      * The router implementation.

@@ -4,28 +4,27 @@ namespace Composer;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\ServiceProvider as AbstractServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 
-class ServiceProvider extends AbstractServiceProvider
+class ComposerServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        BaseRoute::routes();
+        Composer::routes();
         $this->makeLog();
         $this->makePassport();
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        //php artisan vendor:publish --tag=controller-publish
-        //$this->publishes([
-        //    __DIR__ . '/Http/Controllers/Backend/Auth' => app_path("Http/Controllers/Backend/Auth"),
-        //], 'controller-publish');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/auth.php',
+            'auth'
+        );
 
-        //php artisan vendor:publish --tag=auth-publish --force
         $this->publishes([
-            __DIR__ . '/Config/auth.php' => config_path("auth.php"),
-        ], 'auth-publish');
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ], 'composer-migrations');
     }
 
     public function register()
