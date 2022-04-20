@@ -2,7 +2,7 @@
 
 namespace Composer\Http\Middleware;
 
-use Composer\Application\Auth\Models\OperationLog as OperationLog;
+use Composer\Support\Auth\Models\OperationLog as OperationLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
