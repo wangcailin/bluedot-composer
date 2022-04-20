@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Gate;
 
 class ComposerServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Composer::routes();
         $this->makeLog();
         $this->makePassport();
 
@@ -22,6 +22,17 @@ class ComposerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
         ], 'composer-migrations');
+
+        $this->publishes([
+            __DIR__ . '/../database/seeders' => database_path('seeders'),
+        ], 'composer-seeders');
+
+        Gate::before(function ($user, $ability) {
+            if ($user->hasRole('Super-Admin')) {
+                return true;
+            }
+        });
+        Composer::routes();
     }
 
     public function register()
