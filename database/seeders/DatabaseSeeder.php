@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Laravel\Passport\ClientRepository;
 use Composer\Application\Auth\Models\User;
 
 class DatabaseSeeder extends Seeder
@@ -16,5 +17,9 @@ class DatabaseSeeder extends Seeder
         $superAdminRole = Role::create(['name' => 'Super-Admin']);
         $user = User::createAdminUser('bluedot', 'Bluedot@2022');
         $user->assignRole($superAdminRole);
+
+        $client = new ClientRepository();
+        $client->createPasswordGrantClient(null, 'Default Tenant Client', '');
+        $client->createPersonalAccessClient(null, 'Default Tenant Personal Client', '');
     }
 }
