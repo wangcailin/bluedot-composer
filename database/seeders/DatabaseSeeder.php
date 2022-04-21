@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Laravel\Passport\ClientRepository;
-use Composer\Application\Auth\Models\User;
+use Composer\Support\Auth\Models\User;
 
 class DatabaseSeeder extends Seeder
 {

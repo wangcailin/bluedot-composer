@@ -3,7 +3,7 @@
 namespace Composer\Application\Auth;
 
 use Composer\Http\Controller;
-use Composer\Application\Auth\Models\Role as RoleModel;
+use Composer\Support\Auth\Models\Role as RoleModel;
 use Spatie\Permission\Models\Role;
 
 class RoleClient extends Controller

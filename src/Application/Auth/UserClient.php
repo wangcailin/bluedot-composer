@@ -2,7 +2,7 @@
 
 namespace Composer\Application\Auth;
 
-use Composer\Application\Auth\Models\User;
+use Composer\Support\Auth\Models\User;
 use Composer\Http\Controller;
 
 class UserClient extends Controller
