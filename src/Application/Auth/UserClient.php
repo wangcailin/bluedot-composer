@@ -42,6 +42,11 @@ class UserClient extends Controller
         foreach ($roles as $key => $value) {
             $auth->removeRole($value);
         }
+
+        if (($key = array_search('Super-Admin', $data['role']))) {
+            unset($data['role'][$key]);
+        }
+
         $auth->assignRole($data['role']);
         $this->performUpdate();
         return $this->success($user);

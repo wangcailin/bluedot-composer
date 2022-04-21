@@ -3,26 +3,39 @@
 namespace Composer\Application\Auth;
 
 use Composer\Http\Controller;
-use Composer\Support\Auth\Models\Role as RoleModel;
-use Spatie\Permission\Models\Role;
 
 class RoleClient extends Controller
 {
-    public function __construct(RoleModel $roleModel)
+    public function __construct()
     {
-        $this->model = $roleModel;
+        $this->model = config('permission.models.role');
+
+        $this->allowedIncludes = ['permissions'];
+
+        $this->validateRules = [
+            'name' => 'required|unique:' . config('permission.models.role'),
+        ];
+
+        $this->validateMessage = [
+            'unique' => '请输入唯一的部门名',
+        ];
+    }
+
+    public function performBuildFilter()
+    {
+        $this->model->where('name', '!=', 'Super-Admin');
     }
 
     public function get($id)
     {
-        $role = Role::findById($id);
+        $role = $this->model::findById($id);
         $role['permission'] = $role->permissions->pluck('name');
         return $this->success($role);
     }
 
     public function update($id)
     {
-        $role = Role::findOrFail($id);
+        $role = $this->model::findOrFail($id);
         $data = request()->all();
         $role->update(['name' => $data['name']]);
         $permission = $role->permissions->pluck('name');
@@ -36,13 +49,14 @@ class RoleClient extends Controller
     public function create()
     {
         $this->performCreate();
-        $role = Role::create(['name' => $this->data['name']]);
+        $role = $this->model::create(['name' => $this->data['name']]);
         $role->givePermissionTo($this->data['permission']);
         return $this->success($role);
     }
 
     public function getSelect()
     {
+        $this->buildFilter();
         $list = $this->model->select('name as value', 'name as label')->get();
         return $this->success($list);
     }
