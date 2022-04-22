@@ -14,7 +14,7 @@ class PermissionClient extends BaseController
 
     public function getSelect()
     {
-        $list = $this->model->select('name as value', 'name as label')->get();
+        $list = $this->model->select('name as value', 'label')->get();
         return $this->success($list);
     }
 }
