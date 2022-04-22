@@ -41,7 +41,7 @@ class CryptGenerateCommand extends Command
         $publicKey = '';
         $privateKey = '';
         if (class_exists(LegacyRSA::class)) {
-            $keys = (new LegacyRSA)->createKey(4096);
+            $keys = (new LegacyRSA())->createKey(4096);
             $publicKey = Arr::get($keys, 'publickey');
             $privateKey = Arr::get($keys, 'privatekey');
         } else {
