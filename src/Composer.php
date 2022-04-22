@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 class Composer
 {
-
     /**
      * Binds the Passport routes into the controller.
      *

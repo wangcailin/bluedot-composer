@@ -9,9 +9,8 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Facades\Excel as Excels;
 
-class ExcelExport  implements WithEvents, FromArray, WithMapping, WithHeadings
+class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
 {
-
     protected $data;
     protected $headings;
     protected $columnWidth = []; //设置列宽       key：列  value:宽

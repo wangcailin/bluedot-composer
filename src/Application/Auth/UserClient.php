@@ -12,11 +12,18 @@ class UserClient extends Controller
     public function __construct(User $user)
     {
         $this->model = $user;
+
+        $this->allowedIncludes = ['roles'];
+
+        $this->validateRules = [
+            'username' => 'required',
+            'password' => 'required',
+        ];
     }
 
     public function get($id)
     {
-        $user = User::find($id);
+        $user = $this->model::find($id);
         $user['role'] = $user->roles->pluck('name');
         return $this->success($user);
     }
@@ -24,10 +31,10 @@ class UserClient extends Controller
     public function create()
     {
         $this->performCreate();
-        if (User::where('username', $this->data['username'])->first()) {
-            return $this->success(['errcode' => 1, 'errmsg' => '账号已存在，请重新输入']);
+        if ($this->model::where('username', $this->data['username'])->first()) {
+            throw new ApiException('账号已存在，请重新输入', ApiErrorCode::ACCOUNT_REPEAT_ERROR);
         }
-        $user = User::createUser($this->data['username'], $this->data['password'], empty($this->data['email']) ?: '', empty($this->data['phone']) ?: '');
+        $user = $this->model::createUser($this->data['username'], $this->data['password'], empty($this->data['email']) ?: '', empty($this->data['phone']) ?: '');
         if (!empty($this->data['role'])) {
             $user->assignRole($this->data['role']);
         }
@@ -54,9 +61,9 @@ class UserClient extends Controller
         return $this->success($user);
     }
 
-    public function performDelete($id)
+    public function performDelete()
     {
-        if ($id == '1') {
+        if ($this->id == '1') {
             throw new ApiException('不能删除超级管理员', ApiErrorCode::VALIDATION_ERROR);
         }
     }

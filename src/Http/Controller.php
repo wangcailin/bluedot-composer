@@ -92,9 +92,9 @@ class Controller extends BaseController
     public function delete($id)
     {
         $this->id = $id;
-        $this->performDelete($id);
+        $this->performDelete();
         $this->model::findOrFail($id)->delete();
-        $this->afterDelete($id);
+        $this->afterDelete();
         return $this->success();
     }
 

@@ -4,7 +4,6 @@ namespace Composer\Support\Crypt;
 
 class Rsa
 {
-
     public function __construct()
     {
     }
