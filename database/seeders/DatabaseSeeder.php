@@ -14,9 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $superAdminRole = Role::create(['name' => 'Super-Admin']);
-        $user = User::createAdminUser('bluedot', 'Bluedot@2022');
-        $user->assignRole($superAdminRole);
+        User::createAdminUser('bluedot', 'Bluedot@2022');
 
         $client = new ClientRepository();
         $client->createPasswordGrantClient(null, 'Default Tenant Client', '');

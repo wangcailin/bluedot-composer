@@ -27,11 +27,18 @@ class ComposerServiceProvider extends ServiceProvider
             __DIR__ . '/../database/seeders' => database_path('seeders'),
         ], 'composer-seeders');
 
+
+        $this->commands([
+            Console\CryptGenerateCommand::class,
+            Console\InstallCommand::class,
+        ]);
+
         Gate::before(function ($user, $ability) {
-            if ($user->hasRole('Super-Admin')) {
+            if ($user->is_admin) {
                 return true;
             }
         });
+
         Composer::routes();
     }
 

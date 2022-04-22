@@ -21,11 +21,6 @@ class RoleClient extends Controller
         ];
     }
 
-    public function performBuildFilter()
-    {
-        $this->model->where('name', '!=', 'Super-Admin');
-    }
-
     public function get($id)
     {
         $role = $this->model::findById($id);
