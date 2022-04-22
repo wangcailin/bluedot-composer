@@ -44,14 +44,14 @@ class UserClient extends Controller
     public function change($id)
     {
         $user = $this->model::findOrFail($id);
-        $data = request()->all();
+        $data = request()->only(['is_active', 'roles']);
         $user->update($data);
         $auth = User::find($id);
         $roles = $auth->roles->pluck('name');
         foreach ($roles as $key => $value) {
             $auth->removeRole($value);
         }
-        $auth->assignRole($data['role']);
+        $auth->assignRole($data['roles']);
         $this->performUpdate();
         return $this->success($user);
     }
