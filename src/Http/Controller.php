@@ -32,6 +32,9 @@ class Controller extends BaseController
     /** 详情数据 */
     public $row = [];
 
+    /** id */
+    public $id = [];
+
     /** 创建数据 */
     public $data = [];
 
@@ -61,6 +64,7 @@ class Controller extends BaseController
 
     public function get($id)
     {
+        $this->id = $id;
         $this->performGet();
         $this->row = $this->model->findOrFail($id);
         $this->afterGet();
@@ -77,6 +81,7 @@ class Controller extends BaseController
 
     public function update($id)
     {
+        $this->id = $id;
         $this->performUpdate();
         $this->row = $this->model::findOrFail($id);
         $this->row->update($this->data);
@@ -86,6 +91,7 @@ class Controller extends BaseController
 
     public function delete($id)
     {
+        $this->id = $id;
         $this->performDelete($id);
         $this->model::findOrFail($id)->delete();
         $this->afterDelete($id);
@@ -124,10 +130,10 @@ class Controller extends BaseController
     {
     }
 
-    public function performDelete($id)
+    public function performDelete()
     {
     }
-    public function afterDelete($id)
+    public function afterDelete()
     {
     }
 

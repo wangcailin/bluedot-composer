@@ -2,6 +2,8 @@
 
 namespace Composer\Application\Auth;
 
+use Composer\Exceptions\ApiErrorCode;
+use Composer\Exceptions\ApiException;
 use Composer\Support\Auth\Models\User;
 use Composer\Http\Controller;
 
@@ -50,5 +52,12 @@ class UserClient extends Controller
         $auth->assignRole($data['role']);
         $this->performUpdate();
         return $this->success($user);
+    }
+
+    public function performDelete($id)
+    {
+        if ($id == '1') {
+            throw new ApiException('不能删除超级管理员', ApiErrorCode::VALIDATION_ERROR);
+        }
     }
 }
