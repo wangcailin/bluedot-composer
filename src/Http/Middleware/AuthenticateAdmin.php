@@ -16,7 +16,7 @@ class AuthenticateAdmin
 
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->is_admin === 1) {
+        if ($this->auth->guard($guard)->user()->is_admin === 1) {
             return $next($request);
         }
         return response('Unauthorized.', 401);

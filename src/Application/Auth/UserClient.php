@@ -52,7 +52,6 @@ class UserClient extends Controller
             $auth->removeRole($value);
         }
         $auth->assignRole($data['roles']);
-        $this->performUpdate();
         return $this->success($user);
     }
 

@@ -33,12 +33,6 @@ class ComposerServiceProvider extends ServiceProvider
             Console\InstallCommand::class,
         ]);
 
-        Gate::before(function ($user, $ability) {
-            if ($user->is_admin) {
-                return true;
-            }
-        });
-
         Composer::routes();
     }
 
