@@ -8,11 +8,11 @@ use phpseclib\Crypt\RSA as LegacyRSA;
 use phpseclib3\Crypt\RSA;
 use Illuminate\Support\Arr;
 
-class CryptGenerateCommand extends Command
+class KeyCommand extends Command
 {
     use ConfirmableTrait;
 
-    protected $signature = 'crypt:generate';
+    protected $signature = 'composer:key';
 
     protected $description = 'Set the application crypt key';
 

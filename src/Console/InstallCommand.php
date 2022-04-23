@@ -16,6 +16,6 @@ class InstallCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'composer-migrations']);
         $this->call('vendor:publish', ['--tag' => 'composer-seeders']);
 
-        $this->call('crypt:generate');
+        $this->call('composer:key');
     }
 }

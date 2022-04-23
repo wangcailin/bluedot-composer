@@ -29,7 +29,7 @@ class ComposerServiceProvider extends ServiceProvider
 
 
         $this->commands([
-            Console\CryptGenerateCommand::class,
+            Console\KeyCommand::class,
             Console\InstallCommand::class,
         ]);
 
