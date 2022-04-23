@@ -32,8 +32,6 @@ class ComposerServiceProvider extends ServiceProvider
             Console\KeyCommand::class,
             Console\InstallCommand::class,
         ]);
-
-        Composer::routes();
     }
 
     public function register()

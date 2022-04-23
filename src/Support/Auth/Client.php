@@ -177,7 +177,6 @@ abstract class Client extends BaseController
     {
         return $this->success([
             'access_token' => $token,
-            'X-Tenant' => tenant()->id
         ]);
     }
 

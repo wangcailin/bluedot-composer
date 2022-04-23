@@ -6,12 +6,19 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
+use Composer\Support\Auth\Traits\Model\Bind;
+use Composer\Support\Auth\Traits\Model\Account;
+use Composer\Support\Auth\Traits\Model\Attribute;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
     use HasApiTokens;
+
+    use Bind;
+    use Account;
+    use Attribute;
 
     protected $table = 'auth_user';
 
