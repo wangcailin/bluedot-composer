@@ -37,7 +37,9 @@ class UserClient extends Controller
         $user = $this->model::createUser($this->data['username'], $this->data['password'], empty($this->data['email']) ?: '', empty($this->data['phone']) ?: '');
         if (!empty($this->data['roles'])) {
             $user->assignRole($this->data['roles']);
+            app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
         }
+
         return $this->success($user);
     }
 
@@ -51,6 +53,7 @@ class UserClient extends Controller
             $user->removeRole($value);
         }
         $user->assignRole($data['roles']);
+        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
         return $this->success($user);
     }
 

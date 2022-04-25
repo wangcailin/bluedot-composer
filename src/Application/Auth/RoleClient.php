@@ -38,6 +38,7 @@ class RoleClient extends Controller
             $role->revokePermissionTo($value);
         }
         $role->givePermissionTo($data['permission']);
+        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
         return $this->success($role);
     }
 
@@ -46,6 +47,7 @@ class RoleClient extends Controller
         $this->performCreate();
         $role = $this->model::create(['name' => $this->data['name']]);
         $role->givePermissionTo($this->data['permission']);
+        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
         return $this->success($role);
     }
 
