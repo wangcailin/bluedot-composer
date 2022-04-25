@@ -23,8 +23,8 @@ class UserClient extends Controller
 
     public function get($id)
     {
-        $user = $this->model::find($id);
-        $user['role'] = $user->roles->pluck('name');
+        $user = $this->model::findOrFail($id);
+        $user['roles'] = $user->roles->pluck('name');
         return $this->success($user);
     }
 
@@ -35,8 +35,8 @@ class UserClient extends Controller
             throw new ApiException('账号已存在，请重新输入', ApiErrorCode::ACCOUNT_REPEAT_ERROR);
         }
         $user = $this->model::createUser($this->data['username'], $this->data['password'], empty($this->data['email']) ?: '', empty($this->data['phone']) ?: '');
-        if (!empty($this->data['role'])) {
-            $user->assignRole($this->data['role']);
+        if (!empty($this->data['roles'])) {
+            $user->assignRole($this->data['roles']);
         }
         return $this->success($user);
     }
