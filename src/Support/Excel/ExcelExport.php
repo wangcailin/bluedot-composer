@@ -24,7 +24,7 @@ class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
     protected $sheetName; //sheet title
     protected $borders = []; //设置边框颜色  key：A1:K8  value:#000000
     //设置页面属性时如果无效   更改excel格式尝试即可
-
+    protected   $column;
     protected $dataMergeKey = []; //需要合并的单元格 数组 ['A1:A2', 'B1:C1', 'D1:E1', 'F1:G1', 'H1:I1'];
 
     //构造函数传值
@@ -34,6 +34,10 @@ class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
         $this->headings = $headings;
         $this->sheetName = $sheetName;
         $this->dataMergeKey = $dataMergeKey;
+    }
+    public function setColumn($c)
+    {
+        $this->column = $c;
     }
     public function headings(): array
     {
@@ -50,18 +54,14 @@ class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
     }
     public function registerEvents(): array
     {
+        $Column = $this->column;
         return [
-            AfterSheet::class  => function (AfterSheet $event) {
-                //设置列宽
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(20);
+
+            AfterSheet::class  => function (AfterSheet $event)  use($Column)   {
+                foreach ($Column as $value){
+                    $event->sheet->getDelegate()->getColumnDimension($value['tag'])->setWidth($value['width']);
+                }
+
                 //设置行高，$i为数据行数
                 for ($i = 0; $i <= 1265; $i++) {
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(20);
@@ -92,6 +92,11 @@ class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
         ];
         $name = "导出文件名称";
         $export = new \Composer\Support\Excel\ExcelExport($excelData, $header, $name);
+        $clo = [
+            ['tag'=>'A',"width"=>50],
+            ['tag'=>'B',"width"=>50],
+        ];
+        $export->setColumn($clo);
         return Excels::download($export, $name . '.xls');
     }
 }
