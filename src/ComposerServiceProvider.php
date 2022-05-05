@@ -21,7 +21,7 @@ class ComposerServiceProvider extends ServiceProvider
         ], 'composer-config');
 
         $this->publishes([
-            __DIR__ . '/../database/migrations/create_permission_tables.php.stub' => $this->getMigrationFileName('create_permission_tables.php'),
+            __DIR__ . '/../database/migrations/update_permission_tables.php.stub' => $this->getMigrationFileName('update_permission_tables.php'),
         ], 'composer-migrations');
         $this->publishes([
             __DIR__ . '/../database/migrations/create_auth_user_table.php.stub' => $this->getMigrationFileName('create_auth_user_table.php'),
