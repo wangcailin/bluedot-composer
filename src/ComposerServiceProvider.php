@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Collection;
+use Illuminate\Filesystem\Filesystem;
 
 class ComposerServiceProvider extends ServiceProvider
 {
