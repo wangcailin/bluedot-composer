@@ -33,6 +33,7 @@ class RouteRegistrar
     {
         $this->forBackendAuthRoute();
         $this->forBackendStaffRoute();
+        $this->forCaptchaRoute();
     }
 
     /**
@@ -86,5 +87,10 @@ class RouteRegistrar
 
             $this->router->put('personal', 'BackendClient@updatePersonal');
         });
+    }
+
+    public function forCaptchaRoute()
+    {
+        $this->router->get('backend/auth/captcha', 'CaptchaClient@getCaptcha');
     }
 }

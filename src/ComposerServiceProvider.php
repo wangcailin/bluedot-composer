@@ -26,6 +26,10 @@ class ComposerServiceProvider extends ServiceProvider
             __DIR__ . '/../database/seeders' => database_path('seeders'),
         ], 'composer-seeders');
 
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views'),
+        ], 'composer-views');
+
 
         $this->commands([
             Console\KeyCommand::class,
