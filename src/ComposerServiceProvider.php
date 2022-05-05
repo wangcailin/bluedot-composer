@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
-use Illuminate\Support\Collection;
-use Illuminate\Filesystem\Filesystem;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -21,13 +19,7 @@ class ComposerServiceProvider extends ServiceProvider
         ], 'composer-config');
 
         $this->publishes([
-            __DIR__ . '/../database/migrations/update_permission_tables.php.stub' => $this->getMigrationFileName('update_permission_tables.php'),
-        ], 'composer-migrations');
-        $this->publishes([
-            __DIR__ . '/../database/migrations/create_auth_user_table.php.stub' => $this->getMigrationFileName('create_auth_user_table.php'),
-        ], 'composer-migrations');
-        $this->publishes([
-            __DIR__ . '/../database/migrations/create_auth_operation_log_table.php.stub' => $this->getMigrationFileName('create_auth_operation_log_table.php'),
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
         ], 'composer-migrations');
 
         $this->publishes([
@@ -99,24 +91,5 @@ class ComposerServiceProvider extends ServiceProvider
             \Illuminate\Contracts\Http\Kernel::class,
             \Composer\Http\Kernel::class
         );
-    }
-
-    /**
-     * Returns existing migration file if found, else uses the current timestamp.
-     *
-     * @return string
-     */
-    protected function getMigrationFileName($migrationFileName): string
-    {
-        $timestamp = date('Y_m_d_His');
-
-        $filesystem = $this->app->make(Filesystem::class);
-
-        return Collection::make($this->app->databasePath() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR)
-            ->flatMap(function ($path) use ($filesystem, $migrationFileName) {
-                return $filesystem->glob($path . '*_' . $migrationFileName);
-            })
-            ->push($this->app->databasePath() . "/migrations/{$timestamp}_{$migrationFileName}")
-            ->first();
     }
 }
