@@ -21,7 +21,7 @@ class Composer
 
         $defaultOptions = [
             'prefix' => 'api',
-            'namespace' => '\Composer\Http\Application',
+            'namespace' => '\Composer\Application',
         ];
 
         $options = array_merge($defaultOptions, $options);
