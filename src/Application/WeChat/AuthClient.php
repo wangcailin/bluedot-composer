@@ -6,6 +6,7 @@ use Composer\Application\WeChat\Models\WeChatOpenid;
 use Composer\Application\WeChat\User\MiniProgram;
 use Composer\Http\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthClient extends BaseController
 {
@@ -26,7 +27,8 @@ class AuthClient extends BaseController
             if (strpos($redirectUrl, '?')) {
                 $link = '&';
             }
-            $this->oauthAfter($appid, $user);
+            $userInfo = $this->oauthAfter($appid, $user);
+            $user['token'] = Auth::guard('platform')->tokenById($userInfo['id']);
             $query = http_build_query($user);
             return \redirect($redirectUrl . $link . $query);
         }
@@ -50,7 +52,7 @@ class AuthClient extends BaseController
         if (isset($user['unionid'])) {
             $data['unionid'] = $user['unionid'];
         }
-        WeChatOpenid::updateOrCreate(
+        return WeChatOpenid::updateOrCreate(
             ['appid' => $appid, 'openid' => $user['openid']],
             $data
         );
