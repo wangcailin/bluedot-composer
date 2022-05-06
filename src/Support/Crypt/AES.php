@@ -4,6 +4,16 @@ namespace Composer\Support\Crypt;
 
 class AES
 {
+    /**
+     * 解密前端数据然后返回加密数据库数据
+     */
+    public static function transfromRsaToAes($cryptKey, $value, $config = [])
+    {
+        $plaintext = AES::decodeRsa($cryptKey, $value);
+        $ciphertext = AES::encode($plaintext, $config);
+        return $ciphertext;
+    }
+
     public static function decodeRsa($rsa, $str)
     {
         $config = json_decode(Rsa::privateDecrypt($rsa), true);
