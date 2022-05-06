@@ -95,6 +95,14 @@ class RouteRegistrar
             ['prefix' => 'platform/wechat', 'namespace' => 'WeChat'],
             function () {
                 $this->router->group(
+                    ['prefix' => 'official-account', 'namespace' => 'OfficialAccount'],
+                    function () {
+                        $this->router->get('jssdk', 'JssdkClient@get');
+                    }
+                );
+
+
+                $this->router->group(
                     ['prefix' => 'response', 'namespace' => 'Response'],
                     function () {
                         $this->router->get('{appid}', 'Client@response');
