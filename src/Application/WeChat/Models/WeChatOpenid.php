@@ -2,10 +2,13 @@
 
 namespace Composer\Application\WeChat\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class WeChatOpenid extends Model
+class WeChatOpenid extends Authenticatable implements JWTSubject
 {
+    use Notifiable;
     protected $table = 'wechat_openid';
 
     protected $fillable = [
@@ -45,5 +48,15 @@ class WeChatOpenid extends Model
     public function appid()
     {
         return $this->hasOne(Authorizer::class, 'appid', 'appid');
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
