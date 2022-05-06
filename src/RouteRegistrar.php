@@ -98,6 +98,7 @@ class RouteRegistrar
                     ['prefix' => 'official-account', 'namespace' => 'OfficialAccount'],
                     function () {
                         $this->router->get('jssdk', 'JssdkClient@get');
+                        $this->router->get('user/info', 'UserClient@getInfo');
                     }
                 );
 

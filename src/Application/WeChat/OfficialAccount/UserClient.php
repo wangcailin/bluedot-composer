@@ -8,7 +8,7 @@ use Composer\Http\BaseController;
 
 class UserClient extends BaseController
 {
-    public function getUserInfo(Request $request, WeChat $weChat)
+    public function getInfo(Request $request, WeChat $weChat)
     {
         $appid = $request->input('appid');
         $openid = $request->input('openid');
