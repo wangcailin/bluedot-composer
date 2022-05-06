@@ -21,6 +21,8 @@ class Controller extends BaseController
     public $allowedIncludes = [];
     public $allowedAppends = [];
 
+    public $guard = null;
+
     /**
      * 数据是否绑定当前管理员ID
      */
@@ -168,6 +170,11 @@ class Controller extends BaseController
 
     public function createAuthUserId()
     {
-        $this->data['auth_user_id'] = Auth::user()->id;
+        if ($this->guard) {
+            $authUserId = Auth::guard($this->guard)->id();
+        } else {
+            $authUserId = Auth::id();
+        }
+        $this->data['auth_user_id'] = $authUserId;
     }
 }
