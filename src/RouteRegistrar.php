@@ -92,6 +92,28 @@ class RouteRegistrar
     public function forWeChatRoute()
     {
         $this->router->group(
+            ['prefix' => 'platform/wechat', 'namespace' => 'WeChat'],
+            function () {
+                $this->router->group(
+                    ['prefix' => 'response', 'namespace' => 'Response'],
+                    function () {
+                        $this->router->get('{appid}', 'Client@response');
+                        $this->router->post('{appid}', 'Client@response');
+                    }
+                );
+
+                $this->router->group(
+                    ['prefix' => 'auth'],
+                    function () {
+                        $this->router->get('oauth', 'AuthClient@oauth');
+                        $this->router->get('auth', 'AuthClient@auth');
+                    }
+                );
+            }
+        );
+
+
+        $this->router->group(
             ['prefix' => 'platform/wechat', 'namespace' => 'WeChat\Response'],
             function () {
                 $this->router->get('response/{appid}', 'Client@response');
