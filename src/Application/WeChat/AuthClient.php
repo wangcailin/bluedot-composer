@@ -2,9 +2,8 @@
 
 namespace Composer\Application\WeChat;
 
-use Composer\Application\User\Models\UserWeChat;
+use Composer\Application\WeChat\Models\WeChatOpenid;
 use Composer\Application\WeChat\User\MiniProgram;
-use Composer\Application\WeChat\User\OfficialAccount;
 use Composer\Http\BaseController;
 use Illuminate\Http\Request;
 
@@ -47,7 +46,14 @@ class AuthClient extends BaseController
 
     protected function oauthAfter($appid, $user)
     {
-        new OfficialAccount('oauth', null, $appid, $user['openid'], $user);
+        $data = ['nickname' => $user['nickname'], 'avatar' => $user['headimgurl']];
+        if (isset($user['unionid'])) {
+            $data['unionid'] = $user['unionid'];
+        }
+        WeChatOpenid::updateOrCreate(
+            ['appid' => $appid, 'openid' => $user['openid']],
+            $data
+        );
     }
 
     protected function authAfter($appid, $user)
