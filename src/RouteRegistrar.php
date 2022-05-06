@@ -94,8 +94,8 @@ class RouteRegistrar
         $this->router->group(
             ['prefix' => 'platform/wechat', 'namespace' => 'WeChat\Response'],
             function () {
-                $this->router->get('response', 'Client@response');
-                $this->router->post('response', 'Client@response');
+                $this->router->get('response/{appid}', 'Client@response');
+                $this->router->post('response/{appid}', 'Client@response');
             }
         );
     }
