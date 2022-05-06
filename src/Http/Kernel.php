@@ -35,6 +35,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'auth' => Middleware\Authenticate::class,
         'auth.admin' => Middleware\AuthenticateAdmin::class,
         'auth.operation_log' => Middleware\AuthOperationLog::class,
         'auth.role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
