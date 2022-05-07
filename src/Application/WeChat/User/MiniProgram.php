@@ -10,6 +10,6 @@ class MiniProgram extends BaseUser
         $this->unionid = $unionid;
         $this->openid = $openid;
         $this->wechatUser = $wechatUser;
-        $this->handle();
+        // $this->handle();
     }
 }

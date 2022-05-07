@@ -3,14 +3,12 @@
 namespace Composer\Application\WeChat\Response\Handler;
 
 use Composer\Application\Analysis\Models\Monitor;
-
+use Composer\Application\WeChat\User\OfficialAccount;
 use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
 use Illuminate\Support\Facades\Log;
 
 class LogMessageHandler implements EventHandlerInterface
 {
-    use Traits;
-
     public $appid;
     public $app;
     public function __construct($appid, $app)
@@ -25,10 +23,11 @@ class LogMessageHandler implements EventHandlerInterface
     public function handle($payload = null)
     {
         Log::info($payload);
-        $unionid = $this->getUnionID($payload);
+        $userObj = new OfficialAccount('response', $this->app, $this->appid, $payload['FromUserName']);
+        $user = $userObj->getUser();
         $data = [
             'type' => 2,
-            'unionid' => $unionid,
+            'unionid' => isset($user['unionid']) ? $user['unionid'] : '',
             'openid' => $payload['FromUserName'],
             'wechat_user_name' => $payload['ToUserName'],
             'wechat_appid' => $this->appid,

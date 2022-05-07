@@ -6,17 +6,37 @@ class OfficialAccount extends BaseUser
 {
     public function __construct($type, $app, $appid, $openid, $wechatUser = [])
     {
-        $this->type = $type;
-        $this->appid = $appid;
-        $this->openid = $openid;
-        $this->wechatUser = $wechatUser;
+        $this->where = ['appid' => $appid, 'openid' => $openid];
+        $this->data = [];
 
-        if (!$wechatUser) {
-            $this->wechatUser = $app->user->get($this->openid);
-            $this->wechatUser['avatar'] = $this->wechatUser['headimgurl'];
+        if ($type == 'response') {
+            $this->handleResponse($app);
+        } else if ($type == 'oauth') {
+            $this->handleOauth($wechatUser);
         }
 
-        $this->unionid = $this->wechatUser['unionid'];
-        $this->handle();
+        $this->asyncWeChatOpenid();
+    }
+
+    protected function handleResponse($app)
+    {
+        $wechatUser = $app->user->get($this->openid);
+        $this->data = [
+            'subscribe' => $wechatUser['subscribe'],
+            'subscribe_time' => $wechatUser['subscribe_time'],
+            'subscribe_scene' => $wechatUser['subscribe_scene'],
+            'qr_scene_str' => $wechatUser['qr_scene_str'],
+        ];
+        if (isset($wechatUser['unionid'])) {
+            $this->data['unionid'] = $wechatUser['unionid'];
+        }
+    }
+
+    protected function handleOauth($wechatUser)
+    {
+        $this->data = ['nickname' => $wechatUser['nickname'], 'avatar' => $wechatUser['headimgurl']];
+        if (isset($wechatUser['unionid'])) {
+            $this->data['unionid'] = $wechatUser['unionid'];
+        }
     }
 }

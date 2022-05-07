@@ -21,7 +21,7 @@ class TextMessageHandler implements EventHandlerInterface
         $where = ['appid' => $this->appid];
         if ($reply = Reply::where('text', $payload['Content'])->where('match', 'EQUAL')->where($where)->first()) {
             return $this->reply($reply['reply_material_id'], $payload['FromUserName']);
-        } elseif ($reply = Reply::where('text', 'like', "%{$payload['Content']}%")->where('match', 'CONTAIN')->where($where)->first()) {
+        } elseif ($reply = Reply::where('match', 'CONTAIN')->where('strpos(\'' . $payload['Content'] . '\',"text") > 0')->where($where)->first()) {
             return $this->reply($reply['reply_material_id'], $payload['FromUserName']);
         } elseif ($reply = Reply::where($where)->where('type', 'msg')->first()) {
             return $this->reply($reply['reply_material_id'], $payload['FromUserName']);
