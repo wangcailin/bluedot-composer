@@ -10,7 +10,7 @@ class OfficialAccount extends BaseUser
         $this->data = [];
 
         if ($type == 'response') {
-            $this->handleResponse($app);
+            $this->handleResponse($app, $openid);
         } else if ($type == 'oauth') {
             $this->handleOauth($wechatUser);
         }
@@ -18,9 +18,9 @@ class OfficialAccount extends BaseUser
         $this->asyncWeChatOpenid();
     }
 
-    protected function handleResponse($app)
+    protected function handleResponse($app, $openid)
     {
-        $wechatUser = $app->user->get($this->openid);
+        $wechatUser = $app->user->get($openid);
         $this->data = [
             'subscribe' => $wechatUser['subscribe'],
             'subscribe_time' => $wechatUser['subscribe_time'],
