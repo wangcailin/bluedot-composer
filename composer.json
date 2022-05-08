@@ -29,7 +29,7 @@
     "alibabacloud/dysmsapi-20170525": "^2.0",
     "alibabacloud/kms": "^1.8",
     "alibabacloud/sdk": "^1.8",
-    "tymon/jwt-auth": "^1.0"
+    "tymon/jwt-auth": "^1.0.2"
   },
   "autoload": {
     "psr-4": {
