@@ -16,7 +16,7 @@ class Controller extends BaseController
     protected $model;
 
     public $allowedFilters = ['id'];
-    public $defaultSort = '-id';
+    public $defaultSorts = '-id';
     public $allowedSorts = [];
     public $allowedIncludes = [];
     public $allowedAppends = [];
@@ -142,7 +142,7 @@ class Controller extends BaseController
     public function buildFilter()
     {
         $this->model = QueryBuilder::for($this->model)
-            ->defaultSort($this->defaultSort)
+            ->defaultSorts($this->defaultSorts)
             ->allowedFilters($this->allowedFilters)
             ->allowedSorts($this->allowedSorts)
             ->allowedIncludes($this->allowedIncludes)
