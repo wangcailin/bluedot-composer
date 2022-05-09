@@ -54,7 +54,7 @@ class RoleClient extends Controller
     public function getSelect()
     {
         $this->buildFilter();
-        $list = $this->model->select('name as value', 'name as label')->get();
+        $list = $this->model->select('id as value', 'name as label')->get();
         return $this->success($list);
     }
 }

@@ -35,7 +35,7 @@ class UserClient extends Controller
             throw new ApiException('账号已存在，请重新输入', ApiErrorCode::ACCOUNT_REPEAT_ERROR);
         }
         $user = $this->model::createUser($this->data['username'], $this->data['password'], empty($this->data['email']) ?: '', empty($this->data['phone']) ?: '');
-        if (!empty($this->data['roles'])) {
+        if (isset($this->data['roles'])) {
             $user->assignRole($this->data['roles']);
             app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
         }
@@ -48,11 +48,7 @@ class UserClient extends Controller
         $user = $this->model::findOrFail($id);
         $data = request()->only(['is_active', 'roles']);
         $user->update($data);
-        $roles = $user->roles->pluck('name');
-        foreach ($roles as $key => $value) {
-            $user->removeRole($value);
-        }
-        $user->assignRole($data['roles']);
+        $user->syncRoles($data['roles']);
         app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
         return $this->success($user);
     }
