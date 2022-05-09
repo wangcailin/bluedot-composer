@@ -17,8 +17,23 @@ class Authenticate
 
     public function handle($request, Closure $next, $guard = null)
     {
+        if ($token = $request->input('token', null)) {
+            $request->headers->set('Authorization', 'Bearer ' . $token);
+        }
+
         if ($this->auth->guard($guard)->guest()) {
-            throw new ApiException('Unauthorized.', 401);
+            return response()->json([
+                'errmsg' => 'Unauthorized.',
+                'errcode'  => 401,
+            ], 401);
+        }
+        if ($user = $request->user()) {
+            if ($user->is_active == 0) {
+                return response()->json([
+                    'errmsg' => '此账号已停用，请联系管理员',
+                    'errcode'  => 401,
+                ], 401);
+            }
         }
 
         return $next($request);
