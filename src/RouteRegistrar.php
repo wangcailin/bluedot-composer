@@ -148,4 +148,23 @@ class RouteRegistrar
             }
         );
     }
+
+    public function forBackendSystemRoute()
+    {
+        $this->router->group(
+            ['prefix' => 'backend/system', 'namespace' => 'System'],
+            function () {
+                $this->router->group(['middleware' => ['auth.admin']], function () {
+                    $this->router->group(['prefix' => 'config'], function () {
+                        $this->router->post('', 'ConfigClient@updateOrCreate');
+                        $this->router->get('{type}', 'ConfigClient@get');
+                    });
+                });
+
+                $this->router->group(['prefix' => 'resource'], function () {
+                    $this->router->post('', 'ResourceClient@create');
+                });
+            }
+        );
+    }
 }
