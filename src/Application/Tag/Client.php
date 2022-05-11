@@ -3,8 +3,7 @@
 namespace Composer\Application\Tag;
 
 use Composer\Application\Tag\Models\Tag;
-use Composer\Application\Tag\Models\TagCategory;
-use Composer\Application\Tag\Models\TagType;
+use Composer\Application\Tag\Models\TagGroup;
 use Composer\Application\User\Models\Relation\UserTagCount;
 use Composer\Application\User\Models\User;
 use Composer\Http\Controller;
@@ -20,6 +19,9 @@ class Client extends Controller
     {
         $this->model = $tag;
         $this->allowedFilters = ['id', 'name', 'remark'];
+        $this->validateRules = [
+            'name' => 'required|max:100',
+        ];
     }
 
     public function performBuildFilterList()
@@ -29,45 +31,39 @@ class Client extends Controller
         }]);
     }
 
-    public function getTableList(TagCategory $tagCategory)
+    public function getTableList(TagGroup $tagGroup)
     {
-        $this->model = $tagCategory;
+        $this->model = $tagGroup;
         $this->buildFilter();
         $this->list = $this->model->with(['tag'])->get();
         return $this->success(['data' => $this->list]);
     }
 
-    public function getTypeSelect(TagType $tagType)
+    public function createGroup(TagGroup $tagGroup)
     {
-        $this->model = $tagType;
-        return parent::getSelectList();
-    }
-
-    public function createCategry(TagCategory $tagCategory)
-    {
-        $this->model = $tagCategory;
+        $this->model = $tagGroup;
         return parent::create();
     }
 
-    public function updateCategry(TagCategory $tagCategory, $id)
+    public function updateGroup(TagGroup $tagGroup, $id)
     {
-        $row = $tagCategory::findOrFail($id);
+        $row = $tagGroup::findOrFail($id);
         $row->update(request()->all());
         $this->performUpdate();
         return $this->success($row);
     }
 
-    public function getTreeSelectList(TagCategory $tagCategory)
+    public function getTreeSelectList(TagGroup $tagGroup)
     {
-        $this->model = $tagCategory;
+        $this->model = $tagGroup;
         $this->buildFilter();
         $this->list = $this->model->with('children')->select(['id', 'name as title'])->get();
         return $this->success($this->list);
     }
 
-    public function export(TagCategory $tagCategory)
+    public function export(TagGroup $tagGroup)
     {
-        $this->model = $tagCategory;
+        $this->model = $tagGroup;
         $this->buildFilter();
         $list = $this->model->with(['tag'])->get();
 
@@ -102,17 +98,17 @@ class Client extends Controller
         exit();
     }
 
-    public function getStatistic(TagCategory $tagCategory, User $user, UserTagCount $userTagCount)
+    public function getStatistic(TagGroup $tagGroup, User $user, UserTagCount $userTagCount)
     {
-        $tagCategoryCount = $tagCategory->count();
-        $tagCount = $this->model->whereIn('category_id', $tagCategory->select('id'))->count();
+        $tagGroupCount = $tagGroup->count();
+        $tagCount = $this->model->whereIn('group_id', $tagGroup->select('id'))->count();
         $tagRan = $userTagCount::whereIn('user_id', $user::select('id'));
         $tagHitCount = $tagRan->select('tag_id')->distinct()->count();
         $tagUserCount = $tagRan->select('user_id')->distinct()->count();
 
         $userCount = $user::count();
-        $tagCount = $this->model::whereIn('category_id', function ($query) {
-            return $query->select('id')->from('tag_category')->get();
+        $tagCount = $this->model::whereIn('group_id', function ($query) {
+            return $query->select('id')->from('tag_Group')->get();
         })->count();
 
         if ($userCount == 0) {
@@ -122,7 +118,7 @@ class Client extends Controller
         }
 
         return $this->success([
-            'tag_category_count' => $tagCategoryCount,
+            'tag_group_count' => $tagGroupCount,
             'tag_count' => $tagCount,
             'tag_hit_count' => $tagHitCount,
             'tag_user_count' => $tagUserCount,
@@ -138,8 +134,8 @@ class Client extends Controller
 
     private function handleWordCloud()
     {
-        return $this->model::whereIn('category_id', function ($query) {
-            return $query->select('id')->from('tag_category')->get();
+        return $this->model::whereIn('group_id', function ($query) {
+            return $query->select('id')->from('tag_Group')->get();
         })->has('user')->withCount('user')->orderBy('user_count', 'desc')->get();
     }
 

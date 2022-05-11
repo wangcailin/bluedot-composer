@@ -4,9 +4,9 @@ namespace Composer\Application\Tag\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TagCategory extends Model
+class TagGroup extends Model
 {
-    protected $table = 'tag_category';
+    protected $table = 'tag_group';
 
     protected $fillable = [
         'name',
@@ -15,11 +15,11 @@ class TagCategory extends Model
 
     public function tag()
     {
-        return $this->hasMany(Tag::class, 'category_id', 'id');
+        return $this->hasMany(Tag::class, 'group_id', 'id');
     }
 
     public function children()
     {
-        return $this->tag()->select(['id', 'category_id', 'id as value', 'name as title']);
+        return $this->tag()->select(['id', 'group_id', 'id as value', 'name as title']);
     }
 }
