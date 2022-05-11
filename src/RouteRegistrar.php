@@ -32,7 +32,7 @@ class RouteRegistrar
     public function all()
     {
         $this->forBackendAuthRoute();
-        $this->forWeChatRoute();
+        $this->forBackendSystemRoute();
         $this->forWeChatRoute();
         $this->forAnalysisRoute();
     }
@@ -64,7 +64,7 @@ class RouteRegistrar
                     $this->router->put('personal', 'BackendClient@updatePersonal');
                 });
 
-                $this->router->group(['prefix' => 'staff', 'middleware' => ['auth:backend', 'auth.admin']], function () {
+                $this->router->group(['prefix' => 'staff', 'middleware' => ['auth.admin']], function () {
                     $this->router->group(['prefix' => 'user'], function () {
                         $this->router->get('', 'UserClient@getList');
                         $this->router->get('{id}', 'UserClient@get');
