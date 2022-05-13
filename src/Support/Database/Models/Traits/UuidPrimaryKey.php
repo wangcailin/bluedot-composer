@@ -6,15 +6,22 @@ use Illuminate\Support\Str;
 
 trait UuidPrimaryKey
 {
-    public $incrementing = false;
 
-    protected static function boot()
+    protected static function booting()
     {
-        parent::boot();
-        static::createing(function ($model) {
+        static::creating(function ($model) {
             if (!$model->getKey()) {
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
+    }
+
+    public function getIncrementing()
+    {
+        return false;
+    }
+    public function getKeyType()
+    {
+        return 'string';
     }
 }
