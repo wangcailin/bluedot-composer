@@ -25,7 +25,7 @@
     "guzzlehttp/guzzle": "^7.4",
     "spatie/laravel-permission": "^5.5",
     "laravel/passport": "^10.4",
-    "alibabacloud/darabonba-openapi": "^0.2.8",
+    "alibabacloud/darabonba-openapi": "^0.2.5",
     "alibabacloud/dysmsapi-20170525": "^2.0",
     "alibabacloud/sdk": "^1.8",
     "tymon/jwt-auth": "1.0.x-dev"
