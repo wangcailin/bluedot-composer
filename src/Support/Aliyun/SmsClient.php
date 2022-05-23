@@ -30,8 +30,8 @@ class SmsClient
         self::createClient();
         $sendSmsRequest = new SendSmsRequest([
             'phoneNumbers' => $phone,
-            'signName' => '青云智慧科技',
-            'templateCode' => 'SMS_234136468',
+            'signName' => config('composer.aliyun_sms_sign_name'),
+            'templateCode' => config('composer.aliyun_sms_template_code'),
             'templateParam' => "{\"code\": \"{$code}\"}"
         ]);
         return self::$client->sendSms($sendSmsRequest);
