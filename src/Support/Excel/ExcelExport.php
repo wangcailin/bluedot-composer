@@ -24,7 +24,7 @@ class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
     protected $sheetName; //sheet title
     protected $borders = []; //设置边框颜色  key：A1:K8  value:#000000
     //设置页面属性时如果无效   更改excel格式尝试即可
-    protected   $column;
+    protected   $column=[];
     protected $dataMergeKey = []; //需要合并的单元格 数组 ['A1:A2', 'B1:C1', 'D1:E1', 'F1:G1', 'H1:I1'];
 
     //构造函数传值
