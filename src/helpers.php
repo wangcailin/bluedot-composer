@@ -142,3 +142,23 @@ if (!function_exists('file_upload_oss')) {
         return $res;
     }
 }
+
+if (!function_exists('content_xiumiedit_oss')) {
+    /**
+     * @param string $content 内容的单引号 都换成双引号
+     * @return array|string|string[]
+     */
+    function content_xiumiedit_oss(string $content)
+    {
+        $html  = preg_match_all(' /htt(ps|p):\/\/(statics|img).xiumi.us([^"]*?)(.jpg|.JPG|.png|.PNG|.bmp|.BMP|.gif|.GIF|.jpeg|.JPEG|.webp|.WEBP|.svg|.SVG)/',$centes,$LIST);
+        foreach ($LIST[0] as $k =>$value){
+            $ext = explode('.', $value);
+            $dir = !empty($dir) ? $dir : 'XiumiEdit';
+            $path = $dir."/" . date('ymd') . '/';
+            $name = $path . md5(rand(1000, 90000) . time()) . '.' . end($ext);
+            $new  = Composer\Support\Aliyun\OssClient::putObject($name, file_get_contents($value));
+            $content = str_replace($value,$new['info']['url'],$content);
+        }
+        return $content;
+    }
+}
