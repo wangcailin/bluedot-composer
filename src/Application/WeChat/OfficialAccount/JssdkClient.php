@@ -13,12 +13,13 @@ class JssdkClient extends BaseController
         $appid = $request->input('appid');
         $referer_url = $request->input('referer_url');
         $jsApiList = $request->input('js_api_list');
+        $debug = $request->input('debug', false);
         $app = $weChat->getOfficialAccount($appid);
         $app->jssdk->setUrl(urldecode($referer_url));
 
         $jsApiList = explode(',', $jsApiList);
 
-        $result = $app->jssdk->buildConfig($jsApiList, $debug = true, $beta = false, $json = false, $openTagList = []);
+        $result = $app->jssdk->buildConfig($jsApiList, $debug, $beta = false, $json = false, $openTagList = []);
         return $this->success($result);
     }
 }
