@@ -24,11 +24,11 @@ class DevopsClient
     /**
      * 创建文件
      */
-    public function startPipelineRun($body)
+    public function startPipelineRun($pipelineId, $body)
     {
         try {
             $result = self::$client
-                ->pathPattern('/organizations/61b2f0aba9dfa18f9b46a3ad/pipelines/1595095/run')
+                ->pathPattern('/organizations/61b2f0aba9dfa18f9b46a3ad/pipelines/' . $pipelineId . '/run')
                 ->method('POST')
                 ->body(json_encode($body))
                 ->request();
