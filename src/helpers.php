@@ -150,7 +150,7 @@ if (!function_exists('content_xiumiedit_oss')) {
      */
     function content_xiumiedit_oss(string $content)
     {
-        $html  = preg_match_all(' /htt(ps|p):\/\/(statics|img).xiumi.us([^"]*?)(.jpg|.JPG|.png|.PNG|.bmp|.BMP|.gif|.GIF|.jpeg|.JPEG|.webp|.WEBP|.svg|.SVG)/',$centes,$LIST);
+        $html  = preg_match_all(' /htt(ps|p):\/\/(statics|img).xiumi.us([^"]*?)(.jpg|.JPG|.png|.PNG|.bmp|.BMP|.gif|.GIF|.jpeg|.JPEG|.webp|.WEBP|.svg|.SVG)/',$content,$LIST);
         foreach ($LIST[0] as $k =>$value){
             $ext = explode('.', $value);
             $dir = !empty($dir) ? $dir : 'XiumiEdit';
@@ -160,5 +160,11 @@ if (!function_exists('content_xiumiedit_oss')) {
             $content = str_replace($value,$new['info']['url'],$content);
         }
         return $content;
+    }
+}
+if (!function_exists('content_xiumiedit_oss')) {
+    function gmt_iso8601($time)
+    {
+        return str_replace('+00:00', '.000Z', gmdate('c', $time));
     }
 }

@@ -14,5 +14,6 @@ return [
     'aliyun_oss_endpoint' => env('ALIYUN_OSS_ENDPOINT', ''),
     'aliyun_sms_sign_name' => env('ALIYUN_SMS_SIGN_NAME', ''),
     'aliyun_sms_template_code' => env('ALIYUN_SMS_TEMPLATE_CODE', ''),
+    'aliyun_oss_token_expire' => env('ALIYUN_OSS_TOKEN_EXPIRE', 10),
 
 ];
