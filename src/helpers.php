@@ -162,7 +162,7 @@ if (!function_exists('content_xiumiedit_oss')) {
         return $content;
     }
 }
-if (!function_exists('content_xiumiedit_oss')) {
+if (!function_exists('gmt_iso8601')) {
     function gmt_iso8601($time)
     {
         return str_replace('+00:00', '.000Z', gmdate('c', $time));
