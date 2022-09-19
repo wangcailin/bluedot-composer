@@ -15,4 +15,8 @@ return [
     'aliyun_sms_sign_name' => env('ALIYUN_SMS_SIGN_NAME', ''),
     'aliyun_sms_template_code' => env('ALIYUN_SMS_TEMPLATE_CODE', ''),
 
+    'lookstar_tenant_id' => env('LOOKSTAR_TENANT_ID', ''),
+    'lookstar_client_id' => env('LOOKSTAR_CLIENT_ID', ''),
+    'lookstar_client_secret' => env('LOOKSTAR_CLIENT_SECRET', ''),
+
 ];

@@ -28,7 +28,8 @@
     "alibabacloud/darabonba-openapi": "^0.2.5",
     "alibabacloud/dysmsapi-20170525": "^2.0",
     "alibabacloud/sdk": "^1.8",
-    "tymon/jwt-auth": "1.0.x-dev"
+    "tymon/jwt-auth": "1.0.x-dev",
+    "bluedot/lookstar": "*"
   },
   "autoload": {
     "psr-4": {
