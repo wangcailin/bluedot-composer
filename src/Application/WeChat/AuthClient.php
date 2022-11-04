@@ -41,8 +41,7 @@ class AuthClient extends BaseController
         $app = $weChat->getMiniProgram($appid);
 
         $user = $app->auth->session($code);
-        $userInfo = $this->oauthAfter($appid, $user);
-        $userInfo['auth'] = $user;
+        $userInfo = $this->authAfter($appid, $user);
         return $this->success($userInfo);
     }
 
@@ -60,7 +59,12 @@ class AuthClient extends BaseController
 
     protected function authAfter($appid, $user)
     {
-        $app = new MiniProgram($appid, $user['unionid'], $user['openid']);
-        return $app->getUser();
+        if (isset($user['unionid'])) {
+            $data['unionid'] = $user['unionid'];
+        }
+        return WeChatOpenid::updateOrCreate(
+            ['appid' => $appid, 'openid' => $user['openid']],
+            $data
+        );
     }
 }
