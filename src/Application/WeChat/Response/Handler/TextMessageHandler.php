@@ -3,10 +3,8 @@
 namespace Composer\Application\WeChat\Response\Handler;
 
 use Composer\Application\WeChat\Models\Reply;
-use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
-use Illuminate\Support\Facades\Log;
 
-class TextMessageHandler implements EventHandlerInterface
+class TextMessageHandler
 {
     public $appid;
     public $app;
@@ -16,8 +14,9 @@ class TextMessageHandler implements EventHandlerInterface
         $this->app = $app;
     }
 
-    public function handle($payload = null)
+    public function __invoke($message, \Closure $next)
     {
+        $payload = $message->toArray();
         $where = ['appid' => $this->appid];
         if ($reply = Reply::where('text', $payload['Content'])->where('match', 'EQUAL')->where($where)->first()) {
             return $this->reply($reply['reply_material_id'], $payload['FromUserName']);

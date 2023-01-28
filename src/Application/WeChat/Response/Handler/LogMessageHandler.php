@@ -4,10 +4,9 @@ namespace Composer\Application\WeChat\Response\Handler;
 
 use Composer\Application\Analysis\Models\Monitor;
 use Composer\Application\WeChat\User\OfficialAccount;
-use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
 use Illuminate\Support\Facades\Log;
 
-class LogMessageHandler implements EventHandlerInterface
+class LogMessageHandler
 {
     public $appid;
     public $app;
@@ -17,11 +16,9 @@ class LogMessageHandler implements EventHandlerInterface
         $this->app = $app;
     }
 
-    /**
-     * @param mixed $payload
-     */
-    public function handle($payload = null)
+    public function __invoke($message, \Closure $next)
     {
+        $payload = $message->toArray();
         Log::info($payload);
         $userObj = new OfficialAccount('response', $this->app, $this->appid, $payload['FromUserName']);
         $user = $userObj->getUser();

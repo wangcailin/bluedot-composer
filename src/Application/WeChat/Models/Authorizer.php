@@ -3,6 +3,7 @@
 namespace Composer\Application\WeChat\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Authorizer extends Model
 {
@@ -21,16 +22,4 @@ class Authorizer extends Model
     ];
 
     protected $appends = ['type_text'];
-
-    public function getTypeTextAttribute()
-    {
-        $data = [
-            1 => '公众号',
-            2 => '小程序',
-        ];
-
-        if ($this->type && !empty($data[$this->type])) {
-            return $data[$this->type];
-        }
-    }
 }

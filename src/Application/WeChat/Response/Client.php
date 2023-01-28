@@ -6,7 +6,6 @@ use Composer\Application\WeChat\WeChat;
 use Composer\Application\WeChat\Response\Handler\EventMessageHandler;
 use Composer\Application\WeChat\Response\Handler\LogMessageHandler;
 use Composer\Application\WeChat\Response\Handler\TextMessageHandler;
-use EasyWeChat\Kernel\Messages\Message;
 
 class Client
 {
@@ -26,11 +25,14 @@ class Client
             return $this->releaseToNetwork($appid);
         }
         $app = $this->weChat->getOfficialAccount($appid);
-        $server = $app->server;
+        $server = $app->getServer();
 
-        $server->push(new LogMessageHandler($appid, $app), Message::ALL); // 日志
-        $server->push(new EventMessageHandler($appid, $app), Message::EVENT); // 事件消息
-        $server->push(new TextMessageHandler($appid, $app), Message::TEXT); // 文本消息
+        $server->with(new LogMessageHandler($appid, $app)); // 日志
+        $server->addMessageListener('event', new EventMessageHandler($appid, $app)); // 事件消息
+        $server->addMessageListener('text', new TextMessageHandler($appid, $app)); // 文本消息
+        $server->addEventListener('subscribe', function ($message, \Closure $next) {
+            return '感谢您关注';
+        });
 
         return $server->serve();
     }

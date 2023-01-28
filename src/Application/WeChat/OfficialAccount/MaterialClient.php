@@ -18,8 +18,14 @@ class MaterialClient extends BaseController
     public function getList(Request $request)
     {
         $input = $request->only(['appid', 'type', 'offset', 'count']);
-        $app = $this->weChat->getOfficialAccount($input['appid']);
-        $list = $app->material->list($input['type'], $input['offset'], $input['count']);
-        return $this->success($list);
+        $api = $this->weChat->getOfficialAccount($input['appid'])->getClient();
+
+        $response = $api->get('/cgi-bin/material/batchget_material', [
+            'type' => $input['type'],
+            'offset' => $input['offset'],
+            'count' => $input['count'],
+        ]);
+
+        return $this->success($response);
     }
 }

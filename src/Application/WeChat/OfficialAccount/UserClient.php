@@ -13,7 +13,11 @@ class UserClient extends BaseController
         $appid = $request->input('appid');
         $openid = $request->input('openid');
         $app = $weChat->getOfficialAccount($appid);
-        $user = $app->user->get($openid);
-        return $this->success($user);
+        $api = $app->getClient();
+
+        $response = $api->get('/cgi-bin/user/info', [
+            'openid' => $openid
+        ]);
+        return $this->success($response);
     }
 }

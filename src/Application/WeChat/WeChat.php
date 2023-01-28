@@ -3,6 +3,9 @@
 namespace Composer\Application\WeChat;
 
 use Symfony\Component\Cache\Adapter\RedisAdapter;
+use EasyWeChat\OfficialAccount\Application as OfficialAccountApplication;
+use EasyWeChat\MiniApp\Application as MiniAppApplication;
+use EasyWeChat\OpenPlatform\Application as OpenPlatformApplication;
 
 class WeChat
 {
@@ -18,7 +21,7 @@ class WeChat
     /**
      * 获取开放平台Token
      */
-    public function getComponentAccessToken()
+    public function getComponentAccessToken(): string
     {
         return $this->getOpenPlatform()->access_token->getToken()['component_access_token'];
     }
@@ -26,7 +29,7 @@ class WeChat
     /**
      * 获取公众号实例
      */
-    public function getOfficialAccount($AppID)
+    public function getOfficialAccount(string $AppID): OfficialAccountApplication
     {
         if ($this->officialAccount) {
             return $this->officialAccount;
@@ -42,7 +45,7 @@ class WeChat
     /**
      * 获取小程序实例
      */
-    public function getMiniProgram($AppID)
+    public function getMiniProgram(string $AppID): MiniAppApplication
     {
         if ($this->miniProgram) {
             return $this->miniProgram;
@@ -58,7 +61,7 @@ class WeChat
     /**
      * 获取公众号实例
      */
-    public function getOpenPlatform()
+    public function getOpenPlatform(): OpenPlatformApplication
     {
         if ($this->openPlatform) {
             return $this->openPlatform;
@@ -70,7 +73,7 @@ class WeChat
     /**
      * 获取token
      */
-    private function getAuthorzerRefreshToken($AppID)
+    private function getAuthorzerRefreshToken(string $AppID): string
     {
         return $this->getOpenPlatform()->getAuthorizer($AppID)['authorization_info']['authorizer_refresh_token'];
     }

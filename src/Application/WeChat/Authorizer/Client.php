@@ -33,7 +33,8 @@ class Client extends Controller
      */
     public function callback(Request $request)
     {
-        $authorizer = $this->weChat->getOpenPlatform()->handleAuthorize($request->input('auth_code'));
+        $api = $this->weChat->getOpenPlatform()->getClient();
+        $authorizer = $api->handleAuthorize($request->input('auth_code'));
         $authorizer = $this->weChat->getOpenPlatform()->getAuthorizer($authorizer['authorization_info']['authorizer_appid']);
         $type = empty($authorizer['authorizer_info']['MiniProgramInfo']) ? 1 : 2;
         $data = [

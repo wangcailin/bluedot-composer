@@ -3,7 +3,6 @@
 namespace Composer\Application\WeChat;
 
 use Composer\Application\WeChat\Models\WeChatOpenid;
-use Composer\Application\WeChat\User\MiniProgram;
 use Composer\Http\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

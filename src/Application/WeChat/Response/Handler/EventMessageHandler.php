@@ -4,12 +4,10 @@ namespace Composer\Application\WeChat\Response\Handler;
 
 use Composer\Application\WeChat\Models\WeChatOpenid;
 use Composer\Application\WeChat\Models\WeChatOpenidTagRelation;
-use Composer\Application\User\Tag\Tag;
 use Composer\Application\WeChat\Models\Qrcode;
 use Composer\Application\WeChat\Models\Reply;
-use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
 
-class EventMessageHandler implements EventHandlerInterface
+class EventMessageHandler
 {
     public $appid;
     public $app;
@@ -19,11 +17,9 @@ class EventMessageHandler implements EventHandlerInterface
         $this->app = $app;
     }
 
-    /**
-     * @param mixed $payload
-     */
-    public function handle($payload = null)
+    public function __invoke($message, \Closure $next)
     {
+        $payload = $message->toArray();
         switch ($payload['Event']) {
             case 'unsubscribe':
                 if ($userOpenid = WeChatOpenid::firstWhere('openid', $payload['FromUserName'])) {
