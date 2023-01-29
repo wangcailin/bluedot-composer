@@ -6,6 +6,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Composer\Http\Traits\Select;
 use Composer\Http\Traits\Validate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 
 class Controller extends BaseController
 {
@@ -13,32 +14,32 @@ class Controller extends BaseController
     use Validate;
 
     /** 模型对象 */
-    protected $model;
+    public Model $model;
 
-    public $allowedFilters = ['id'];
-    public $defaultSorts = '-id';
-    public $allowedSorts = [];
-    public $allowedIncludes = [];
-    public $allowedAppends = [];
+    public array $allowedFilters = ['id'];
+    public string $defaultSorts = '-id';
+    public array $allowedSorts = [];
+    public array $allowedIncludes = [];
+    public array $allowedAppends = [];
 
-    public $guard = null;
+    public string|null $guard = null;
 
     /**
      * 数据是否绑定当前管理员ID
      */
-    public $authUserId = true;
+    public bool $authUserId = true;
 
     /** 列表数据 */
-    public $list = [];
+    public array $list = [];
 
     /** 详情数据 */
-    public $row = [];
+    public array $row = [];
 
     /** id */
-    public $id = [];
+    public string|int|null $id = null;
 
     /** 创建数据 */
-    public $data = [];
+    public array $data = [];
 
     /**
      * 获取list
@@ -74,13 +75,9 @@ class Controller extends BaseController
     /**
      * 获取row
      */
-    public function get($id)
+    public function get(string $id)
     {
         $this->id = $id;
-
-        if ($this->authUserId) {
-            $this->createAuthUserId();
-        }
 
         $this->beforeGet();
         $this->row = $this->model->findOrFail($id);
@@ -102,13 +99,13 @@ class Controller extends BaseController
         $this->handleCreateValidate();
 
         $this->beforeCreate();
-        $this->row = $this->model::create($this->data);
+        $this->row = $this->model->create($this->data);
         $this->afterCreate();
 
         return $this->success($this->row);
     }
 
-    public function update($id)
+    public function update(string $id)
     {
         $this->id = $id;
         $this->data = request()->all();
@@ -123,7 +120,7 @@ class Controller extends BaseController
         return $this->success($this->row);
     }
 
-    public function delete($id)
+    public function delete(string $id)
     {
         $this->id = $id;
 
