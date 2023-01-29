@@ -79,16 +79,6 @@ class CreateWechatTable extends Migration
 
             $table->comment('微信用户表');
         });
-
-        Schema::create('wechat_openid_tag_relation', function (Blueprint $table) {
-            $table->string('openid', 32);
-            $table->integer('tag_id');
-            $table->jsonb('source')->nullable();
-            $table->timestamps();
-
-            $table->foreign('tag_id')->references('id')->on('tag')->onUpdate('cascade')->onDelete('cascade');
-            $table->comment('微信用户标签表');
-        });
     }
 
     /**
@@ -102,6 +92,5 @@ class CreateWechatTable extends Migration
         Schema::dropIfExists('wechat_qrcode');
         Schema::dropIfExists('wechat_reply');
         Schema::dropIfExists('wechat_openid');
-        Schema::dropIfExists('wechat_openid_tag_relation');
     }
 }

@@ -20,7 +20,7 @@ class Client
     /**
      * 发送手机号验证码
      */
-    public static function sendSmsCode($phone, $action)
+    public static function sendSmsCode(string $phone, string $action)
     {
         $code = rand(100000, 999999); //验证码
         $key = self::SMS_KEY_PREFIX . $action . ':' . $phone;

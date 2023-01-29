@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthOperationLog
 {
+
     public function handle(Request $request, \Closure $next)
     {
         $log = [

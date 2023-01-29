@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\WeChat\TemplateMessage;
+namespace Composer\Application\WeChat\TemplateMessage;
 
 use Composer\Application\WeChat\Models\TemplateMessageTaskResult;
 use Composer\Application\WeChat\WeChat;

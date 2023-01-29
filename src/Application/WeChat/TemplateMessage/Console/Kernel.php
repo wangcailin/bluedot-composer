@@ -1,9 +1,9 @@
 <?php
 
-namespace Composer\WeChat\TemplateMessage\Console;
+namespace Composer\Application\WeChat\TemplateMessage\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Laravel\Lumen\Console\Kernel as ConsoleKernel;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {

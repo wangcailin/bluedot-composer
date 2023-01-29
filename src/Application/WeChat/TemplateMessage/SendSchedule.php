@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\WeChat\TemplateMessage;
+namespace Composer\Application\WeChat\TemplateMessage;
 
 use App\Models\User\User;
 use Composer\Application\WeChat\Models\TemplateMessage;
@@ -9,7 +9,8 @@ use Composer\WeChat\TemplateMessage\SendJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
-use Laravel\Lumen\Console\Kernel;
+use Illuminate\Foundation\Console\Kernel;
+
 
 class SendSchedule extends Kernel
 {

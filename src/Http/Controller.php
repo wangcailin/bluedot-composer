@@ -41,105 +41,103 @@ class Controller extends BaseController
     public $data = [];
 
     /**
-     * 获取列表
+     * 获取list
      */
     public function getList()
     {
+        $this->beforeBuildFilter();
         $this->buildFilter();
-        $this->performBuildFilterList();
+        $this->afterBuildFilter();
+
         $pageSize = (int) request()->input('pageSize', 10);
         $this->list = $this->model->paginate($pageSize, ['*'], 'current');
         $this->afterList();
+
         return $this->success($this->list);
     }
 
     /**
-     * 获取全部
+     * 获取list
      */
     public function getAllList()
     {
+        $this->beforeBuildFilter();
         $this->buildFilter();
+        $this->afterBuildFilter();
+
         $this->list = $this->model->get();
         $this->afterList();
+
         return $this->success($this->list);
     }
 
+    /**
+     * 获取row
+     */
     public function get($id)
     {
         $this->id = $id;
-        $this->performGet();
+
+        if ($this->authUserId) {
+            $this->createAuthUserId();
+        }
+
+        $this->beforeGet();
         $this->row = $this->model->findOrFail($id);
         $this->afterGet();
+
         return $this->success($this->row);
     }
 
+    /**
+     * 创建
+     */
     public function create()
     {
-        $this->performCreate();
+        $this->data = request()->all();
+        if ($this->authUserId) {
+            $this->createAuthUserId();
+        }
+
+        $this->handleCreateValidate();
+
+        $this->beforeCreate();
         $this->row = $this->model::create($this->data);
         $this->afterCreate();
+
         return $this->success($this->row);
     }
 
     public function update($id)
     {
         $this->id = $id;
-        $this->performUpdate();
+        $this->data = request()->all();
+
+        $this->handleUpdateValidate();
+
+        $this->beforeUpdate();
         $this->row = $this->model::findOrFail($id);
         $this->row->update($this->data);
         $this->afterUpdate();
+
         return $this->success($this->row);
     }
 
     public function delete($id)
     {
         $this->id = $id;
-        $this->performDelete();
+
+        $this->beforeDelete();
         $this->model::findOrFail($id)->delete();
         $this->afterDelete();
+
         return $this->success();
     }
 
-    public function performCreate()
-    {
-        $this->data = request()->all();
-        if ($this->authUserId) {
-            $this->createAuthUserId();
-        }
-        $this->handleCreateValidate();
-    }
-    public function afterCreate()
+    public function beforeBuildFilter(): void
     {
     }
-
-    public function performGet()
-    {
-    }
-    public function afterGet()
-    {
-    }
-
-    public function performUpdate()
-    {
-        $this->data = request()->all();
-        $this->handleUpdateValidate();
-    }
-    public function afterUpdate()
-    {
-    }
-
-    public function afterList()
-    {
-    }
-
-    public function performDelete()
-    {
-    }
-    public function afterDelete()
-    {
-    }
-
-    public function buildFilter()
+    public function buildFilter(): void
     {
         $this->model = QueryBuilder::for($this->model)
             ->defaultSorts($this->defaultSorts)
@@ -147,15 +145,39 @@ class Controller extends BaseController
             ->allowedSorts($this->allowedSorts)
             ->allowedIncludes($this->allowedIncludes)
             ->allowedAppends($this->allowedAppends);
-
-        $this->performBuildFilter();
     }
-
-    public function performBuildFilter()
+    public function afterBuildFilter(): void
+    {
+    }
+    public function afterList(): void
     {
     }
 
-    public function performBuildFilterList()
+    public function beforeCreate(): void
+    {
+    }
+    public function afterCreate(): void
+    {
+    }
+
+    public function beforeGet(): void
+    {
+    }
+    public function afterGet(): void
+    {
+    }
+
+    public function beforeUpdate(): void
+    {
+    }
+    public function afterUpdate(): void
+    {
+    }
+
+    public function beforeDelete(): void
+    {
+    }
+    public function afterDelete(): void
     {
     }
 
@@ -168,7 +190,7 @@ class Controller extends BaseController
         return $this->success();
     }
 
-    public function createAuthUserId()
+    public function createAuthUserId(): void
     {
         if ($this->guard) {
             $authUserId = Auth::guard($this->guard)->id();
