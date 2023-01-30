@@ -6,6 +6,8 @@ use Composer\Exceptions\ApiErrorCode;
 use Composer\Exceptions\ApiException;
 use Composer\Support\Auth\Models\User;
 use Composer\Http\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserClient extends Controller
 {
@@ -15,7 +17,7 @@ class UserClient extends Controller
 
         $this->allowedIncludes = ['roles'];
 
-        $this->validateRules = [
+        $this->validateCreateRules = [
             'username' => 'required',
             'password' => 'required',
         ];
@@ -28,32 +30,36 @@ class UserClient extends Controller
         return $this->success($user);
     }
 
-    public function create()
+    public function handleCreate()
     {
-        $this->performCreate();
         if ($this->model::where('username', $this->data['username'])->first()) {
             throw new ApiException('账号已存在，请重新输入', ApiErrorCode::ACCOUNT_REPEAT_ERROR);
         }
-        $user = $this->model::createUser($this->data['username'], $this->data['password'], empty($this->data['email']) ?: '', empty($this->data['phone']) ?: '');
+        $this->row = $this->model::createUser($this->data['username'], $this->data['password'], empty($this->data['email']) ?: '', empty($this->data['phone']) ?: '');
         if (isset($this->data['roles'])) {
-            $user->assignRole($this->data['roles']);
+            $this->row->assignRole($this->data['roles']);
             app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
         }
-
-        return $this->success($user);
     }
 
-    public function change($id)
+    public function change(Request $request, $id)
     {
         $user = $this->model::findOrFail($id);
-        $data = request()->only(['is_active', 'roles']);
-        $user->update($data);
-        $user->syncRoles($data['roles']);
-        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+        $validateData = $request->validate([
+            'is_active' => [Rule::in([0, 1])],
+            'roles' => ['array']
+        ]);
+        if ($validateData) {
+            $user->update($validateData);
+            if (isset($validateData['roles'])) {
+                $user->syncRoles($validateData['roles']);
+                app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+            }
+        }
         return $this->success($user);
     }
 
-    public function performDelete()
+    public function beforeDelete()
     {
         if ($this->id == '1') {
             throw new ApiException('不能删除超级管理员', ApiErrorCode::VALIDATION_ERROR);

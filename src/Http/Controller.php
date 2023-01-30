@@ -6,7 +6,6 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Composer\Http\Traits\Select;
 use Composer\Http\Traits\Validate;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Model;
 
 class Controller extends BaseController
 {
@@ -14,32 +13,31 @@ class Controller extends BaseController
     use Validate;
 
     /** 模型对象 */
-    public Model $model;
+    protected $model;
 
-    public array $allowedFilters = ['id'];
-    public string $defaultSorts = '-id';
-    public array $allowedSorts = [];
-    public array $allowedIncludes = [];
-    public array $allowedAppends = [];
+    public $allowedFilters = ['id'];
+    public $defaultSorts = '-id';
+    public $allowedSorts = [];
+    public $allowedIncludes = [];
 
-    public string|null $guard = null;
+    public $guard = null;
 
     /**
      * 数据是否绑定当前管理员ID
      */
-    public bool $authUserId = true;
+    public $authUserId = true;
 
     /** 列表数据 */
-    public array $list = [];
+    public $list = [];
 
     /** 详情数据 */
-    public array $row = [];
+    public $row = [];
 
     /** id */
-    public string|int|null $id = null;
+    public $id = [];
 
     /** 创建数据 */
-    public array $data = [];
+    public $data = [];
 
     /**
      * 获取list
@@ -50,8 +48,7 @@ class Controller extends BaseController
         $this->buildFilter();
         $this->afterBuildFilter();
 
-        $pageSize = (int) request()->input('pageSize', 10);
-        $this->list = $this->model->paginate($pageSize, ['*'], 'current');
+        $this->handleList();
         $this->afterList();
 
         return $this->success($this->list);
@@ -75,12 +72,16 @@ class Controller extends BaseController
     /**
      * 获取row
      */
-    public function get(string $id)
+    public function get($id)
     {
         $this->id = $id;
 
+        if ($this->authUserId) {
+            $this->createAuthUserId();
+        }
+
         $this->beforeGet();
-        $this->row = $this->model->findOrFail($id);
+        $this->handleGet();
         $this->afterGet();
 
         return $this->success($this->row);
@@ -99,13 +100,13 @@ class Controller extends BaseController
         $this->handleCreateValidate();
 
         $this->beforeCreate();
-        $this->row = $this->model->create($this->data);
+        $this->handleCreate();
         $this->afterCreate();
 
         return $this->success($this->row);
     }
 
-    public function update(string $id)
+    public function update($id)
     {
         $this->id = $id;
         $this->data = request()->all();
@@ -113,68 +114,88 @@ class Controller extends BaseController
         $this->handleUpdateValidate();
 
         $this->beforeUpdate();
-        $this->row = $this->model::findOrFail($id);
-        $this->row->update($this->data);
+        $this->handleUpdate();
         $this->afterUpdate();
 
         return $this->success($this->row);
     }
 
-    public function delete(string $id)
+    public function delete($id)
     {
         $this->id = $id;
 
         $this->beforeDelete();
-        $this->model::findOrFail($id)->delete();
+        $this->handleDelete();
         $this->afterDelete();
 
         return $this->success();
     }
 
-    public function beforeBuildFilter(): void
+    public function beforeBuildFilter()
     {
     }
-    public function buildFilter(): void
+    public function buildFilter()
     {
         $this->model = QueryBuilder::for($this->model)
             ->defaultSorts($this->defaultSorts)
             ->allowedFilters($this->allowedFilters)
             ->allowedSorts($this->allowedSorts)
-            ->allowedIncludes($this->allowedIncludes)
-            ->allowedAppends($this->allowedAppends);
+            ->allowedIncludes($this->allowedIncludes);
     }
-    public function afterBuildFilter(): void
+    public function afterBuildFilter()
     {
     }
-    public function afterList(): void
+    public function handleList()
     {
+        $pageSize = (int) request()->input('pageSize', 10);
+        $this->list = $this->model->paginate($pageSize, ['*'], 'current');
     }
-
-    public function beforeCreate(): void
-    {
-    }
-    public function afterCreate(): void
+    public function afterList()
     {
     }
 
-    public function beforeGet(): void
+    public function beforeCreate()
     {
     }
-    public function afterGet(): void
+    public function handleCreate()
     {
+        $this->row = $this->model::create($this->data);
     }
-
-    public function beforeUpdate(): void
-    {
-    }
-    public function afterUpdate(): void
+    public function afterCreate()
     {
     }
 
-    public function beforeDelete(): void
+    public function beforeGet()
     {
     }
-    public function afterDelete(): void
+    public function handleGet()
+    {
+        $this->row = $this->model->findOrFail($this->id);
+    }
+    public function afterGet()
+    {
+    }
+
+    public function beforeUpdate()
+    {
+    }
+    public function handleUpdate()
+    {
+        $this->row = $this->model::findOrFail($this->id);
+        $this->row->update($this->data);
+    }
+    public function afterUpdate()
+    {
+    }
+
+    public function beforeDelete()
+    {
+    }
+    public function handleDelete()
+    {
+        $this->model::findOrFail($this->id)->delete();
+    }
+    public function afterDelete()
     {
     }
 
@@ -187,7 +208,7 @@ class Controller extends BaseController
         return $this->success();
     }
 
-    public function createAuthUserId(): void
+    public function createAuthUserId()
     {
         if ($this->guard) {
             $authUserId = Auth::guard($this->guard)->id();

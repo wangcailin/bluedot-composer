@@ -5,7 +5,6 @@ namespace Composer\Application\WeChat;
 use Composer\Application\WeChat\Models\WeChatOpenid;
 use Composer\Http\BaseController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AuthClient extends BaseController
 {
@@ -13,21 +12,22 @@ class AuthClient extends BaseController
     {
         $appid = $request->input('appid');
         $redirectUrl = $request->input('redirect_url');
+        $scope = $request->input('scope', 'snsapi_userinfo');
         $code = $request->input('code');
         $app = $weChat->getOfficialAccount($appid);
-
+        $oauth = $app->getOAuth();
         if (!$code) {
-            $oauthRedirectUrl = $app->oauth->scopes(['snsapi_userinfo'])
+            $oauthRedirectUrl = $oauth->scopes([$scope])
                 ->redirect($request->getScheme() . '://' . $request->getHost() . '/api/platform/wechat/auth/oauth?appid=' . $appid . '&redirect_url=' . $redirectUrl);
             return \redirect($oauthRedirectUrl);
         } else {
-            $user = $app->oauth->scopes(['snsapi_userinfo'])->userFromCode($code)->getRaw();
+            $user = $oauth->userFromCode($code)->getRaw();
             $link = '?';
             if (strpos($redirectUrl, '?')) {
                 $link = '&';
             }
             $userInfo = $this->oauthAfter($appid, $user);
-            $user['token'] = Auth::guard('platform')->tokenById($userInfo['id']);
+            $user['token'] = $userInfo->createToken('openid')->plainTextToken;
             $query = http_build_query($user);
             return \redirect($redirectUrl . $link . $query);
         }
@@ -39,16 +39,21 @@ class AuthClient extends BaseController
         $code = $request->input('code');
         $app = $weChat->getMiniProgram($appid);
 
-        $user = $app->auth->session($code);
+        $utils = $app->getUtils();
+        $user = $utils->codeToSession($code);
+
         $userInfo = $this->authAfter($appid, $user);
+
         return $this->success($userInfo);
     }
 
-    protected function oauthAfter($appid, $user)
+    protected function oauthAfter($appid, $user): WeChatOpenid
     {
-        $data = ['nickname' => $user['nickname'], 'avatar' => $user['headimgurl']];
         if (isset($user['unionid'])) {
             $data['unionid'] = $user['unionid'];
+        }
+        if (isset($user['headimgurl'])) {
+            $data['avatar'] = $user['headimgurl'];
         }
         return WeChatOpenid::updateOrCreate(
             ['appid' => $appid, 'openid' => $user['openid']],
@@ -56,7 +61,7 @@ class AuthClient extends BaseController
         );
     }
 
-    protected function authAfter($appid, $user)
+    protected function authAfter($appid, $user): WeChatOpenid
     {
         if (isset($user['unionid'])) {
             $data['unionid'] = $user['unionid'];

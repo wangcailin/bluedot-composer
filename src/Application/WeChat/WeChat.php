@@ -29,13 +29,13 @@ class WeChat
     /**
      * 获取公众号实例
      */
-    public function getOfficialAccount(string $AppID): OfficialAccountApplication
+    public function getOfficialAccount(string $appid): OfficialAccountApplication
     {
         if ($this->officialAccount) {
             return $this->officialAccount;
         } else {
             if (config('wechat.open_platform')) {
-                return $this->officialAccount = $this->getOpenPlatform()->officialAccount($AppID, $this->getAuthorzerRefreshToken($AppID));
+                return $this->officialAccount = $this->getOpenPlatform()->officialAccount($appid, $this->getAuthorzerRefreshToken($appid));
             } else {
                 return $this->officialAccount = $this->getApp('official_account');
             }
@@ -45,13 +45,13 @@ class WeChat
     /**
      * 获取小程序实例
      */
-    public function getMiniProgram(string $AppID): MiniAppApplication
+    public function getMiniProgram(string $appid): MiniAppApplication
     {
         if ($this->miniProgram) {
             return $this->miniProgram;
         } else {
             if (config('wechat.open_platform')) {
-                return $this->miniProgram = $this->getOpenPlatform()->miniProgram($AppID, $this->getAuthorzerRefreshToken($AppID));
+                return $this->miniProgram = $this->getOpenPlatform()->miniProgram($appid, $this->getAuthorzerRefreshToken($appid));
             } else {
                 return $this->miniProgram = $this->getApp('mini_program');
             }
@@ -73,9 +73,9 @@ class WeChat
     /**
      * 获取token
      */
-    private function getAuthorzerRefreshToken(string $AppID): string
+    private function getAuthorzerRefreshToken(string $appid): string
     {
-        return $this->getOpenPlatform()->getAuthorizer($AppID)['authorization_info']['authorizer_refresh_token'];
+        return $this->getOpenPlatform()->getAuthorizer($appid)['authorization_info']['authorizer_refresh_token'];
     }
 
     private function rebindCache($app)

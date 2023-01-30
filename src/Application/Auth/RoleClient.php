@@ -3,6 +3,7 @@
 namespace Composer\Application\Auth;
 
 use Composer\Http\Controller;
+use Illuminate\Validation\Rule;
 
 class RoleClient extends Controller
 {
@@ -13,7 +14,7 @@ class RoleClient extends Controller
         $this->allowedIncludes = ['permissions'];
 
         $this->validateRules = [
-            'name' => 'required|unique:' . config('permission.models.role'),
+            'name' => ['required', Rule::unique(config('permission.models.role'))],
         ];
 
         $this->validateMessage = [
@@ -28,27 +29,32 @@ class RoleClient extends Controller
         return $this->success($role);
     }
 
-    public function update($id)
+    public function handleUpdate()
     {
-        $role = $this->model::findOrFail($id);
+        $this->row = $this->model::findOrFail($this->id);
         $data = request()->all();
-        $role->update(['name' => $data['name']]);
-        $permission = $role->permissions->pluck('name');
+        $this->row->update(['name' => $data['name']]);
+        $permission = $this->row->permissions->pluck('name');
         foreach ($permission as $key => $value) {
-            $role->revokePermissionTo($value);
+            $this->row->revokePermissionTo($value);
         }
-        $role->givePermissionTo($data['permission']);
+        $this->row->givePermissionTo($data['permission']);
         app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
-        return $this->success($role);
     }
 
-    public function create()
+    public function getValidateUpdateRules()
     {
-        $this->performCreate();
-        $role = $this->model::create(['name' => $this->data['name']]);
-        $role->givePermissionTo($this->data['permission']);
-        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
-        return $this->success($role);
+        $this->validateRules['name'] = ['required', Rule::unique(config('permission.models.role'))->ignore($this->id),];
+        return $this->validateRules;
+    }
+
+    public function handleCreate()
+    {
+        $this->row = $this->model::create(['name' => $this->data['name']]);
+        if (isset($this->data['permission'])) {
+            $this->row->givePermissionTo($this->data['permission']);
+            app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+        }
     }
 
     public function getSelect()

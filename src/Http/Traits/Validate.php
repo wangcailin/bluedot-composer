@@ -21,20 +21,36 @@ trait Validate
     {
         Validator::make(
             $this->data,
-            $this->validateCreateRules,
-            $this->validateCreateMessage
+            $this->getValidateCreateRules(),
+            $this->getValidateCreateMessage()
         )->validate();
         $this->handleValidate();
+    }
+    public function getValidateCreateRules()
+    {
+        return $this->validateCreateRules;
+    }
+    public function getValidateCreateMessage()
+    {
+        return $this->validateCreateMessage;
     }
 
     public function handleUpdateValidate()
     {
         Validator::make(
             $this->data,
-            $this->validateUpdateRules,
-            $this->validateUpdateMessage
+            $this->getValidateUpdateRules(),
+            $this->getValidateUpdateMessage()
         )->validate();
         $this->handleValidate();
+    }
+    public function getValidateUpdateRules()
+    {
+        return $this->validateUpdateRules;
+    }
+    public function getValidateUpdateMessage()
+    {
+        return $this->validateUpdateMessage;
     }
 
     public function handleValidate()
