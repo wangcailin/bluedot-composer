@@ -34,7 +34,7 @@ class WeChat
         if ($this->officialAccount) {
             return $this->officialAccount;
         } else {
-            if (config('wechat.open_platform')) {
+            if (config('easywechat.open_platform')) {
                 return $this->officialAccount = $this->getOpenPlatform()->officialAccount($appid, $this->getAuthorzerRefreshToken($appid));
             } else {
                 return $this->officialAccount = $this->getApp('official_account');
@@ -50,7 +50,7 @@ class WeChat
         if ($this->miniProgram) {
             return $this->miniProgram;
         } else {
-            if (config('wechat.open_platform')) {
+            if (config('easywechat.open_platform')) {
                 return $this->miniProgram = $this->getOpenPlatform()->miniProgram($appid, $this->getAuthorzerRefreshToken($appid));
             } else {
                 return $this->miniProgram = $this->getApp('mini_program');
@@ -87,8 +87,8 @@ class WeChat
 
     private function getApp($name = '')
     {
-        $app = app('wechat.' . $name);
-        $this->rebindCache($app);
+        $app = app('easywechat.' . $name);
+        // $this->rebindCache($app);
         return $app;
     }
 }
