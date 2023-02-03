@@ -15,6 +15,7 @@ class InstallCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'composer-config']);
         $this->call('vendor:publish', ['--tag' => 'composer-migrations']);
         $this->call('vendor:publish', ['--tag' => 'composer-seeders']);
+        $this->call('vendor:publish', ['--tag' => 'composer-views']);
 
         $this->call('composer:key');
     }

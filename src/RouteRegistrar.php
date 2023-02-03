@@ -69,6 +69,7 @@ class RouteRegistrar
                         $this->router->get('', 'UserClient@getList');
                         $this->router->get('{id}', 'UserClient@get');
                         $this->router->put('{id}/change', 'UserClient@change');
+                        $this->router->put('change/{id}', 'UserClient@change');
                         $this->router->put('{id}', 'UserClient@update');
                         $this->router->post('', 'UserClient@create');
                         $this->router->delete('{id}', 'UserClient@delete');
