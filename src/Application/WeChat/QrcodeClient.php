@@ -22,7 +22,7 @@ class QrcodeClient extends Controller
         ];
     }
 
-    public function performCreate()
+    public function beforeCreate()
     {
         $data = request()->all();
 

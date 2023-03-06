@@ -18,7 +18,7 @@ class ReplyClient extends Controller
         ];
     }
 
-    public function performBuildFilter()
+    public function afterBuildFilter()
     {
         $this->model->with('authorizer');
     }
