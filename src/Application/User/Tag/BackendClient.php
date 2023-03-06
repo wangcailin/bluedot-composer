@@ -18,7 +18,7 @@ class BackendClient extends Controller
         ];
     }
 
-    public function performBuildFilter()
+    public function afterBuildFilter()
     {
         $this->model->with('tag');
     }
@@ -26,7 +26,7 @@ class BackendClient extends Controller
     public function getUserList()
     {
         $this->buildFilter();
-        $this->performBuildFilterList();
+        $this->afterBuildFilter();
         $pageSize = (int) request()->input('pageSize', 10);
         $this->list = $this->model->paginate($pageSize, ['*'], 'current');
         return $this->success($this->list);

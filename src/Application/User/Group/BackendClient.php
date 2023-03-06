@@ -19,7 +19,7 @@ class BackendClient extends Controller
         $this->allowedFilters = [AllowedFilter::exact('id'), 'name'];
     }
 
-    public function performBuildFilter()
+    public function afterBuildFilter()
     {
         $this->model->withCount('users');
     }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait PlatformBindUser
 {
-    public function performCreate()
+    public function beforeCreate()
     {
         $this->data = request()->all();
         $this->data['user_id'] = Auth::guard('platform')->id();

@@ -16,7 +16,7 @@ class MonitorClient extends Controller
 
     public function create()
     {
-        $this->performCreate();
+        $this->beforeCreate();
         if (!empty($this->data['page_param'])) {
             $this->data['page_param'] = json_decode($this->data['page_param']);
         }

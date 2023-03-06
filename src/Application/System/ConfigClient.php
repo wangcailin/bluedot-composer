@@ -15,7 +15,7 @@ class ConfigClient extends Controller
 
     public function get($type)
     {
-        $this->performGet();
+        $this->beforeGet();
         $this->row = $this->model::firstWhere('type', $type);
         return $this->success($this->row);
     }

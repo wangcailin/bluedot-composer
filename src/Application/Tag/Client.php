@@ -24,7 +24,7 @@ class Client extends Controller
         ];
     }
 
-    public function performBuildFilterList()
+    public function afterBuildFilter()
     {
         $this->model->withCount(['user' => function (Builder $query) {
             $query->select(DB::raw('COUNT(DISTINCT id)'));
@@ -49,7 +49,7 @@ class Client extends Controller
     {
         $row = $tagGroup::findOrFail($id);
         $row->update(request()->all());
-        $this->performUpdate();
+        $this->beforeUpdate();
         return $this->success($row);
     }
 
