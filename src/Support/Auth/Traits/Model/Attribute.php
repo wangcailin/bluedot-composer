@@ -45,7 +45,7 @@ trait Attribute
     private function getMaskPhone($value)
     {
         if ($value) {
-            return data_masking($value, 3, 4);
+            return desensitize($value);
         }
         return $value;
     }
@@ -53,7 +53,7 @@ trait Attribute
     private function getMaskEmail($value)
     {
         if ($value) {
-            return data_masking_email($value);
+            return desensitize($value);
         }
         return $value;
     }
