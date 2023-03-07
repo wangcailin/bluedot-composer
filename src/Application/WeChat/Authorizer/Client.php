@@ -82,62 +82,38 @@ class Client extends Controller
         Authorizer::where(['appid' => $appid])->update(['open_appid' => $result]);
     }
 
-    // public function asyncUser($appid)
-    // {
-    //     $app = $this->openPlatform->getOfficialAccount($appid);
-    //     $result = $app->user->list();
-    //     foreach ($result['data']['openid'] as $key => $value) {
-    //         $user = $app->user->get($value);
-    //         User::create([
-    //             'appid' => $appid,
-    //             'nickname' => $user['nickname'],
-    //             'avatar' => $user['headimgurl'],
-    //             'sex' => $user['sex'],
-    //             'language' => $user['language'],
-    //             'country' => $user['country'],
-    //             'province' => $user['province'],
-    //             'city' => $user['city'],
-    //             'remark' => $user['remark'],
-    //             'unionid' => empty($user['unionid']) ? '' : $user['unionid'],
-    //             'openid' => $user['openid'],
-    //             'subscribe' => $user['subscribe'],
-    //             'subscribe_time' => $user['subscribe_time'],
-    //             'subscribe_scene' => $user['subscribe_scene'],
-    //         ]);
-    //     }
-    // }
-
     /**
      * 授权事件接收URL
      */
     public function event()
     {
-        $server = $this->weChat->getOpenPlatform()->server;
+        $app = $this->weChat->getOpenPlatform();
+        $server = $app->getServer();
 
-        // 处理授权成功事件
-        $server->push(function ($message) {
-            Log::info($message);
-        }, Guard::EVENT_AUTHORIZED);
+        $server->handleAuthorized(function ($message, \Closure $next) {
+            return $next($message);
+        });
 
-        // 处理授权更新事件
-        $server->push(function ($message) {
-            Log::info($message);
-        }, Guard::EVENT_UPDATE_AUTHORIZED);
+        $server->handleAuthorizeUpdated(function ($message, \Closure $next) {
+            return $next($message);
+        });
 
-        // 处理授权取消事件
-        $server->push(function ($message) {
-            Log::info($message);
+        $server->handleUnauthorized(function ($message, \Closure $next) {
             Authorizer::where('appid', $message['AuthorizerAppid'])->update(['subscribe' => false]);
-        }, Guard::EVENT_UNAUTHORIZED);
+            return $next($message);
+        });
 
-        // VerifyTicket
-        $server->push(function ($message) {
-            Log::info($message);
-        }, Guard::EVENT_COMPONENT_VERIFY_TICKET);
+        $server->handleVerifyTicketRefreshed(function ($message, \Closure $next) {
+            return $next($message);
+        });
 
-        $server->push(function ($message) {
-            Log::info($message);
-        }, Guard::EVENT_THIRD_FAST_REGISTERED);
+        $server->handleVerifyTicketRefreshed(function ($message, \Closure $next) {
+            return $next($message);
+        });
+
+        $server->with(function ($message, \Closure $next) {
+            return $next($message);
+        });
 
         return $server->serve();
     }
