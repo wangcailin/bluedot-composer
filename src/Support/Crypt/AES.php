@@ -1,6 +1,8 @@
 <?php
 
 namespace Composer\Support\Crypt;
+use Composer\Exceptions\ApiErrorCode;
+use Composer\Exceptions\ApiException;
 
 class AES
 {
@@ -22,8 +24,13 @@ class AES
 
     public static function decode($str, $config = [])
     {
-        $config = self::getConfig($config);
-        return openssl_decrypt(base64_decode($str), "AES-256-CBC", $config['key'], OPENSSL_RAW_DATA, $config['iv']);
+        try {
+            $config = self::getConfig($config);
+            return openssl_decrypt(base64_decode($str), "AES-256-CBC", $config['key'], OPENSSL_RAW_DATA, $config['iv']);
+        } catch (\Exception $exception) {
+            // 处理异常
+            throw new ApiException('解密失败', ApiErrorCode::VALIDATION_ERROR);
+        }
     }
 
     /**
@@ -33,8 +40,13 @@ class AES
      */
     public static function encode($str, $config = [])
     {
-        $config = self::getConfig($config);
-        return base64_encode(openssl_encrypt($str, "AES-256-CBC", $config['key'], OPENSSL_RAW_DATA, $config['iv']));
+        try {
+            $config = self::getConfig($config);
+            return base64_encode(openssl_encrypt($str, "AES-256-CBC", $config['key'], OPENSSL_RAW_DATA, $config['iv']));
+        } catch (\Exception $exception) {
+            // 处理异常
+            throw new ApiException('加密失败', ApiErrorCode::VALIDATION_ERROR);
+        }
     }
 
     private static function getConfig($config)
