@@ -2,7 +2,6 @@
 
 namespace Composer\Application\WeChat;
 
-use Symfony\Component\Cache\Adapter\RedisAdapter;
 use EasyWeChat\OfficialAccount\Application as OfficialAccountApplication;
 use EasyWeChat\MiniApp\Application as MiniAppApplication;
 use EasyWeChat\OpenPlatform\Application as OpenPlatformApplication;
@@ -19,25 +18,22 @@ class WeChat
     public $miniProgram = null;
 
     /**
-     * 获取开放平台Token
+     * 授权Model
      */
-    public function getComponentAccessToken(): string
-    {
-        return $this->getOpenPlatform()->access_token->getToken()['component_access_token'];
-    }
+    public $authorizerModel = null;
 
     /**
      * 获取公众号实例
      */
-    public function getOfficialAccount(string $appid): OfficialAccountApplication
+    public function getOfficialAccount(string $appId): OfficialAccountApplication
     {
         if ($this->officialAccount) {
             return $this->officialAccount;
         } else {
             if (config('easywechat.open_platform')) {
-                return $this->officialAccount = $this->getOpenPlatform()->officialAccount($appid, $this->getAuthorzerRefreshToken($appid));
+                return $this->officialAccount = $this->getOpenPlatform()->getOfficialAccountWithRefreshToken($appId, $this->getAuthorzerRefreshToken($appId));
             } else {
-                return $this->officialAccount = $this->getApp('official_account');
+                return $this->officialAccount = app('easywechat.official_account');
             }
         }
     }
@@ -45,15 +41,15 @@ class WeChat
     /**
      * 获取小程序实例
      */
-    public function getMiniProgram(string $appid): MiniAppApplication
+    public function getMiniProgram(string $appId): MiniAppApplication
     {
         if ($this->miniProgram) {
             return $this->miniProgram;
         } else {
             if (config('easywechat.open_platform')) {
-                return $this->miniProgram = $this->getOpenPlatform()->miniProgram($appid, $this->getAuthorzerRefreshToken($appid));
+                return $this->miniProgram = $this->getOpenPlatform()->getMiniAppWithRefreshToken($appId, $this->getAuthorzerRefreshToken($appId));
             } else {
-                return $this->miniProgram = $this->getApp('mini_program');
+                return $this->miniProgram = app('easywechat.mini_program');
             }
         }
     }
@@ -66,29 +62,45 @@ class WeChat
         if ($this->openPlatform) {
             return $this->openPlatform;
         } else {
-            return $this->openPlatform = $this->getApp('open_platform');
+            return $this->openPlatform = app('easywechat.open_platform');
         }
     }
 
     /**
-     * 获取token
+     * 获取 RefreshToken
      */
-    private function getAuthorzerRefreshToken(string $appid): string
+    public function getAuthorzerRefreshToken(string $appId): string
     {
-        return $this->getOpenPlatform()->getAuthorizer($appid)['authorization_info']['authorizer_refresh_token'];
+        $cacheKey = sprintf('open-platform.authorizer_refresh_token.%s', $appId);
+        $app = $this->getOpenPlatform();
+        $cache = $app->getCache();
+
+        $authorizerRefreshToken = (string) $cache->get($cacheKey);
+
+        if (!$authorizerRefreshToken) {
+            $api = $app->getClient();
+            $response = $api->postJson('/cgi-bin/component/api_get_authorizer_info', [
+                'component_appid' => $app->getAccount()->getAppId(),
+                'authorizer_appid' => $appId
+            ]);
+            $authorizerRefreshToken = (string) $response['authorization_info']['authorizer_refresh_token'];
+            $cache->set($cacheKey, $authorizerRefreshToken);
+        }
+
+        return $authorizerRefreshToken;
     }
 
-    private function rebindCache($app)
+    /**
+     * 获取 RefreshToken
+     */
+    public function setAuthorzerRefreshToken(string $appId, string $authorizerRefreshToken): string
     {
-        $client = app('redis')->connection()->client();
-        $cache = new RedisAdapter($client);
-        $app->rebind('cache', $cache);
-    }
+        $cacheKey = sprintf('open-platform.authorizer_refresh_token.%s', $appId);
+        $app = $this->getOpenPlatform();
+        $cache = $app->getCache();
 
-    private function getApp($name = '')
-    {
-        $app = app('easywechat.' . $name);
-        // $this->rebindCache($app);
-        return $app;
+        $cache->set($cacheKey, $authorizerRefreshToken);
+
+        return $authorizerRefreshToken;
     }
 }
