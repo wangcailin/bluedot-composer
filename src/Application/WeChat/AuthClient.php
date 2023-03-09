@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class AuthClient extends BaseController
 {
 
-    public ?WeChatOpenid $weChatOpenidModel = null;
+    public $weChatOpenidModel = null;
+    
     public function __construct(WeChatOpenid $weChatOpenid)
     {
         $this->weChatOpenidModel = $weChatOpenid;
