@@ -6,6 +6,7 @@ use Composer\Application\WeChat\Models\Authorizer;
 use Composer\Application\WeChat\WeChat;
 use Composer\Http\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class Client extends Controller
 {
@@ -83,15 +84,12 @@ class Client extends Controller
         });
 
         $server->handleUnauthorized(function ($message, \Closure $next) {
-            Authorizer::where('appid', $message['AuthorizerAppid'])->update(['subscribe' => false]);
+            $this->model::where('appid', $message['AuthorizerAppid'])->update(['subscribe' => false]);
             return $next($message);
         });
 
         $server->handleVerifyTicketRefreshed(function ($message, \Closure $next) {
-            return $next($message);
-        });
-
-        $server->handleVerifyTicketRefreshed(function ($message, \Closure $next) {
+            Log::info($message);
             return $next($message);
         });
 

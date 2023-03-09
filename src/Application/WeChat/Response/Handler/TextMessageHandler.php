@@ -25,6 +25,7 @@ class TextMessageHandler
         } elseif ($reply = Reply::where($where)->where('type', 'msg')->first()) {
             return $this->reply($reply['reply_material_id'], $payload['FromUserName']);
         }
+        return $next($message);
     }
 
     private function reply($replyMaterialId, $openid)

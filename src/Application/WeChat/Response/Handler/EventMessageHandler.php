@@ -45,6 +45,7 @@ class EventMessageHandler
                 }
                 break;
         }
+        return $next($message);
     }
 
     private function reply($replyMaterialId, $openid)
