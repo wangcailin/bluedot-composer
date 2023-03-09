@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class AuthClient extends BaseController
 {
+
+    public ?WeChatOpenid $weChatOpenidModel = null;
+    public function __construct(WeChatOpenid $weChatOpenid)
+    {
+        $this->weChatOpenidModel = $weChatOpenid;
+    }
+
     public function oauth(WeChat $weChat, Request $request)
     {
         $appid = $request->input('appid');
@@ -47,7 +54,7 @@ class AuthClient extends BaseController
         return $this->success($userInfo);
     }
 
-    protected function oauthAfter($appid, $user): WeChatOpenid
+    public function oauthAfter($appid, $user): WeChatOpenid
     {
         if (isset($user['unionid'])) {
             $data['unionid'] = $user['unionid'];
@@ -55,18 +62,18 @@ class AuthClient extends BaseController
         if (isset($user['headimgurl'])) {
             $data['avatar'] = $user['headimgurl'];
         }
-        return WeChatOpenid::updateOrCreate(
+        return $this->weChatOpenidModel::updateOrCreate(
             ['appid' => $appid, 'openid' => $user['openid']],
             $data
         );
     }
 
-    protected function authAfter($appid, $user): WeChatOpenid
+    public function authAfter($appid, $user): WeChatOpenid
     {
         if (isset($user['unionid'])) {
             $data['unionid'] = $user['unionid'];
         }
-        return WeChatOpenid::updateOrCreate(
+        return $this->weChatOpenidModel::updateOrCreate(
             ['appid' => $appid, 'openid' => $user['openid']],
             $data
         );
