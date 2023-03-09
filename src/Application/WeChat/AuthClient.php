@@ -54,7 +54,7 @@ class AuthClient extends BaseController
         return $this->success($userInfo);
     }
 
-    public function oauthAfter($appid, $user): WeChatOpenid
+    public function oauthAfter($appid, $user)
     {
         if (isset($user['unionid'])) {
             $data['unionid'] = $user['unionid'];
@@ -68,7 +68,7 @@ class AuthClient extends BaseController
         );
     }
 
-    public function authAfter($appid, $user): WeChatOpenid
+    public function authAfter($appid, $user)
     {
         if (isset($user['unionid'])) {
             $data['unionid'] = $user['unionid'];
