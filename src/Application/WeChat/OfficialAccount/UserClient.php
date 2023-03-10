@@ -18,6 +18,6 @@ class UserClient extends BaseController
         $response = $api->get('/cgi-bin/user/info', [
             'openid' => $openid
         ]);
-        return $this->success($response);
+        return $this->success($response->toArray());
     }
 }
