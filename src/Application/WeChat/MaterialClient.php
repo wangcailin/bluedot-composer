@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Tenant\WeChat;
+namespace Composer\Application\WeChat;
 
 use Composer\Http\Controller;
 use Spatie\QueryBuilder\AllowedFilter;
