@@ -6,6 +6,7 @@ use AlibabaCloud\SDK\Dysmsapi\V20170525\Dysmsapi;
 use Darabonba\OpenApi\Models\Config;
 use AlibabaCloud\SDK\Dysmsapi\V20170525\Models\SendSmsRequest;
 
+// composer require alibabacloud/dysmsapi-20170525 2.0.23
 class SmsClient
 {
     public static $client;
