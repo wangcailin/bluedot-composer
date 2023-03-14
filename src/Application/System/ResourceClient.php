@@ -7,6 +7,8 @@ use Composer\Application\System\Models\Resource;
 use Composer\Exceptions\ApiErrorCode;
 use Composer\Exceptions\ApiException;
 use Composer\Support\Aliyun\OssClient;
+use Composer\Support\Aliyun\OssServerClient;
+use Illuminate\Http\Request;
 
 class ResourceClient extends Controller
 {
@@ -28,7 +30,7 @@ class ResourceClient extends Controller
             $fileSize = $file->getSize();
             $fileUid = uniqid();
             $filePath = $this->getFilePathPrefix() . $fileUid . '.' . $fileExtension;
-            $result = OssClient::putObject($filePath, $file->get());
+            $result = OssServerClient::putObject($filePath, $file->get());
             if ($result && isset($result['info']) && isset($result['info']['url'])) {
                 $data = [
                     'title' => $fileName,
@@ -48,5 +50,12 @@ class ResourceClient extends Controller
     public function getFilePathPrefix()
     {
         return 'uploads/' . date('Ymd') . '/';
+    }
+
+    public function getOssUploadUrl(Request $request)
+    {
+        $dir = $request->input('dir', 'upload/');
+        $response = OssClient::getUploadUrl($dir);
+        return $this->success($response);
     }
 }

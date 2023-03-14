@@ -164,7 +164,7 @@ class RouteRegistrar
 
                 $this->router->group(['prefix' => 'resource'], function () {
                     $this->router->post('', 'ResourceClient@create');
-                    $this->router->get('sdk', 'OssSdkClient@getSdk');
+                    $this->router->get('oss-upload-url', 'ResourceClient@getOssUploadUrl');
                 });
             }
         );
