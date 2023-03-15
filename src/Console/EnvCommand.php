@@ -21,25 +21,22 @@ class EnvCommand extends Command
         if (!$this->setKeyInEnvironmentFile('APP_ENV', 'dev', 'production')) {
             return;
         }
+        if (!$this->setKeyInEnvironmentFile('APP_DEBUG', 'true', 'false')) {
+            return;
+        }
 
         $this->info('Application Env set successfully.');
     }
 
     protected function setKeyInEnvironmentFile($key, $before, $after)
     {
-        $this->writeNewEnvironmentFileWith($key, $before, $after);
+        $content = file_get_contents('.env.production');
+        file_put_contents('.env.production', str_replace(
+            "{$key}={$before}",
+            "{$key}={$after}",
+            $content
+        ));
 
         return true;
-    }
-
-    protected function writeNewEnvironmentFileWith($key, $before, $after)
-    {
-        $environmentFilePath = $this->laravel->environmentFilePath();
-        $before = file_get_contents($environmentFilePath);
-        file_put_contents($environmentFilePath, str_replace(
-            "{$key}={$before}",
-            "{$key}=\"{$after}\"",
-            $before
-        ));
     }
 }
