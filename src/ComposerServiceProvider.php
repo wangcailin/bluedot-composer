@@ -34,6 +34,7 @@ class ComposerServiceProvider extends ServiceProvider
         $this->commands([
             Console\KeyCommand::class,
             Console\InstallCommand::class,
+            Console\EnvCommand::class,
         ]);
     }
 
