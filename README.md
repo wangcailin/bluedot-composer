@@ -54,7 +54,7 @@
 
 - **[Laravel](https://learnku.com/docs/laravel/9.x)**
 - **[Passport OAuth 认证](https://learnku.com/docs/laravel/9.x/passport/12270)**
-- **[Sanctum API 授权](https://learnku.com/docs/laravel/9.x/sanctum/12272)**
+- **[jwt-auth](https://jwt-auth.readthedocs.io/en/develop/)**
 - **[laravel-query-builder HTTP 查询](https://spatie.be/docs/laravel-query-builder/v5/introduction)**
 - **[laravel-permission 多权限](https://spatie.be/docs/laravel-permission/v5/introduction)**
 - **[EasyWeChat 微信 SDK](https://easywechat.com/6.x/)**

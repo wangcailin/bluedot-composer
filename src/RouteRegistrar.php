@@ -134,22 +134,6 @@ class RouteRegistrar
         );
     }
 
-    public function forBackendTagRoute()
-    {
-        $this->router->group(
-            ['prefix' => 'backend/tag', 'namespace' => 'Tag'],
-            function () {
-                $this->router->get('table-list', 'Client@getTableList');
-                $this->router->get('tree-select', 'Client@getTreeSelectList');
-                $this->router->post('', 'Client@create');
-                $this->router->put('{id}', 'Client@update');
-
-                $this->router->post('group', 'Client@createGroup');
-                $this->router->put('group/{id}', 'Client@updateGroup');
-            }
-        );
-    }
-
     public function forBackendSystemRoute()
     {
         $this->router->group(

@@ -2,14 +2,13 @@
 
 namespace Composer\Application\WeChat\Models;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Sanctum\HasApiTokens;
 
-class WeChatOpenid extends Authenticatable
+class WeChatOpenid extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-    use HasApiTokens;
     protected $table = 'wechat_openid';
 
     protected $fillable = [
@@ -49,5 +48,25 @@ class WeChatOpenid extends Authenticatable
     public function appid()
     {
         return $this->hasOne(Authorizer::class, 'appid', 'appid');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
