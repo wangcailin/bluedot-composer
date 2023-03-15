@@ -7,12 +7,19 @@ use Composer\Http\Traits\Select;
 use Composer\Http\Traits\Validate;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * 统一Http控制器
+ */
 class Controller extends BaseController
 {
     use Select;
     use Validate;
 
-    /** 模型对象 */
+    /**
+     * 当前模型
+     *
+     * @var [type]
+     */
     protected $model;
 
     public $allowedFilters = ['id'];
@@ -40,7 +47,9 @@ class Controller extends BaseController
     public $data = [];
 
     /**
-     * 获取list
+     * 获取列表
+     *
+     * @return void
      */
     public function getList()
     {
@@ -55,7 +64,9 @@ class Controller extends BaseController
     }
 
     /**
-     * 获取list
+     * 获取所有数据
+     *
+     * @return void
      */
     public function getAllList()
     {
@@ -70,7 +81,10 @@ class Controller extends BaseController
     }
 
     /**
-     * 获取row
+     * 获取单行数据
+     *
+     * @param [type] $id
+     * @return void
      */
     public function get($id)
     {
@@ -88,7 +102,9 @@ class Controller extends BaseController
     }
 
     /**
-     * 创建
+     * 创建数据
+     *
+     * @return void
      */
     public function create()
     {
@@ -106,6 +122,12 @@ class Controller extends BaseController
         return $this->success($this->row);
     }
 
+    /**
+     * 更新数据
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function update($id)
     {
         $this->id = $id;
@@ -120,6 +142,12 @@ class Controller extends BaseController
         return $this->success($this->row);
     }
 
+    /**
+     * 删除数据
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function delete($id)
     {
         $this->id = $id;
@@ -131,9 +159,20 @@ class Controller extends BaseController
         return $this->success();
     }
 
+    /**
+     * BuildFilter 前置方法
+     *
+     * @return void
+     */
     public function beforeBuildFilter()
     {
     }
+
+    /**
+     * BuildFilter 方法
+     *
+     * @return void
+     */
     public function buildFilter()
     {
         $this->model = QueryBuilder::for($this->model)
@@ -142,63 +181,147 @@ class Controller extends BaseController
             ->allowedSorts($this->allowedSorts)
             ->allowedIncludes($this->allowedIncludes);
     }
+    /**
+     * BuildFilter 后置方法
+     *
+     * @return void
+     */
     public function afterBuildFilter()
     {
     }
+
+    /**
+     * 获取列表核心方法
+     *
+     * @return void
+     */
     public function handleList()
     {
         $pageSize = (int) request()->input('pageSize', 10);
         $this->list = $this->model->paginate($pageSize, ['*'], 'current');
     }
+    /**
+     * 获取列表 后置方法
+     *
+     * @return void
+     */
     public function afterList()
     {
     }
 
+    /**
+     * 创建数据 前置方法
+     *
+     * @return void
+     */
     public function beforeCreate()
     {
     }
+
+    /**
+     * 创建数据 核心方法
+     *
+     * @return void
+     */
     public function handleCreate()
     {
         $this->row = $this->model::create($this->data);
     }
+
+    /**
+     * 创建数据 后置方法
+     *
+     * @return void
+     */
     public function afterCreate()
     {
     }
 
+    /**
+     * 获取单个数据 前置方法
+     *
+     * @return void
+     */
     public function beforeGet()
     {
     }
+    /**
+     * 获取单个数据 核心方法
+     *
+     * @return void
+     */
     public function handleGet()
     {
         $this->row = $this->model->findOrFail($this->id);
     }
+    /**
+     * 获取单个数据 后置方法
+     *
+     * @return void
+     */
     public function afterGet()
     {
     }
 
+    /**
+     * 更新数据 前置方法
+     *
+     * @return void
+     */
     public function beforeUpdate()
     {
     }
+
+    /**
+     * 更新数据 核心方法
+     *
+     * @return void
+     */
     public function handleUpdate()
     {
         $this->row = $this->model::findOrFail($this->id);
         $this->row->update($this->data);
     }
+    /**
+     * 更新数据 后置方法
+     *
+     * @return void
+     */
     public function afterUpdate()
     {
     }
 
+    /**
+     * 删除数据 前置方法
+     *
+     * @return void
+     */
     public function beforeDelete()
     {
     }
+    /**
+     * 删除数据 核心方法
+     *
+     * @return void
+     */
     public function handleDelete()
     {
         $this->model::findOrFail($this->id)->delete();
     }
+    /**
+     * 删除数据 后置方法
+     *
+     * @return void
+     */
     public function afterDelete()
     {
     }
 
+    /**
+     * 拖动排序
+     *
+     * @return void
+     */
     public function sort()
     {
         $ids = request()->input('ids', []);
@@ -208,6 +331,11 @@ class Controller extends BaseController
         return $this->success();
     }
 
+    /**
+     * 创建数据 注入后台用户ID auth_user_id
+     *
+     * @return void
+     */
     public function createAuthUserId()
     {
         if ($this->guard) {

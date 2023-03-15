@@ -1,88 +1,60 @@
 # bluedot/composer
 
-## 目录
+## 目录结构
+
+遵循于 Laravel 最佳实践
 
 ```
-├── README.md
-├── composer.json
-├── composer.lock
+├── config
+├── database
+├── resources
 └── src
-    ├── Application    # 应用目录
-    │   ├── Analysis
-    │   ├── Auth
-    │   ├── Common
-    │   ├── Config
-    │   ├── DataDownload
-    │   ├── Event
-    │   ├── Push
-    │   ├── Tag
-    │   ├── User
-    │   └── WeChat
+    ├── Application
+    │   ├── Analysis
+    │   ├── Auth
+    │   ├── Push
+    │   ├── System
+    │   ├── Tag
+    │   ├── User
+    │   └── WeChat
+    ├── Composer.php
+    ├── ComposerServiceProvider.php
+    ├── Console
     ├── Exceptions
-    │   └── Handler.php
-    ├── Http    # HTTP核心文件
-    │   ├── BaseController.php
-    │   ├── Controller.php
-    │   ├── Middleware
-    │   ├── Response.php
-    │   └── Select.php
-    ├── ServiceProvider.php    # 服务提供者
-    ├── Support    # 第三方类库
-    │   ├── AES.php
-    │   ├── OSS.php
-    │   ├── Paginator.php
-    │   └── Vhall.php
-    └── helpers.php    # 公共函数
+    ├── Http # HTTP 核心库
+    │   ├── BaseController.php # 基类公共控制器
+    │   ├── Controller.php # 公共控制器
+    │   ├── Kernel.php
+    │   ├── Middleware
+    │   │   ├── AuthOperationLog.php
+    │   │   ├── Authenticate.php
+    │   │   ├── AuthenticateAdmin.php
+    │   │   └── RequestLog.php
+    │   └── Traits
+    │       ├── PlatformBindUser.php
+    │       ├── Select.php
+    │       └── Validate.php
+    ├── RouteRegistrar.php # 注入一些公共路由
+    ├── Support # 第三方包
+    │   ├── Aip
+    │   ├── Aliyun
+    │   ├── Auth
+    │   ├── Captcha
+    │   ├── Crypt
+    │   ├── Database
+    │   ├── Excel
+    │   ├── Lookstar
+    │   ├── Mail
+    │   ├── Redis
+    │   └── Vhall.php
+    └── helpers.php
 ```
 
-## Application
+## Package Support
 
-### Analysis
-
-数据系统
-
-### Auth
-
-权限系统
-
-### Common
-
-公共 App
-
-### Config
-
-配置系统
-
-### DataDownload
-
-资料下载
-
-### Event
-
-活动中心
-
-### Push
-
-推送系统
-
-### Tag
-
-标签系统
-
-### User
-
-用户系统
-
-### WeChat
-
-微信系统
-
-## Exceptions
-
-## Http
-
-## Support
-
-## helpers
-
-## ServiceProvider
+- **[Laravel](https://learnku.com/docs/laravel/9.x)**
+- **[Passport OAuth 认证](https://learnku.com/docs/laravel/9.x/passport/12270)**
+- **[Sanctum API 授权](https://learnku.com/docs/laravel/9.x/sanctum/12272)**
+- **[laravel-query-builder HTTP 查询](https://spatie.be/docs/laravel-query-builder/v5/introduction)**
+- **[laravel-permission 多权限](https://spatie.be/docs/laravel-permission/v5/introduction)**
+- **[EasyWeChat 微信 SDK](https://easywechat.com/6.x/)**

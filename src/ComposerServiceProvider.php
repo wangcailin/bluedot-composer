@@ -73,6 +73,8 @@ class ComposerServiceProvider extends ServiceProvider
 
     /**
      * 分页器
+     *
+     * @return void
      */
     protected function registerPaginator()
     {
