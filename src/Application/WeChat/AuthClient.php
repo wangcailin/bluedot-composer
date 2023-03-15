@@ -10,7 +10,7 @@ class AuthClient extends BaseController
 {
 
     public $weChatOpenidModel = null;
-    
+
     public function __construct(WeChatOpenid $weChatOpenid)
     {
         $this->weChatOpenidModel = $weChatOpenid;
@@ -35,7 +35,7 @@ class AuthClient extends BaseController
                 $link = '&';
             }
             $userInfo = $this->oauthAfter($appid, $user);
-            $user['token'] = $userInfo->createToken('openid')->plainTextToken;
+            $user['token'] = auth('platform')->login($userInfo);
             $query = http_build_query($user);
             return \redirect($redirectUrl . $link . $query);
         }
