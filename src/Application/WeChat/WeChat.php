@@ -49,7 +49,7 @@ class WeChat
             if (config('easywechat.open_platform')) {
                 return $this->miniProgram = $this->getOpenPlatform()->getMiniAppWithRefreshToken($appId, $this->getAuthorzerRefreshToken($appId));
             } else {
-                return $this->miniProgram = app('easywechat.mini_program');
+                return $this->miniProgram = app('easywechat.mini_app');
             }
         }
     }
