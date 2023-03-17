@@ -57,6 +57,7 @@ class AuthClient extends BaseController
 
     public function oauthAfter($appid, $user)
     {
+        $data = [];
         if (isset($user['unionid'])) {
             $data['unionid'] = $user['unionid'];
         }
@@ -71,6 +72,7 @@ class AuthClient extends BaseController
 
     public function authAfter($appid, $user)
     {
+        $data = [];
         if (isset($user['unionid'])) {
             $data['unionid'] = $user['unionid'];
         }

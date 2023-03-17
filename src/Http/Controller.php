@@ -191,7 +191,7 @@ class Controller extends BaseController
     }
 
     /**
-     * 获取列表核心方法
+     * 获取列表 核心方法
      *
      * @return void
      */
