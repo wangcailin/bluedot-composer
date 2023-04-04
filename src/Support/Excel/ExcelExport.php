@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Facades\Excel as Excels;
 
+// composer require maatwebsite/excel
 class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
 {
     protected $data;
@@ -24,7 +25,7 @@ class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
     protected $sheetName; //sheet title
     protected $borders = []; //设置边框颜色  key：A1:K8  value:#000000
     //设置页面属性时如果无效   更改excel格式尝试即可
-    protected   $column=[];
+    protected   $column = [];
     protected $dataMergeKey = []; //需要合并的单元格 数组 ['A1:A2', 'B1:C1', 'D1:E1', 'F1:G1', 'H1:I1'];
 
     //构造函数传值
@@ -57,8 +58,8 @@ class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
         $Column = $this->column;
         return [
 
-            AfterSheet::class  => function (AfterSheet $event)  use($Column)   {
-                foreach ($Column as $value){
+            AfterSheet::class  => function (AfterSheet $event)  use ($Column) {
+                foreach ($Column as $value) {
                     $event->sheet->getDelegate()->getColumnDimension($value['tag'])->setWidth($value['width']);
                 }
 
@@ -84,17 +85,17 @@ class ExcelExport implements WithEvents, FromArray, WithMapping, WithHeadings
     }
     public function example()
     {
-        $header = ["产品名", "浏览量（PV）", '独立访客（UV）','创建时间'];
-        $excelData =[
-            ['机器人','10','20','2022-10-13'],
-            ['机器人','10','20','2022-10-13'],
-            ['机器人','10','20','2022-10-13'],
+        $header = ["产品名", "浏览量（PV）", '独立访客（UV）', '创建时间'];
+        $excelData = [
+            ['机器人', '10', '20', '2022-10-13'],
+            ['机器人', '10', '20', '2022-10-13'],
+            ['机器人', '10', '20', '2022-10-13'],
         ];
         $name = "导出文件名称";
         $export = new \Composer\Support\Excel\ExcelExport($excelData, $header, $name);
         $clo = [
-            ['tag'=>'A',"width"=>50],
-            ['tag'=>'B',"width"=>50],
+            ['tag' => 'A', "width" => 50],
+            ['tag' => 'B', "width" => 50],
         ];
         $export->setColumn($clo);
         return Excels::download($export, $name . '.xls');
