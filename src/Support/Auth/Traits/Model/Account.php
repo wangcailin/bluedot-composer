@@ -4,7 +4,7 @@ namespace Composer\Support\Auth\Traits\Model;
 
 trait Account
 {
-    private static function handleCreateUser($username, $password, $email = '', $phone = '', $nickname = '', $isAdmin)
+    protected static function handleCreateUser($username, $password, $email, $phone, $nickname, $isAdmin)
     {
         $nickname = $nickname !== '' ?: $username;
         return self::create([
@@ -18,10 +18,10 @@ trait Account
     }
     public static function createAdminUser($username, $password, $email = '', $phone = '', $nickname = '')
     {
-        return self::handleCreateUser($username, $password, $email = '', $phone = '', $nickname = '', 1);
+        return self::handleCreateUser($username, $password, $email, $phone, $nickname, 1);
     }
     public static function createUser($username, $password, $email = '', $phone = '', $nickname = '')
     {
-        return self::handleCreateUser($username, $password, $email = '', $phone = '', $nickname = '', 0);
+        return self::handleCreateUser($username, $password, $email, $phone, $nickname, 0);
     }
 }

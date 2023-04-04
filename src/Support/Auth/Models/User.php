@@ -62,25 +62,4 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = \Illuminate\Support\Facades\Hash::make($value);
     }
-
-    private static function handleCreateUser($username, $password, $email = '', $phone = '', $nickname = '', $isAdmin)
-    {
-        $nickname = $nickname !== '' ?: $username;
-        return self::create([
-            'username' => $username,
-            'password' => $password,
-            'email' => $email,
-            'phone' => $phone,
-            'nickname' => $nickname,
-            'is_admin' => $isAdmin,
-        ]);
-    }
-    public static function createAdminUser($username, $password, $email = '', $phone = '', $nickname = '')
-    {
-        return self::handleCreateUser($username, $password, $email = '', $phone = '', $nickname = '', 1);
-    }
-    public static function createUser($username, $password, $email = '', $phone = '', $nickname = '')
-    {
-        return self::handleCreateUser($username, $password, $email = '', $phone = '', $nickname = '', 0);
-    }
 }
