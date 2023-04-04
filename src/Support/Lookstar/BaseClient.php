@@ -2,7 +2,7 @@
 
 namespace Composer\Support\Lookstar;
 
-use Lookstar\ApiClient;
+use LookstarClient\ApiClient;
 
 class BaseClient
 {

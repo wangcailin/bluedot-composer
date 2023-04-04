@@ -13,6 +13,7 @@ use Composer\Exceptions\ApiErrorCode;
 use Composer\Exceptions\ApiException;
 use Composer\Support\Crypt\AES;
 use Composer\Support\Captcha\Client as CaptchaClient;
+use Illuminate\Validation\Rule;
 
 abstract class Client extends BaseController
 {
@@ -33,11 +34,19 @@ abstract class Client extends BaseController
 
     public function login(Request $request)
     {
-        $input = $request->all();
+        $input = $request->validate([
+            'crypt_key' => 'required',
+            'type' => ['required', Rule::in(['account', 'mail', 'mobile'])],
+            'username' => ['exclude_unless:type,account', 'required'],
+            'password' => ['exclude_unless:type,account', 'required'],
+            'email' => ['exclude_unless:type,mail', 'required'],
+            'phone' => ['exclude_unless:type,mobile', 'required'],
+            'code' => ['exclude_unless:type,mail,mobile', 'required'],
+        ]);
         return $this->handleLogin($input);
     }
 
-    private function handleLogin($input)
+    protected function handleLogin($input)
     {
         switch ($input['type']) {
             case 'account':
