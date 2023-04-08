@@ -52,6 +52,7 @@ class AuthClient extends BaseController
 
         $userInfo = $this->authAfter($appid, $user);
         $user['token'] = auth('platform')->login($userInfo);
+        unset($user['session_key']);
         return $this->success($user);
     }
 
