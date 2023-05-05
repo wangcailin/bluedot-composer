@@ -37,12 +37,12 @@ class OssClient
         $signature = base64_encode(hash_hmac('sha1', $string_to_sign, $key, true));
 
         $response = [
-            'accessid' => $id,
+            'accessId' => $id,
             'host' => $host,
             'policy' => $base64_policy,
             'signature' => $signature,
             'expire' => $end,
-            'dir' => $dir,
+            'dir' =>  $dir . date('Ym'),
         ];
         return $response;
     }
