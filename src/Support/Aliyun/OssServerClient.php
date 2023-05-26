@@ -21,6 +21,6 @@ class OssServerClient
 
     public static function OSSClient()
     {
-        return self::$OSS ?: self::$OSS = new BaseOssClient(config('composer.aliyun_access_key_id'), config('composer.aliyun_access_key_secret'), config('composer.aliyun_oss_endpoint'));
+        return self::$OSS ?: self::$OSS = new BaseOssClient(config('composer.aliyun_access_key_id'), config('composer.aliyun_access_key_secret'), 'https://' . config('composer.aliyun_oss_endpoint'));
     }
 }
