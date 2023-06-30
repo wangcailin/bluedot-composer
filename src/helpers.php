@@ -87,3 +87,23 @@ if (!function_exists('gmt_iso8601')) {
         return str_replace('+00:00', '.000Z', gmdate('c', $time));
     }
 }
+
+if (!function_exists('get_excel_column_name')) {
+    /**
+     * 获取Excel列名字
+     *
+     * @param integer $num 列数
+     * @return string
+     */
+    function get_excel_column_name(int $num): string
+    {
+        $numeric = $num % 26;
+        $letter = chr(65 + $numeric);
+        $num2 = intval($num / 26);
+        if ($num2 > 0) {
+            return get_excel_column_name($num2 - 1) . $letter;
+        } else {
+            return $letter;
+        }
+    }
+}
