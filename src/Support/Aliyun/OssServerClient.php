@@ -2,7 +2,6 @@
 
 namespace Composer\Support\Aliyun;
 
-use Illuminate\Support\Env;
 use OSS\OssClient as BaseOssClient;
 
 class OssServerClient
@@ -21,6 +20,10 @@ class OssServerClient
 
     public static function OSSClient()
     {
-        return self::$OSS ?: self::$OSS = new BaseOssClient(config('composer.aliyun_access_key_id'), config('composer.aliyun_access_key_secret'), 'https://' . config('composer.aliyun_oss_endpoint'));
+        if (self::$OSS) return self::$OSS;
+
+        self::$OSS = new BaseOssClient(config('composer.aliyun_access_key_id'), config('composer.aliyun_access_key_secret'), config('composer.aliyun_oss_endpoint'));
+        self::$OSS->setUseSSL(true);
+        return self::$OSS;
     }
 }
