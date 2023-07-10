@@ -58,3 +58,18 @@
 - **[laravel-query-builder HTTP 查询](https://spatie.be/docs/laravel-query-builder/v5/introduction)**
 - **[laravel-permission 多权限](https://spatie.be/docs/laravel-permission/v5/introduction)**
 - **[EasyWeChat 微信 SDK](https://easywechat.com/6.x/)**
+
+## 功能说明
+
+- 权限系统（节省 8h）
+- 微信系统
+  - 自动回复（节省 4h）
+  - 二维码管理（节省 4h）
+  - 微信授权（节省 2h）
+- 增删改查（节省 8h）
+- 公共服务
+  - 阿里云服务（节省 2h）
+  - 验证码服务（节省 2h）
+  - 加解密服务（节省 1h）
+  - Redis 缓存（节省 4h）
+  - 观星 SDK（节省 1h）
