@@ -64,6 +64,6 @@ class QrcodeClient extends Controller
                 ]
             ]
         ]);
-        return $response;
+        return $response->toArray();
     }
 }
