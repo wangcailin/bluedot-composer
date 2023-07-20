@@ -16,12 +16,12 @@ class Qrcode extends Model
         'url',
         'remark',
         'appid',
-        'reply_material_type',
-        'reply_material_id',
-        'auth_user_id'
+        'auth_user_id',
+        'replys'
     ];
 
     protected $casts = [
         'tag_ids' => 'array',
+        'replys' => 'array',
     ];
 }

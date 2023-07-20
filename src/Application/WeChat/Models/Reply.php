@@ -12,17 +12,17 @@ class Reply extends Model
         'appid',
         'match',
         'text',
-        'reply_material_type',
-        'reply_material_id',
         'remark',
         'appid',
         'tag_ids',
         'type',
-        'auth_user_id'
+        'auth_user_id',
+        'replys'
     ];
 
     protected $casts = [
         'tag_ids' => 'array',
+        'replys' => 'array',
     ];
 
     public function authorizer()
