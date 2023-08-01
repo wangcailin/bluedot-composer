@@ -53,11 +53,16 @@ trait Validate
         return $this->validateUpdateMessage;
     }
 
+    public function getValidateRules()
+    {
+        return $this->validateRules;
+    }
+
     public function handleValidate()
     {
         Validator::make(
             $this->data,
-            $this->validateRules,
+            $this->getValidateRules(),
             $this->validateMessage
         )->validate();
     }
