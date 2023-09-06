@@ -106,18 +106,6 @@ class AipNlp extends AipBase
     private $newsSummaryUrl = 'https://aip.baidubce.com/rpc/2.0/nlp/v1/news_summary';
 
     /**
-     * 图文转换器 doc_convert api url
-     * @var string
-     */
-    private $docConvertUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/doc_convert/request';
-
-    /**
-     * 图文转换器查询接口 get_request_result api url
-     * @var string
-     */
-    private $docConvertResultUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/doc_convert/get_request_result';
-
-    /**
      * 格式化结果
      * @param $content string
      * @return mixed
@@ -425,27 +413,5 @@ class AipNlp extends AipBase
         $data = mb_convert_encoding(json_encode($data), 'GBK', 'UTF8');
 
         return $this->request($this->newsSummaryUrl, $data);
-    }
-
-    /**
-     * 图文转换接口
-     *
-     * @param [type] $data   https://cloud.baidu.com/doc/OCR/s/Elf3sp7cz
-     * @return void
-     */
-    public function docConvertRequest($data)
-    {
-        return $this->request($this->docConvertUrl, $data);
-    }
-
-    /**
-     * 图文转换查询接口
-     *
-     * @param [type] $data
-     * @return void
-     */
-    public function docConvertResultRequest($data)
-    {
-        return $this->request($this->docConvertResultUrl, $data);
     }
 }
