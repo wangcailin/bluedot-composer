@@ -356,7 +356,7 @@ class AipBase
         $headers['x-bce-date'] = $timestamp;
 
         //签名
-        $headers['authorization'] = AipSampleSigner::sign(array(
+        $headers['authorization'] = \AipSampleSigner::sign(array(
             'ak' => $this->apiKey,
             'sk' => $this->secretKey,
         ), $method, $obj['path'], $headers, $params, array(
