@@ -9,6 +9,8 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
+use Composer\Exceptions\ApiErrorCode;
+use Composer\Exceptions\ApiException;
 
 class BaseExport implements FromArray, WithTitle, WithHeadings, ShouldAutoSize, WithEvents, WithStrictNullComparison
 {
@@ -17,16 +19,20 @@ class BaseExport implements FromArray, WithTitle, WithHeadings, ShouldAutoSize, 
     $exportService->setExportData($data);
     $exportService->setHeadingArr(['订单号', '课程名称', '支付金额', '支付方式', '报名时间', '支付时间', '买家信息', '操作人', '订单状态']);
     $exportService->setSheetTitle('订单列表');
+    $exportService->setExportFileTitle('订单列表.xlsx'); //可以不传递，如果不传递
     return $exportService->download();
     */
 
+    protected $isExportData = 0;
     protected $exportData = [];
     protected $sheetTitle = '请输入excel的表头';
+    protected $exportFileTitle = '';
     protected $headingArr = [];
 
     public function setExportData(array $exportData)
     {
         $this->exportData = $exportData;
+        $this->isExportData = 1;
     }
 
     public function setSheetTitle(string $sheetTitle)
@@ -39,10 +45,31 @@ class BaseExport implements FromArray, WithTitle, WithHeadings, ShouldAutoSize, 
         $this->headingArr = $headingArr;
     }
 
+    public function setExportFileTitle(string $exportFileTitle)
+    {
+        $this->exportFileTitle = $exportFileTitle;
+    }
+
+    private function getExportFileTitle()
+    {
+        return $this->exportFileTitle ?: $this->sheetTitle . '.xlsx';
+    }
 
     public function download()
     {
-        return \Maatwebsite\Excel\Facades\Excel::download($this, $this->sheetTitle . '.xlsx');
+        if ($this->headingArr) {
+            throw new ApiException('导出失败,请输出表头', ApiErrorCode::VALIDATION_ERROR);
+        }
+
+        if ($this->sheetTitle) {
+            throw new ApiException('导出失败,请输入Excel表格的标题', ApiErrorCode::VALIDATION_ERROR);
+        }
+
+        if ($this->isExportData) {
+            throw new ApiException('导出失败,请输入导出数据', ApiErrorCode::VALIDATION_ERROR);
+        }
+
+        return \Maatwebsite\Excel\Facades\Excel::download($this, $this->getExportFileTitle());
     }
     /**
      * 注册事件，触发操作
@@ -98,7 +125,7 @@ class BaseExport implements FromArray, WithTitle, WithHeadings, ShouldAutoSize, 
     }
 
     /**
-     * excel的表头
+     * Excel 表格的标题
      *
      * @return string
      */
