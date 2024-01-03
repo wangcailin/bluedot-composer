@@ -57,15 +57,15 @@ class BaseExport implements FromArray, WithTitle, WithHeadings, ShouldAutoSize, 
 
     public function download()
     {
-        if ($this->headingArr) {
+        if (!$this->headingArr) {
             throw new ApiException('导出失败,请输出表头', ApiErrorCode::VALIDATION_ERROR);
         }
 
-        if ($this->sheetTitle) {
+        if (!$this->sheetTitle) {
             throw new ApiException('导出失败,请输入Excel表格的标题', ApiErrorCode::VALIDATION_ERROR);
         }
 
-        if ($this->isExportData) {
+        if (!$this->isExportData) {
             throw new ApiException('导出失败,请输入导出数据', ApiErrorCode::VALIDATION_ERROR);
         }
 
