@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace Composer\Support\Excel;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
