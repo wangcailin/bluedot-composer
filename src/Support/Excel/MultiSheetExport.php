@@ -10,15 +10,11 @@ class MultiSheetExport implements WithMultipleSheets
     /* 使用例子 1
     return (new MultiSheetExport())->addSheets(
         '下载数据',
-        [
-            'unionid', '昵称', '姓名', '手机', '公司',  '所在公司类型', '资料名称', '下载时间'
-        ],
+        ['unionid', '昵称'],
         $data['users'] ?? [],
     )->addSheets(
         '资料数据',
-        [
-            '资料名称', '发布时间', '上传人', '权限', '文档类型',  '产品类型', '包含文件数', '浏览数', '下载数', '点赞数', '收藏数'
-        ],
+        ['资料名称', '发布时间', '上传人', '权限', '文档类型'],
         $data['downloads'] ?? [],
     )->download('资料下载.xlsx');
     */
