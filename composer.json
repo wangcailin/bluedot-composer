@@ -19,7 +19,8 @@
     "guzzlehttp/guzzle": "^7.5",
     "aliyuncs/oss-sdk-php": "^2.6",
     "bluedot/lookstar-client": "^1.6",
-    "tymon/jwt-auth": "^2.0"
+    "tymon/jwt-auth": "^2.0",
+    "maatwebsite/excel": "^3.1"
   },
   "autoload": {
     "psr-4": {
