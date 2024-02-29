@@ -90,9 +90,7 @@ class Controller extends BaseController
     {
         $this->id = $id;
 
-        if ($this->authUserId) {
-            $this->createAuthUserId();
-        }
+        $this->getDataTransform();
 
         $this->beforeGet();
         $this->handleGet();
@@ -109,10 +107,8 @@ class Controller extends BaseController
     public function create()
     {
         $this->data = request()->all();
-        if ($this->authUserId) {
-            $this->createAuthUserId();
-        }
 
+        $this->creatDataTransform();
         $this->handleCreateValidate();
 
         $this->beforeCreate();
@@ -210,6 +206,18 @@ class Controller extends BaseController
     }
 
     /**
+     * 验证数据之前格式化数据
+     *
+     * @return void
+     */
+    public function creatDataTransform()
+    {
+        if ($this->authUserId) {
+            $this->createAuthUserId();
+        }
+    }
+
+    /**
      * 创建数据 前置方法
      *
      * @return void
@@ -235,6 +243,18 @@ class Controller extends BaseController
      */
     public function afterCreate()
     {
+    }
+
+    /**
+     * 获取单个数据 格式化数据
+     *
+     * @return void
+     */
+    public function getDataTransform()
+    {
+        if ($this->authUserId) {
+            $this->createAuthUserId();
+        }
     }
 
     /**
