@@ -42,7 +42,7 @@ class OssClient
             'policy' => $base64_policy,
             'signature' => $signature,
             'expire' => $end,
-            'dir' =>  $dir . date('Ym'),
+            'dir' =>  $dir,
         ];
         return $response;
     }
