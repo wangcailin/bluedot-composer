@@ -65,6 +65,9 @@ class AuthClient extends BaseController
         if (isset($user['headimgurl'])) {
             $data['avatar'] = $user['headimgurl'];
         }
+        if (isset($user['nickname'])) {
+            $data['nickname'] = $user['nickname'];
+        }
         return $this->weChatOpenidModel::updateOrCreate(
             ['appid' => $appid, 'openid' => $user['openid']],
             $data
