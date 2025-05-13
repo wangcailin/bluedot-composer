@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Application\WeChat\User;
+namespace BluedotComposer\Application\WeChat\User;
 
-use Composer\Application\WeChat\Models\WeChatOpenid;
+use BluedotComposer\Application\WeChat\Models\WeChatOpenid;
 
 abstract class BaseUser
 {

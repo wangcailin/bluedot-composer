@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Http;
+namespace BluedotComposer\Http;
 
 use Illuminate\Routing\Controller;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Application\WeChat\Qrcode\Login;
+namespace BluedotComposer\Application\WeChat\Qrcode\Login;
 
-use Composer\Application\WeChat\WeChat;
+use BluedotComposer\Application\WeChat\WeChat;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller;
 
@@ -23,7 +23,5 @@ class Client extends Controller
         return response()->json($result);
     }
 
-    public function loginWebsocket()
-    {
-    }
+    public function loginWebsocket() {}
 }

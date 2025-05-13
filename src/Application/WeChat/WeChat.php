@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\WeChat;
+namespace BluedotComposer\Application\WeChat;
 
 use EasyWeChat\OfficialAccount\Application as OfficialAccountApplication;
 use EasyWeChat\MiniApp\Application as MiniAppApplication;

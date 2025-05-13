@@ -8,23 +8,23 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^8.1",
-    "laravel/framework": "^10.10",
-    "laravel/tinker": "^2.8",
-    "laravel/passport": "^11.8",
-    "spatie/laravel-query-builder": "^5.2",
-    "spatie/laravel-permission": "^5.10",
-    "overtrue/laravel-wechat": "^7.0",
-    "phpmailer/phpmailer": "^6.7",
-    "guzzlehttp/guzzle": "^7.5",
-    "aliyuncs/oss-sdk-php": "^2.6",
+    "php": "^8.2",
+    "laravel/framework": "^12.13",
+    "laravel/tinker": "^2.10",
+    "laravel/passport": "^13.0",
+    "spatie/laravel-query-builder": "^6.3",
+    "spatie/laravel-permission": "^6.17",
+    "overtrue/laravel-wechat": "^7.4",
+    "phpmailer/phpmailer": "^6.10",
+    "guzzlehttp/guzzle": "^7.9",
+    "aliyuncs/oss-sdk-php": "^2.7",
     "bluedot/lookstar-client": "^1.6",
-    "tymon/jwt-auth": "^2.0",
-    "maatwebsite/excel": "^3.1"
+    "maatwebsite/excel": "^3.1",
+    "php-open-source-saver/jwt-auth": "^2.8"
   },
   "autoload": {
     "psr-4": {
-      "Composer\\": "src/"
+      "BluedotComposer\\": "src/"
     },
     "files": [
       "src/helpers.php"
@@ -33,13 +33,14 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Composer\\ComposerServiceProvider"
+        "BluedotComposer\\ComposerServiceProvider"
       ]
     }
   },
   "config": {
     "allow-plugins": {
-      "easywechat-composer/easywechat-composer": true
+      "easywechat-composer/easywechat-composer": true,
+      "php-http/discovery": true
     }
   },
   "require-dev": {

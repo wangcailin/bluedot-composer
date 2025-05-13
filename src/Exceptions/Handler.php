@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Exceptions;
+namespace BluedotComposer\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

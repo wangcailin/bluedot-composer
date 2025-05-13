@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\WeChat\Response\Handler;
+namespace BluedotComposer\Application\WeChat\Response\Handler;
 
 use Illuminate\Support\Facades\Log;
 

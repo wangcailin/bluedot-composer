@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\WeChat\User;
+namespace BluedotComposer\Application\WeChat\User;
 
 class MiniProgram extends BaseUser
 {

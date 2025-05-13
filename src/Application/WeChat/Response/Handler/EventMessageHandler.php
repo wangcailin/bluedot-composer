@@ -1,11 +1,11 @@
 <?php
 
-namespace Composer\Application\WeChat\Response\Handler;
+namespace BluedotComposer\Application\WeChat\Response\Handler;
 
-use Composer\Application\WeChat\Models\WeChatOpenid;
-use Composer\Application\WeChat\Models\WeChatOpenidTagRelation;
-use Composer\Application\WeChat\Models\Qrcode;
-use Composer\Application\WeChat\Models\Reply;
+use BluedotComposer\Application\WeChat\Models\WeChatOpenid;
+use BluedotComposer\Application\WeChat\Models\WeChatOpenidTagRelation;
+use BluedotComposer\Application\WeChat\Models\Qrcode;
+use BluedotComposer\Application\WeChat\Models\Reply;
 
 class EventMessageHandler
 {

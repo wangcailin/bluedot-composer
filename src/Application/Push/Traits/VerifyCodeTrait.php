@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Application\Push\Traits;
+namespace BluedotComposer\Application\Push\Traits;
 
-use Composer\Application\Push\Models\VerifyCode;
+use BluedotComposer\Application\Push\Models\VerifyCode;
 
 trait VerifyCodeTrait
 {

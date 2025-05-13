@@ -1,13 +1,13 @@
 <?php
 
-namespace Composer\Application\Push\Commands;
+namespace BluedotComposer\Application\Push\Commands;
 
-use Composer\Application\Push\Models\Push;
-use Composer\Application\User\Models\Relation\UserGroup;
-use Composer\Application\User\Models\User;
-use Composer\Application\User\Models\WeChatUser;
-use Composer\Application\WeChat\Models\Material;
-use Composer\Application\WeChat\WeChat;
+use BluedotComposer\Application\Push\Models\Push;
+use BluedotComposer\Application\User\Models\Relation\UserGroup;
+use BluedotComposer\Application\User\Models\User;
+use BluedotComposer\Application\User\Models\WeChatUser;
+use BluedotComposer\Application\WeChat\Models\Material;
+use BluedotComposer\Application\WeChat\WeChat;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -93,10 +93,10 @@ class PushService extends Command
                                         'data->msg' => [
                                             'id' => $msg['msg_id'],
                                             'data_id' => $msg['msg_data_id'],
-                                        ]]);
+                                        ]
+                                    ]);
                                 }
                             }
-
                     }
             }
         }

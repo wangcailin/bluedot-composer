@@ -1,10 +1,10 @@
 <?php
 
-namespace Composer\Application\WeChat;
+namespace BluedotComposer\Application\WeChat;
 
-use Composer\Application\WeChat\Models\Qrcode;
-use Composer\Application\WeChat\WeChat;
-use Composer\Http\Controller;
+use BluedotComposer\Application\WeChat\Models\Qrcode;
+use BluedotComposer\Application\WeChat\WeChat;
+use BluedotComposer\Http\Controller;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 

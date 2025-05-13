@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Aliyun;
+namespace BluedotComposer\Support\Aliyun;
 
 use AlibabaCloud\Client\AlibabaCloud;
 

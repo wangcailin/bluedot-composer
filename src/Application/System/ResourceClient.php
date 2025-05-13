@@ -1,13 +1,13 @@
 <?php
 
-namespace Composer\Application\System;
+namespace BluedotComposer\Application\System;
 
-use Composer\Http\Controller;
-use Composer\Application\System\Models\Resource;
-use Composer\Exceptions\ApiErrorCode;
-use Composer\Exceptions\ApiException;
-use Composer\Support\Aliyun\OssClient;
-use Composer\Support\Aliyun\OssServerClient;
+use BluedotComposer\Http\Controller;
+use BluedotComposer\Application\System\Models\Resource;
+use BluedotComposer\Exceptions\ApiErrorCode;
+use BluedotComposer\Exceptions\ApiException;
+use BluedotComposer\Support\Aliyun\OssClient;
+use BluedotComposer\Support\Aliyun\OssServerClient;
 use Illuminate\Http\Request;
 
 class ResourceClient extends Controller

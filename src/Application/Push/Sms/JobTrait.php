@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Application\Push\Sms;
+namespace BluedotComposer\Application\Push\Sms;
 
-use Composer\Support\Sms;
+use BluedotComposer\Support\Sms;
 use Illuminate\Support\Facades\Log;
 
 trait JobTrait

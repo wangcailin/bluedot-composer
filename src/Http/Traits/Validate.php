@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Http\Traits;
+namespace BluedotComposer\Http\Traits;
 
 use Illuminate\Support\Facades\Validator;
 

@@ -1,6 +1,6 @@
 <?php
 
-use Composer\Support\Database\Migration;
+use BluedotComposer\Support\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 

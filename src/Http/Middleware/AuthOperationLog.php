@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Http\Middleware;
+namespace BluedotComposer\Http\Middleware;
 
-use Composer\Support\Auth\Models\OperationLog as OperationLog;
+use BluedotComposer\Support\Auth\Models\OperationLog as OperationLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

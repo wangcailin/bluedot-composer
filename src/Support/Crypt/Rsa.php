@@ -1,12 +1,10 @@
 <?php
 
-namespace Composer\Support\Crypt;
+namespace BluedotComposer\Support\Crypt;
 
 class Rsa
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function publicEncrypt($data, $publicKey)
     {

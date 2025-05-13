@@ -1,10 +1,10 @@
 <?php
 
-namespace Composer\Support\Auth\Traits\Model;
+namespace BluedotComposer\Support\Auth\Traits\Model;
 
-use Composer\Exceptions\ApiErrorCode;
-use Composer\Exceptions\ApiException;
-use Composer\Support\Crypt\AES;
+use BluedotComposer\Exceptions\ApiErrorCode;
+use BluedotComposer\Exceptions\ApiException;
+use BluedotComposer\Support\Crypt\AES;
 use Illuminate\Support\Facades\Auth;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Application\Auth;
+namespace BluedotComposer\Application\Auth;
 
-use Composer\Http\BaseController;
+use BluedotComposer\Http\BaseController;
 use Spatie\Permission\Models\Permission;
 
 class PermissionClient extends BaseController

@@ -1,9 +1,7 @@
 <?php
 
-namespace Composer\Exceptions;
+namespace BluedotComposer\Exceptions;
 
 use Exception;
 
-class ApiException extends Exception
-{
-}
+class ApiException extends Exception {}

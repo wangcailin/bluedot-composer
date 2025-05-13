@@ -15,7 +15,7 @@
 * the License.
 */
 
-namespace Composer\Support\Aip\Lib;
+namespace BluedotComposer\Support\Aip\Lib;
 
 require_once 'AipBCEUtil.php';
 

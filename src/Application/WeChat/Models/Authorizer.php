@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\WeChat\Models;
+namespace BluedotComposer\Application\WeChat\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

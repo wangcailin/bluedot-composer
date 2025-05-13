@@ -1,9 +1,9 @@
 <?php
 
-namespace Composer\Application\Push;
+namespace BluedotComposer\Application\Push;
 
-use Composer\Application\Push\Models\Push;
-use Composer\Http\Controller;
+use BluedotComposer\Application\Push\Models\Push;
+use BluedotComposer\Http\Controller;
 
 class Client extends Controller
 {

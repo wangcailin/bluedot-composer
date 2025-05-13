@@ -1,11 +1,11 @@
 <?php
 
-namespace Composer\Application\Auth;
+namespace BluedotComposer\Application\Auth;
 
-use Composer\Exceptions\ApiErrorCode;
-use Composer\Exceptions\ApiException;
-use Composer\Support\Auth\Models\User;
-use Composer\Http\Controller;
+use BluedotComposer\Exceptions\ApiErrorCode;
+use BluedotComposer\Exceptions\ApiException;
+use BluedotComposer\Support\Auth\Models\User;
+use BluedotComposer\Http\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 

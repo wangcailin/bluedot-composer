@@ -1,9 +1,9 @@
 <?php
 
-namespace Composer\Application\Auth;
+namespace BluedotComposer\Application\Auth;
 
-use Composer\Support\Auth\Client;
-use Composer\Support\Auth\Models\User;
+use BluedotComposer\Support\Auth\Client;
+use BluedotComposer\Support\Auth\Models\User;
 
 class BackendClient extends Client
 {

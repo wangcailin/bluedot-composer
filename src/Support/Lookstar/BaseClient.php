@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Lookstar;
+namespace BluedotComposer\Support\Lookstar;
 
 use LookstarClient\ApiClient;
 

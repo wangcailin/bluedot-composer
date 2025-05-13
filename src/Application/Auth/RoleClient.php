@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Application\Auth;
+namespace BluedotComposer\Application\Auth;
 
-use Composer\Http\Controller;
+use BluedotComposer\Http\Controller;
 use Illuminate\Validation\Rule;
 
 class RoleClient extends Controller

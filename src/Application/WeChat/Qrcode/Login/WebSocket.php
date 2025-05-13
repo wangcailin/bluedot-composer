@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\WeChat\Qrcode\Login;
+namespace BluedotComposer\Application\WeChat\Qrcode\Login;
 
 use GatewayWorker\Lib\Gateway;
 
@@ -30,7 +30,5 @@ class WebSocket
         Gateway::sendToGroup($sceneStr, json_encode($message));
     }
 
-    public static function onClose($clientId)
-    {
-    }
+    public static function onClose($clientId) {}
 }

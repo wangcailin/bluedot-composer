@@ -1,11 +1,11 @@
 <?php
 
-namespace Composer\Application\WeChat\TemplateMessage;
+namespace BluedotComposer\Application\WeChat\TemplateMessage;
 
 use App\Models\User\User;
-use Composer\Application\WeChat\Models\TemplateMessage;
-use Composer\Application\WeChat\Models\TemplateMessageTask;
-use Composer\WeChat\TemplateMessage\SendJob;
+use BluedotComposer\Application\WeChat\Models\TemplateMessage;
+use BluedotComposer\Application\WeChat\Models\TemplateMessageTask;
+use BluedotComposer\WeChat\TemplateMessage\SendJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;

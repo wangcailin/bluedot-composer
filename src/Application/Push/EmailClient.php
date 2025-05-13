@@ -1,13 +1,13 @@
 <?php
 
-namespace Composer\Application\Push;
+namespace BluedotComposer\Application\Push;
 
-use Composer\Http\Controller;
+use BluedotComposer\Http\Controller;
 use Illuminate\Http\Request;
-use Composer\Application\Config\System\Models\System;
-use Composer\Application\Push\Email\Job;
-use Composer\Application\Push\Email\JobTrait;
-use Composer\Application\Push\Models\VerifyCode;
+use BluedotComposer\Application\Config\System\Models\System;
+use BluedotComposer\Application\Push\Email\Job;
+use BluedotComposer\Application\Push\Email\JobTrait;
+use BluedotComposer\Application\Push\Models\VerifyCode;
 
 class EmailClient extends Controller
 {

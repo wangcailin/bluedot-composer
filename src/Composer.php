@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer;
+namespace BluedotComposer;
 
 use Illuminate\Support\Facades\Route;
 

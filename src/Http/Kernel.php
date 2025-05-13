@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Http;
+namespace BluedotComposer\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 

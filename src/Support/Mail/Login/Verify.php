@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Mail\Login;
+namespace BluedotComposer\Support\Mail\Login;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

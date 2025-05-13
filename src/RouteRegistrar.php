@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer;
+namespace BluedotComposer;
 
 use Illuminate\Contracts\Routing\Registrar as Router;
 

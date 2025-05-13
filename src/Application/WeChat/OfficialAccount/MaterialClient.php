@@ -1,9 +1,9 @@
 <?php
 
-namespace Composer\Application\WeChat\OfficialAccount;
+namespace BluedotComposer\Application\WeChat\OfficialAccount;
 
-use Composer\Application\WeChat\WeChat;
-use Composer\Http\BaseController;
+use BluedotComposer\Application\WeChat\WeChat;
+use BluedotComposer\Http\BaseController;
 use Illuminate\Http\Request;
 
 class MaterialClient extends BaseController

@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\Push\Email;
+namespace BluedotComposer\Application\Push\Email;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

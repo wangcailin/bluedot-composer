@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Console;
+namespace BluedotComposer\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;

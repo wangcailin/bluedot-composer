@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Application\Push\WeChat\TemplateMessage;
+namespace BluedotComposer\Application\Push\WeChat\TemplateMessage;
 
-use Composer\Http\Controller;
+use BluedotComposer\Http\Controller;
 use Illuminate\Http\Request;
 
 class Client extends Controller

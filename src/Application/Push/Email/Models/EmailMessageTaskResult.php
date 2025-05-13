@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\Push\Email\Models;
+namespace BluedotComposer\Application\Push\Email\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\WeChat\TemplateMessage\Console;
+namespace BluedotComposer\Application\WeChat\TemplateMessage\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -24,8 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-        })
+        $schedule->call(function () {})
             ->everyMinute() // 每分钟执行
             ->withoutOverlapping() // 避免任务重复
             ->onOneServer() // 任务只运行在一台服务器上

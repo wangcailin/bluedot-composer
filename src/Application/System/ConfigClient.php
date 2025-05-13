@@ -1,9 +1,9 @@
 <?php
 
-namespace Composer\Application\System;
+namespace BluedotComposer\Application\System;
 
-use Composer\Http\Controller;
-use Composer\Application\System\Models\Config;
+use BluedotComposer\Http\Controller;
+use BluedotComposer\Application\System\Models\Config;
 use Illuminate\Http\Request;
 
 class ConfigClient extends Controller
@@ -32,7 +32,5 @@ class ConfigClient extends Controller
         return $this->success($this->row);
     }
 
-    private function checkMailAliyun($config)
-    {
-    }
+    private function checkMailAliyun($config) {}
 }

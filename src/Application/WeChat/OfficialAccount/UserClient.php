@@ -1,10 +1,10 @@
 <?php
 
-namespace Composer\Application\WeChat\OfficialAccount;
+namespace BluedotComposer\Application\WeChat\OfficialAccount;
 
-use Composer\Application\WeChat\WeChat;
+use BluedotComposer\Application\WeChat\WeChat;
 use Illuminate\Http\Request;
-use Composer\Http\BaseController;
+use BluedotComposer\Http\BaseController;
 
 class UserClient extends BaseController
 {

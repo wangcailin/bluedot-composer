@@ -1,14 +1,14 @@
 <?php
 
-namespace Composer\Support\Auth\Models;
+namespace BluedotComposer\Support\Auth\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
-use Composer\Support\Auth\Traits\Model\Bind;
-use Composer\Support\Auth\Traits\Model\Account;
-use Composer\Support\Auth\Traits\Model\Attribute;
+use BluedotComposer\Support\Auth\Traits\Model\Bind;
+use BluedotComposer\Support\Auth\Traits\Model\Account;
+use BluedotComposer\Support\Auth\Traits\Model\Attribute;
 
 class User extends Authenticatable
 {

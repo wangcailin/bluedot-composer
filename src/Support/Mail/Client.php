@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Support\Mail;
+namespace BluedotComposer\Support\Mail;
 
-use Composer\Support\Mail\Login\Verify;
+use BluedotComposer\Support\Mail\Login\Verify;
 use Illuminate\Support\Facades\Mail;
 
 class Client

@@ -1,9 +1,9 @@
 <?php
 
-namespace Composer\Http\Middleware;
+namespace BluedotComposer\Http\Middleware;
 
 use Closure;
-use Composer\Exceptions\ApiException;
+use BluedotComposer\Exceptions\ApiException;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
 class Authenticate

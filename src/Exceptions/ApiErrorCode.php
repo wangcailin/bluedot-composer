@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Exceptions;
+namespace BluedotComposer\Exceptions;
 
 class ApiErrorCode
 {

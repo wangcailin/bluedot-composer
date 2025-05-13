@@ -1,11 +1,11 @@
 <?php
 
-namespace Composer\Application\WeChat\Response;
+namespace BluedotComposer\Application\WeChat\Response;
 
-use Composer\Application\WeChat\WeChat;
-use Composer\Application\WeChat\Response\Handler\EventMessageHandler;
-use Composer\Application\WeChat\Response\Handler\LogMessageHandler;
-use Composer\Application\WeChat\Response\Handler\TextMessageHandler;
+use BluedotComposer\Application\WeChat\WeChat;
+use BluedotComposer\Application\WeChat\Response\Handler\EventMessageHandler;
+use BluedotComposer\Application\WeChat\Response\Handler\LogMessageHandler;
+use BluedotComposer\Application\WeChat\Response\Handler\TextMessageHandler;
 
 class Client
 {

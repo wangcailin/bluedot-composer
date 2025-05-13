@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\WeChat\Qrcode\Login;
+namespace BluedotComposer\Application\WeChat\Qrcode\Login;
 
 use GatewayWorker\BusinessWorker;
 use GatewayWorker\Gateway;

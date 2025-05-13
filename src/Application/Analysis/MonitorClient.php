@@ -1,11 +1,11 @@
 <?php
 
-namespace Composer\Application\Analysis;
+namespace BluedotComposer\Application\Analysis;
 
-use Composer\Application\Analysis\Models\Monitor;
-use Composer\Application\User\Models\Relation\UserTag;
-use Composer\Application\User\Models\User;
-use Composer\Http\Controller;
+use BluedotComposer\Application\Analysis\Models\Monitor;
+use BluedotComposer\Application\User\Models\Relation\UserTag;
+use BluedotComposer\Application\User\Models\User;
+use BluedotComposer\Http\Controller;
 
 class MonitorClient extends Controller
 {

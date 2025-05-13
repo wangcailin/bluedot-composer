@@ -1,18 +1,18 @@
 <?php
 
-namespace Composer\Support\Auth;
+namespace BluedotComposer\Support\Auth;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-use Composer\Http\BaseController;
+use BluedotComposer\Http\BaseController;
 
-use Composer\Exceptions\ApiErrorCode;
-use Composer\Exceptions\ApiException;
-use Composer\Support\Crypt\AES;
-use Composer\Support\Captcha\Client as CaptchaClient;
+use BluedotComposer\Exceptions\ApiErrorCode;
+use BluedotComposer\Exceptions\ApiException;
+use BluedotComposer\Support\Crypt\AES;
+use BluedotComposer\Support\Captcha\Client as CaptchaClient;
 use Illuminate\Validation\Rule;
 
 abstract class Client extends BaseController
@@ -296,9 +296,7 @@ abstract class Client extends BaseController
         return $this->success(['errcode' => 0, 'errmsg' => 'ok']);
     }
 
-    public function bindOpenId()
-    {
-    }
+    public function bindOpenId() {}
 
     public function updatePersonal(Request $request)
     {

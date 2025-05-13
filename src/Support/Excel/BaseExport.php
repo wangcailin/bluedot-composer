@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Excel;
+namespace BluedotComposer\Support\Excel;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -9,8 +9,8 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
-use Composer\Exceptions\ApiErrorCode;
-use Composer\Exceptions\ApiException;
+use BluedotComposer\Exceptions\ApiErrorCode;
+use BluedotComposer\Exceptions\ApiException;
 
 class BaseExport implements FromArray, WithTitle, WithHeadings, ShouldAutoSize, WithEvents, WithStrictNullComparison
 {
@@ -99,9 +99,30 @@ class BaseExport implements FromArray, WithTitle, WithHeadings, ShouldAutoSize, 
     public function columnWidths(): array
     {
         return [
-            'A' => 16, 'B' => 13, 'C' => 13, 'D' => 20, 'E' => 50, 'F' => 8, 'G' => 10, 'H' => 13,
-            'I' => 8, 'J' => 12, 'K' => 12, 'L' => 12, 'M' => 20, 'N' => 20, 'O' => 15, 'P' => 20,
-            'Q' => 20, 'R' => 20, 'S' => 30, 'T' => 30, 'U' => 20, 'V' => 20, 'W' => 20, 'X' => 20,
+            'A' => 16,
+            'B' => 13,
+            'C' => 13,
+            'D' => 20,
+            'E' => 50,
+            'F' => 8,
+            'G' => 10,
+            'H' => 13,
+            'I' => 8,
+            'J' => 12,
+            'K' => 12,
+            'L' => 12,
+            'M' => 20,
+            'N' => 20,
+            'O' => 15,
+            'P' => 20,
+            'Q' => 20,
+            'R' => 20,
+            'S' => 30,
+            'T' => 30,
+            'U' => 20,
+            'V' => 20,
+            'W' => 20,
+            'X' => 20,
         ];
     }
     /**

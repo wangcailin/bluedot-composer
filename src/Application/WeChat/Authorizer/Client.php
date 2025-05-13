@@ -1,10 +1,10 @@
 <?php
 
-namespace Composer\Application\WeChat\Authorizer;
+namespace BluedotComposer\Application\WeChat\Authorizer;
 
-use Composer\Application\WeChat\Models\Authorizer;
-use Composer\Application\WeChat\WeChat;
-use Composer\Http\Controller;
+use BluedotComposer\Application\WeChat\Models\Authorizer;
+use BluedotComposer\Application\WeChat\WeChat;
+use BluedotComposer\Http\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -62,9 +62,7 @@ class Client extends Controller
         $this->afterCallback($authorization);
     }
 
-    public function afterCallback($authorization)
-    {
-    }
+    public function afterCallback($authorization) {}
 
 
     /**

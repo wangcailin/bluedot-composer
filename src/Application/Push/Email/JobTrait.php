@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\Push\Email;
+namespace BluedotComposer\Application\Push\Email;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

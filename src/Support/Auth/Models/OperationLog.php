@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Auth\Models;
+namespace BluedotComposer\Support\Auth\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support;
+namespace BluedotComposer\Support;
 
 class Vhall
 {

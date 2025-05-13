@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Auth\Traits\Model;
+namespace BluedotComposer\Support\Auth\Traits\Model;
 
 trait Account
 {

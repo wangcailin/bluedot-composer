@@ -1,8 +1,9 @@
 <?php
 
-namespace Composer\Support\Crypt;
-use Composer\Exceptions\ApiErrorCode;
-use Composer\Exceptions\ApiException;
+namespace BluedotComposer\Support\Crypt;
+
+use BluedotComposer\Exceptions\ApiErrorCode;
+use BluedotComposer\Exceptions\ApiException;
 
 class AES
 {

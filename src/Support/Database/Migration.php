@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Database;
+namespace BluedotComposer\Support\Database;
 
 use Exception;
 use Illuminate\Support\Fluent;

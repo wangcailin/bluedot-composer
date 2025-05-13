@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Sms;
+namespace BluedotComposer\Support\Sms;
 
 
 class YunPianClient

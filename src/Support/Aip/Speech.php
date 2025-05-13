@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Aip;
+namespace BluedotComposer\Support\Aip;
 
 /**
  * 语音合成类库

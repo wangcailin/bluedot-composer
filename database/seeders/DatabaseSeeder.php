@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Laravel\Passport\ClientRepository;
-use Composer\Support\Auth\Models\User;
+use BluedotComposer\Support\Auth\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::createAdminUser('bluedot', 'Bluedot@2023');
+        User::createAdminUser('bluedot', 'Bluedot@2025');
 
         $client = new ClientRepository();
         $client->createPasswordGrantClient(null, 'Default Tenant Client', '');

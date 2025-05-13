@@ -15,9 +15,9 @@
 * the License.
 */
 
-namespace Composer\Support\Aip;
+namespace BluedotComposer\Support\Aip;
 
-use Composer\Support\Aip\Lib\AipBase;
+use BluedotComposer\Support\Aip\Lib\AipBase;
 
 class AipOcr extends AipBase
 {

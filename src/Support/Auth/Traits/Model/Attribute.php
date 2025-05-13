@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Support\Auth\Traits\Model;
+namespace BluedotComposer\Support\Auth\Traits\Model;
 
-use Composer\Support\Crypt\AES;
+use BluedotComposer\Support\Crypt\AES;
 
 trait Attribute
 {

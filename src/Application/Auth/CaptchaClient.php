@@ -1,10 +1,10 @@
 <?php
 
-namespace Composer\Application\Auth;
+namespace BluedotComposer\Application\Auth;
 
 use Illuminate\Http\Request;
-use Composer\Support\Captcha\Client;
-use Composer\Support\Crypt\AES;
+use BluedotComposer\Support\Captcha\Client;
+use BluedotComposer\Support\Crypt\AES;
 
 class CaptchaClient extends Client
 {

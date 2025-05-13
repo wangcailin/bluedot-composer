@@ -1,14 +1,14 @@
 <?php
 
-namespace Composer\Support\Captcha;
+namespace BluedotComposer\Support\Captcha;
 
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Mail;
 
-use Composer\Support\Aliyun\SmsClient;
-use Composer\Exceptions\ApiErrorCode;
-use Composer\Exceptions\ApiException;
-use Composer\Support\Mail\Login\Verify;
+use BluedotComposer\Support\Aliyun\SmsClient;
+use BluedotComposer\Exceptions\ApiErrorCode;
+use BluedotComposer\Exceptions\ApiException;
+use BluedotComposer\Support\Mail\Login\Verify;
 
 class Client
 {

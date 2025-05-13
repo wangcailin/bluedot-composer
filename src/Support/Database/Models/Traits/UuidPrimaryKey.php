@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Database\Models\Traits;
+namespace BluedotComposer\Support\Database\Models\Traits;
 
 use Illuminate\Support\Str;
 

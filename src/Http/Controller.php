@@ -1,10 +1,10 @@
 <?php
 
-namespace Composer\Http;
+namespace BluedotComposer\Http;
 
 use Spatie\QueryBuilder\QueryBuilder;
-use Composer\Http\Traits\Select;
-use Composer\Http\Traits\Validate;
+use BluedotComposer\Http\Traits\Select;
+use BluedotComposer\Http\Traits\Validate;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -160,9 +160,7 @@ class Controller extends BaseController
      *
      * @return void
      */
-    public function beforeBuildFilter()
-    {
-    }
+    public function beforeBuildFilter() {}
 
     /**
      * BuildFilter 方法
@@ -182,9 +180,7 @@ class Controller extends BaseController
      *
      * @return void
      */
-    public function afterBuildFilter()
-    {
-    }
+    public function afterBuildFilter() {}
 
     /**
      * 获取列表 核心方法
@@ -201,9 +197,7 @@ class Controller extends BaseController
      *
      * @return void
      */
-    public function afterList()
-    {
-    }
+    public function afterList() {}
 
     /**
      * 验证数据之前格式化数据
@@ -222,9 +216,7 @@ class Controller extends BaseController
      *
      * @return void
      */
-    public function beforeCreate()
-    {
-    }
+    public function beforeCreate() {}
 
     /**
      * 创建数据 核心方法
@@ -241,9 +233,7 @@ class Controller extends BaseController
      *
      * @return void
      */
-    public function afterCreate()
-    {
-    }
+    public function afterCreate() {}
 
     /**
      * 获取单个数据 格式化数据
@@ -262,9 +252,7 @@ class Controller extends BaseController
      *
      * @return void
      */
-    public function beforeGet()
-    {
-    }
+    public function beforeGet() {}
     /**
      * 获取单个数据 核心方法
      *
@@ -279,18 +267,14 @@ class Controller extends BaseController
      *
      * @return void
      */
-    public function afterGet()
-    {
-    }
+    public function afterGet() {}
 
     /**
      * 更新数据 前置方法
      *
      * @return void
      */
-    public function beforeUpdate()
-    {
-    }
+    public function beforeUpdate() {}
 
     /**
      * 更新数据 核心方法
@@ -307,18 +291,14 @@ class Controller extends BaseController
      *
      * @return void
      */
-    public function afterUpdate()
-    {
-    }
+    public function afterUpdate() {}
 
     /**
      * 删除数据 前置方法
      *
      * @return void
      */
-    public function beforeDelete()
-    {
-    }
+    public function beforeDelete() {}
     /**
      * 删除数据 核心方法
      *
@@ -333,9 +313,7 @@ class Controller extends BaseController
      *
      * @return void
      */
-    public function afterDelete()
-    {
-    }
+    public function afterDelete() {}
 
     /**
      * 拖动排序

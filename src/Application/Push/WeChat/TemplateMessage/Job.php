@@ -1,9 +1,9 @@
 <?php
 
-namespace Composer\Application\Push\WeChat\TemplateMessage;
+namespace BluedotComposer\Application\Push\WeChat\TemplateMessage;
 
-use Composer\Application\WeChat\Models\TemplateMessageTaskResult;
-use Composer\Application\WeChat\WeChat;
+use BluedotComposer\Application\WeChat\Models\TemplateMessageTaskResult;
+use BluedotComposer\Application\WeChat\WeChat;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;

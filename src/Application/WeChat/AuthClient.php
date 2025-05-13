@@ -1,9 +1,9 @@
 <?php
 
-namespace Composer\Application\WeChat;
+namespace BluedotComposer\Application\WeChat;
 
-use Composer\Application\WeChat\Models\WeChatOpenid;
-use Composer\Http\BaseController;
+use BluedotComposer\Application\WeChat\Models\WeChatOpenid;
+use BluedotComposer\Http\BaseController;
 use Illuminate\Http\Request;
 
 class AuthClient extends BaseController

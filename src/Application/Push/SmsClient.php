@@ -1,12 +1,12 @@
 <?php
 
-namespace Composer\Application\Push;
+namespace BluedotComposer\Application\Push;
 
-use Composer\Http\Controller;
+use BluedotComposer\Http\Controller;
 use Illuminate\Http\Request;
-use Composer\Application\Push\Sms\Job;
-use Composer\Application\Push\Sms\JobTrait;
-use Composer\Application\Push\Models\VerifyCode;
+use BluedotComposer\Application\Push\Sms\Job;
+use BluedotComposer\Application\Push\Sms\JobTrait;
+use BluedotComposer\Application\Push\Models\VerifyCode;
 
 class SmsClient extends Controller
 {

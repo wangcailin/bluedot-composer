@@ -1,10 +1,10 @@
 <?php
 
-namespace Composer\Support\Redis;
+namespace BluedotComposer\Support\Redis;
 
 use Illuminate\Support\Facades\Redis;
-use Composer\Exceptions\ApiErrorCode;
-use Composer\Exceptions\ApiException;
+use BluedotComposer\Exceptions\ApiErrorCode;
+use BluedotComposer\Exceptions\ApiException;
 
 class CaptchaClient
 {

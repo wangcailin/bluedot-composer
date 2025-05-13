@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Support\Aip;
+namespace BluedotComposer\Support\Aip;
 
-use Composer\Support\Aip\AipNlp;
+use BluedotComposer\Support\Aip\AipNlp;
 
 class Nlp
 {

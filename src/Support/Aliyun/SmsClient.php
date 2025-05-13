@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Aliyun;
+namespace BluedotComposer\Support\Aliyun;
 
 use AlibabaCloud\SDK\Dysmsapi\V20170525\Dysmsapi;
 use Darabonba\OpenApi\Models\Config;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Composer\Application\WeChat\User;
+namespace BluedotComposer\Application\WeChat\User;
 
-use Composer\Application\WeChat\Models\Authorizer;
-use Composer\Application\WeChat\WeChat;
+use BluedotComposer\Application\WeChat\Models\Authorizer;
+use BluedotComposer\Application\WeChat\WeChat;
 
 class Async
 {

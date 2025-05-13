@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Database\Models;
+namespace BluedotComposer\Support\Database\Models;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\Analysis\Models;
+namespace BluedotComposer\Application\Analysis\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 

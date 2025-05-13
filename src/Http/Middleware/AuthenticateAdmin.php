@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Http\Middleware;
+namespace BluedotComposer\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;

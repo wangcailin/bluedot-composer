@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Support\Excel;
+namespace BluedotComposer\Support\Excel;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithEvents;

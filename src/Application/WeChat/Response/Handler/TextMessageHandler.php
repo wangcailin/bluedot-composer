@@ -1,8 +1,8 @@
 <?php
 
-namespace Composer\Application\WeChat\Response\Handler;
+namespace BluedotComposer\Application\WeChat\Response\Handler;
 
-use Composer\Application\WeChat\Models\Reply;
+use BluedotComposer\Application\WeChat\Models\Reply;
 
 class TextMessageHandler
 {

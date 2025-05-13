@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Application\Push\Sms;
+namespace BluedotComposer\Application\Push\Sms;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
