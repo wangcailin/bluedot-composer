@@ -80,7 +80,7 @@ class ComposerServiceProvider extends ServiceProvider
     protected function registerPaginator()
     {
         $this->app->singleton('Illuminate\Pagination\LengthAwarePaginator', function ($app, $options) {
-            return new \Composer\Support\Database\Models\Paginator($options['items'], $options['total'], $options['perPage'], $options['currentPage'], $options['options']);
+            return new \BluedotComposer\Support\Database\Models\Paginator($options['items'], $options['total'], $options['perPage'], $options['currentPage'], $options['options']);
         });
     }
 
@@ -88,7 +88,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         $this->app->singleton(
             \Illuminate\Contracts\Debug\ExceptionHandler::class,
-            \Composer\Exceptions\Handler::class
+            \BluedotComposer\Exceptions\Handler::class
         );
     }
 
@@ -96,7 +96,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         $this->app->singleton(
             \Illuminate\Contracts\Http\Kernel::class,
-            \Composer\Http\Kernel::class
+            \BluedotComposer\Http\Kernel::class
         );
     }
 }
