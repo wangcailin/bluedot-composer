@@ -169,7 +169,7 @@ class Controller extends BaseController
      */
     public function buildFilter()
     {
-        $this->model = QueryBuilder::for($this->model)
+        $this->model = QueryBuilder::for($this->model::class)
             ->defaultSorts($this->defaultSorts)
             ->allowedFilters($this->allowedFilters)
             ->allowedSorts($this->allowedSorts)

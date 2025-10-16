@@ -19,6 +19,10 @@ class ComposerServiceProvider extends ServiceProvider
         ], 'composer-config');
 
         $this->publishes([
+            __DIR__ . '/../config/passport.php' => config_path('passport.php'),
+        ], 'composer-passport-config');
+
+        $this->publishes([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
         ], 'composer-migrations');
 
@@ -44,9 +48,14 @@ class ComposerServiceProvider extends ServiceProvider
         $this->registerHandler();
         $this->registerHttpKernel();
 
-        $this->app->register(
-            \Laravel\Passport\PassportServiceProvider::class
+        // 合并配置文件
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/passport.php',
+            'passport'
         );
+
+        // Passport 13.x 使用自动发现，无需手动注册
+        // PassportServiceProvider 会自动加载
         $this->app->register(\Spatie\Permission\PermissionServiceProvider::class);
     }
 
@@ -64,8 +73,15 @@ class ComposerServiceProvider extends ServiceProvider
 
     protected function makePassport()
     {
-        Passport::loadKeysFrom(base_path(config('passport.key_path')));
-        Passport::tokensExpireIn(now()->addHour(2));
+        // 新版 Passport 从配置文件或默认路径加载密钥
+        // 如果需要自定义路径，可以通过以下方式设置
+        if (config('passport.key_path')) {
+            Passport::loadKeysFrom(base_path(config('passport.key_path')));
+        }
+        // 否则，Passport 会自动从 storage_path('oauth-private.key') 和 storage_path('oauth-public.key') 加载
+
+        // 配置 Token 过期时间
+        Passport::tokensExpireIn(now()->addHours(2));
         Passport::refreshTokensExpireIn(now()->addDays(1));
         Passport::personalAccessTokensExpireIn(now()->addDays(7));
     }

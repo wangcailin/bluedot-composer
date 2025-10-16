@@ -21,7 +21,7 @@ class Composer
 
         $defaultOptions = [
             'prefix' => 'api',
-            'namespace' => '\Composer\Application',
+            'namespace' => '\BluedotComposer\Application',
         ];
 
         $options = array_merge($defaultOptions, $options);
