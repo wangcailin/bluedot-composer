@@ -11,7 +11,7 @@
     "php": "^8.2",
     "laravel/framework": "^12.13",
     "laravel/tinker": "^2.10",
-    "laravel/passport": "^13.0",
+    "laravel/passport": "^13.2",
     "spatie/laravel-query-builder": "^6.3",
     "spatie/laravel-permission": "^6.17",
     "overtrue/laravel-wechat": "^7.4",
@@ -19,7 +19,6 @@
     "guzzlehttp/guzzle": "^7.9",
     "aliyuncs/oss-sdk-php": "^2.7",
     "bluedot/lookstar-client": "^1.6",
-    "maatwebsite/excel": "^3.1",
     "php-open-source-saver/jwt-auth": "^2.8"
   },
   "autoload": {
