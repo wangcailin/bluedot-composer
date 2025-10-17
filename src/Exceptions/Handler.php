@@ -40,7 +40,7 @@ class Handler extends ExceptionHandler
         } elseif ($exception instanceof \Illuminate\Validation\ValidationException) {
             $errcode = ApiErrorCode::VALIDATION_ERROR;
             $errmsg = $exception->errors();
-        } elseif ($exception instanceof \Composer\Exceptions\ApiException) {
+        } elseif ($exception instanceof \Illuminate\Auth\AuthenticationException) {
             $errcode = $exception->getCode();
             $errmsg = $exception->getMessage();
         } else {
